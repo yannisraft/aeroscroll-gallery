@@ -1,0 +1,864 @@
+
+@import "./quasar.variables.scss";
+@import "~quasar-styl";
+//@import '~quasar-addon-styl';
+
+/* fallback */
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
+}
+/* fallback */
+@font-face {
+    font-family: "Material Icons Outlined";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v109/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2) format("woff2");
+}
+
+.material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+    font-family: "Material Icons Outlined";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Reset all Styles within app */
+#wp-vue-app-admin input {
+    all: unset;
+}
+
+#wp-vue-app-admin body {
+    font-family: unset;
+}
+
+#wp-vue-app-admin h6 {
+    font-size: 16pt;
+    margin: 10px 20px;
+    font-weight: 400;
+}
+
+
+.condensed-width {
+    max-width: 500px;
+}
+
+.condensed-width-200 {
+    max-width: 200px;
+}
+
+.text-field-header {
+    font-weight: bold;
+}
+
+/*
+################################################
+||                                            ||
+||         CSS THEME Aeroscroll Admin         ||
+||                                            ||
+################################################
+*/
+
+.aeroscroll-head {
+    background: #fff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wpcontent {
+    padding-left: 0px;
+}
+
+#wp-vue-app-admin .row,
+#wp-vue-app-admin .column,
+#wp-vue-app-admin .flex {
+    /* align-items: center; */
+}
+
+.q-card {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid #e9ecef;
+    border-radius: 0.25rem;
+
+    box-shadow: 0px 3px 9px 0px rgba(169, 184, 200, 0.14) !important;
+    -webkit-box-shadow: 0px 3px 9px 0px rgba(169, 184, 200, 0.14) !important;
+    -moz-box-shadow: 0px 9px 9px 0px rgba(169, 184, 200, 0.14) !important;
+}
+
+.q-table__card {
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.q-table__title {
+    position: relative;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #212529;
+    font-size: 1.125rem;
+}
+
+// Q-Btn
+
+.q-btn {
+    border-radius: 2px;
+    box-shadow: none;
+    font-size: 1rem;
+    border: 1px solid transparent;
+    text-transform: capitalize;
+
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.q-btn:before {
+    box-shadow: none;
+}
+
+// Q-Input
+
+.q-field {
+    color: #b8c3d5;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.q-field--outlined .q-field__control:before {
+    border: 1px solid #e9ecef;
+    border-radius: 2px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.q-field__control:focus-visible {
+    border: 5px;
+}
+
+.q-field:focus-visible {
+    border: 5px !important;
+}
+
+.material-icons-outlined {
+    font-size: 18px;
+}
+
+.q-btn .q-icon,
+.q-btn .q-spinner {
+    font-size: 1.515em;
+}
+
+.q-table th {
+    font-size: 14px;
+}
+
+.q-table .q-table__sort-icon--left {
+    font-size: 16px;
+}
+
+.shortcode_container {
+    background-color: $primary;
+    color: #fff;
+    text-align: center;
+    padding: 3px;
+    cursor: copy;
+}
+
+.q-toggle__inner {
+    width: 1.8em;
+    height: 1.42em;
+}
+
+.q-toggle__track {
+    border: 4px solid $primary;
+    background-color: transparent;
+    height: 0.75em;
+    border-radius: 0.75em;
+}
+
+.q-toggle__inner--truthy .q-toggle__track {
+    opacity: 1;
+}
+
+.q-toggle__thumb {
+    top: 18px;
+    left: 0.48em;
+    opacity: 0.38;
+    transition: left 0.22s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+}
+
+.q-toggle__inner--truthy .q-toggle__thumb {
+    left: 0.85em;
+    opacity: 1;
+}
+
+.q-toggle__thumb:after {
+    box-shadow: none;
+    background-color: $primary;
+}
+
+body.desktop .q-toggle:not(.disabled) .q-toggle__thumb:hover:before {
+    transform: scale3d(1, 1, 1);
+}
+
+body.desktop .q-toggle:not(.disabled):hover .q-toggle__thumb:before {
+    transform: scale3d(1, 1, 1);
+}
+
+.imageuploader input {
+    width: 0px !important;
+    height: 20px !important;
+}
+
+.aeroscroll-table-imagegalleries {
+    background: #f7fafe;
+    padding: 10px;
+    max-height: 1200px;
+    overflow: auto;
+}
+
+.aeroscroll-table-imagegalleries .q-table__grid-content {
+    background: #f7fafe;
+}
+
+.aeroscroll-imagegalleries-card {
+    /* margin: 10px; */
+}
+
+.aeroscroll-imagegalleries-card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-order {
+    flex: 0 0 auto;
+    flex-basis: 60px;
+    text-align: center;
+}
+
+.card-title {
+    flex: 1 1 auto;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.card-compressstatus {
+    flex: 0 0 auto;
+    flex-basis: 60px;
+    font-size: 12px;
+    line-height: 12px;
+    min-width: 80%;
+}
+
+.card-compressstatus i {
+    font-size: 10pt;
+    line-height: 14px;
+    padding-right: 6px;
+}
+
+.card-compressstatus .q-spinner {
+    margin-right: 8px;
+}
+
+.card-image {
+    flex: 0 0 auto;
+    margin: 10px;
+}
+
+.card-index {
+    color: #459eeb;
+    font-weight: bold;
+    font-size: 12pt;
+}
+
+.q-tabs {
+    background: #f7fafe;
+}
+
+.card-clickarea {
+    width: 100%;
+    height: 220px;
+    position: absolute;
+    z-index: 900009;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.aeroscroll-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.aeroscroll-flex-child {
+    flex: 1 1 auto;
+    padding: 10px;
+}
+
+.aeroscroll-flex-child .fixflex {
+    flex: 0 0 auto;
+    flex-basis: fit-content;
+}
+
+.qconfirmdialog button::before {
+    border-bottom: 0px;
+}
+
+.fullscreen {
+    z-index: 600000;
+}
+
+.aeroscroll-table-filemanager {
+    background: #f7fafe;
+    /* overflow: auto; */
+
+    /* height or max-height is important */
+    height: calc(100vh - 260px);
+}
+
+.aeroscroll-table-filemanager .q-table__grid-content {
+    overflow-y: auto;
+    align-items: flex-start;
+    align-content: baseline;
+    margin-top: 30px;
+}
+
+.aeroscroll-table-filemanager .q-table__top,
+.aeroscroll-table-filemanager .q-table__bottom,
+.aeroscroll-table-filemanager thead tr:first-child th {
+    /* bg color is important for th; just specify one */
+    background-color: #fff;
+}
+.aeroscroll-table-filemanager thead tr th {
+    position: sticky;
+    z-index: 1;
+}
+.aeroscroll-table-filemanager thead tr:first-child th {
+    top: 0;
+}
+.aeroscroll-table-filemanager.q-table--loading thead tr:last-child th {
+    /* height of all previous header rows */
+    top: 48px;
+}
+
+.filemitemlabel {
+    padding: 10px 16px;
+    font-size: 9pt;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.filemitemlabel span {
+    text-overflow: ellipsis;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.filemitemsize {
+    height: 37px;
+}
+
+.q-dialog-plugin h6 {
+    margin: 20px 20px;
+}
+.folder-icon {
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.aeroscroll-table-filemanager .q-card-focused {
+    background-color: #b7d9f7;
+}
+
+.aeroscroll-table-filemanager th.sortable .q-icon {
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.uponefolder_label {
+    height: 80px;
+}
+
+.q-menu {
+    z-index: 900000;
+}
+
+.q-tooltip {
+    z-index: 900001;
+}
+
+#uponefolder:hover {
+    cursor: pointer;
+}
+
+.aeroscroll-table-filemanager-path {
+    margin: 15px 0px 10px 0px;
+    background: #e7e9eb;
+    padding: 5px 10px;
+}
+
+.aeroscroll-layout-option-box {
+    height: 100px;
+    display: flex;
+}
+
+.aeroscroll-layout-option-image {
+    flex-basis: 100px;
+    background-color: #eaeaea;
+}
+
+.aeroscroll-layout-option-text {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 12pt;
+}
+
+.aeroscroll-imagegallery-list-empty {
+    background: #f7fafe;
+    padding: 1px;
+    height: 140px;
+}
+
+.aeroscroll-imagegallery-list-empty-card {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aeroscroll-imagegallery-list-empty-card span {
+    font-size: 12pt;
+    font-weight: 400;
+    color: #646970;
+    font-style: italic;
+}
+
+.optimizebtn_label {
+    font-size: 7pt;
+}
+
+.z-max {
+    z-index: 8999 !important;
+}
+
+.colorfield_preview {
+    width: 24px;
+    height: 24px;
+}
+
+.screensizes_col {
+    position: relative;
+    border-left: 2px solid #444444;
+    border-right: 2px solid #444444;
+}
+
+.screensizes_col:before,
+.screensizes_col:after {
+    content: "";
+    position: absolute;
+    border-bottom: 2px solid #444444;
+    height: 100%;
+    width: 15px;
+    transform: translateY(-50%);
+}
+
+.screensizes_col:before {
+    left: 0px;
+}
+
+.screensizes_col:after {
+    right: 0px;
+}
+
+.screensizes_col_label_left {
+    padding-left: 20px;
+    float: left;
+    font-weight: bold;
+}
+.screensizes_col_label_right {
+    padding-right: 20px;
+    float: right;
+    font-weight: bold;
+}
+
+.aeroscroll-page-header {
+    border-bottom: 1px solid #eaeaea;
+}
+
+.aeroscroll-subheader {
+    font-size: 13pt;
+    color: #4589c8;
+}
+
+.q-inner-loading {
+    justify-content: end;
+    padding-bottom: 10px;
+}
+
+.aeroscroll-edit-label-col {
+    /* flex-basis: 50% !important;
+    flex-grow: unset !important; */
+}
+
+.q-colorfield_preview {
+    width: 20px;
+    height: 20px;
+}
+
+.my-input {
+    max-width: 250px;
+}
+
+.aeroscroll-colorpick-icon {
+    display: flex !important;
+    justify-content: end;
+}
+
+.aeroscroll-page-header span {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em;
+    margin: 10px 20px;
+}
+
+.q-custom-dialog {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    z-index: 100012;
+    padding: 30px;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.q-custom-dialog-card {
+    padding: 20px;
+    width: 100%;
+}
+
+.q-custom-dialog-bg {
+    width: 100%;
+    height: 100%;
+    background: #21252966;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.q-card .row {
+    /* padding: 6px 10px !important; */
+}
+
+.inputfield_createfolder {
+    border: 0px solid !important;
+    box-shadow: none !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    background: none !important;
+}
+
+.inputfield_createfolder input:focus {
+    border: 0px solid !important;
+    box-shadow: none !important;
+}
+
+.inputfield_createfolder input {
+    line-height: 11pt !important;
+    min-height: 30px !important;
+    padding: 0px !important;
+    border: 0px solid !important;
+    box-shadow: none !important;
+    color: rgba(0, 0, 0, 0.87) !important;
+    background: none !important;
+}
+
+.inputfield_createfolder .q-field__control-container {
+    padding-top: 0px !important;
+    padding-left: 0px !important;
+}
+
+.card-compressstatus-container {
+    padding-left: 10px;
+}
+
+.card-compressstatus {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.card-compressstatus .q-chip__content {
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    justify-content: center;
+    overflow-y: hidden;
+}
+
+.aeroscroll-table-filemanager .q-table__bottom {
+    padding: 0px 0px 0px 0px !important;
+}
+
+.aeroscroll-table-filemanager .q-table__control button {
+}
+
+.q-table__bottom .q-table__control {
+    height: 24px !important;
+}
+
+.seperate-line {
+    width: 100%;
+    border-top: 1px solid #aeaeae;
+    height: 2px;
+}
+
+.uploaddialog .row {
+    padding: 6px 10px !important;
+}
+
+.aeroscroll-table-filemanager {
+}
+
+.createfolderdialog .q-card .row {
+    padding: 6px 10px;
+}
+
+.imagesdraggable-header-cell {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+/* ----- */
+
+.aeroscroll-table-filemanager .filemitem {
+    height: auto;
+    width: 33%;
+}
+
+.draggable-item {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    display: block;
+    background-color: #fff;
+    outline: 0;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    margin-bottom: 2px;
+    margin-top: 2px;
+    cursor: default;
+    user-select: none;
+}
+
+.gal-sticky-header-table {
+    /* height or max-height is important */
+    height: 310px;
+
+    .q-table__top,
+    .q-table__bottom,
+    thead tr:first-child th {
+        /* bg color is important for th; just specify one */
+        background-color: #f0f0f1;
+    }
+
+    thead tr th {
+        position: sticky;
+        z-index: 1;
+    }
+
+    thead tr:first-child th {
+        top: 0;
+    }
+
+    /* this is when the loading indicator appears */
+    &.q-table--loading thead tr:last-child th {
+        /* height of all previous header rows */
+        top: 48px;
+    }
+
+    /* prevent scrolling behind sticky top row on focus */
+    tbody {
+        /* height of all previous header rows */
+        scroll-margin-top: 48px;
+    }
+}
+
+.qtb_bottom {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.qtb_bottom_left {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.vel-modal {
+    z-index: 99989999;
+}
+
+.license_inactive_panel {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #454545aa;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.license_inactive_panel span {
+    font-size: 18pt;
+    color: #ffffff;
+}
+
+.serial_result_notification {
+    font-weight: bold;
+    font-size: 11pt;
+}
+
+.q-color-picker input.fit {
+    height: 20px !important;
+}
+
+.galleries_tabs i.q-icon {
+    width: 27px;
+    height: 27px;
+}
+
+.watermark_overlay_text {
+    position: absolute;
+    background: none !important;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    bottom: 0px;
+    left: 0px;
+    padding: 10px !important;
+}
+
+.watermark_overlay_image {
+    position: absolute;
+    background: none !important;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    bottom: 0px;
+    left: 0px;
+    padding: 0px !important;
+    margin: 10px;
+}
+
+.popupeditimage_mask {
+    width: 100%;
+    height: 100%;
+    background-color: #21252988;
+    display: none;
+    cursor: pointer;
+}
+
+.popupeditimage_img:hover .popupeditimage_mask {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (min-width: 800px) {
+    .aeroscroll-table-filemanager .filemitem {
+        height: auto;
+        width: 20%;
+    }
+
+    .aeroscroll-edit-label-col {
+        /* flex-basis: 33% !important;
+        flex-grow: unset !important; */
+    }
+}
+
+@media (min-width: 1280px) {
+    .aeroscroll-table-filemanager .filemitem {
+        height: auto;
+        width: 12.5%;
+    }
+
+    .aeroscroll-edit-label-col {
+        /* flex-basis: 33% !important;
+        flex-grow: unset !important; */
+    }
+}
+
+@media (min-width: 1580px) {
+    .aeroscroll-table-filemanager .filemitem {
+        height: auto;
+        width: 10%;
+    }
+
+    .aeroscroll-edit-label-col {
+        /* flex-basis: 28% !important;
+        flex-grow: unset !important; */
+    }
+}

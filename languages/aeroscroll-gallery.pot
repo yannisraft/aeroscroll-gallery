@@ -1,0 +1,84 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Aeroscroll Gallery\n"
+"POT-Creation-Date: 2023-10-04 18:48+0300\n"
+"PO-Revision-Date: 2023-07-11 14:20+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: aeroscroll-gallery.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-aeroscroll-gallery-admin.php:160
+#: admin/class-aeroscroll-gallery-admin.php:416
+#: admin/class-aeroscroll-gallery-admin.php:417
+msgid "Manage Galleries"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:161
+msgid "Published"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:162
+msgid "Operation"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:163
+msgid "Title"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:243
+msgid "Settings Saved"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:244
+msgid "Error"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:426
+#: admin/class-aeroscroll-gallery-admin.php:427
+msgid "Image Collections"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:437
+#: admin/class-aeroscroll-gallery-admin.php:438
+#: admin/class-aeroscroll-gallery-admin.php:521
+msgid "Settings"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:447
+#: admin/class-aeroscroll-gallery-admin.php:448
+msgid "Help"
+msgstr ""
+
+#: admin/class-aeroscroll-gallery-admin.php:528
+msgid "Orientation"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Aeroscroll Gallery"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "https://www.aeroscroll.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "The aeroscroll gallery is an infinite grid system"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Aeroscroll Team"
+msgstr ""

@@ -1,0 +1,140 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+ h1 {
+    font-size: 30pt;
+ }
+
+ .aeroscroll-page-title {
+    font-size: 18pt;
+    margin-left: 20px;
+ }
+
+ .copiedbox {
+    position: absolute;
+    right: 0px;
+    top: -20px;
+    background: #d2d2d2;
+    padding: 5px;
+    animation: copiedmove 2.5s ease-in;
+    -webkit-animation: copiedmove 2.5s;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+ }
+
+ @keyframes copiedmove
+{ 
+    0% { top: 10px; opacity: 0; }
+    20% { top: -20px; opacity: 1.0; }
+    80% { top: -20px; opacity: 1.0; }
+    100% { top: -20px; opacity: 0.0; }
+}
+
+@-webkit-keyframes copiedmove /* Safari and Chrome */
+{
+    0% { top: 10px; opacity: 0; }
+    20% { top: -20px; opacity: 1.0; }
+    80% { top: -20px; opacity: 1.0; }
+    100% { top: -20px; opacity: 0.0; }
+}
+
+#adminmenu a[href*="admin.php?page=aeroscroll-gallery-help"]
+{
+    color: #7cc2ff;
+}
+
+#adminmenu a[href*="admin.php?page=aeroscroll-gallery-gopro"]
+{
+    color: #eb9545;
+    font-weight: bold;
+}
+
+#adminmenu a[href*="admin.php?page=aeroscroll-gallery-gopro"]:before
+{
+    font-family: "dashicons";
+    content: "\f155";
+    display: inline-block;
+    padding-right: 3px;
+    vertical-align: middle;
+    font-weight: 900;
+}
+
+.premiumdescstyle h5 {
+    color: #ffb46f;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.premiumdescstyle p {
+    font-size: 13pt;
+}
+
+.premiumdescstyle ul {
+    font-size: 13pt;
+}
+
+.premiumdescstyle ul li {
+    line-height: 33px;
+    text-indent: 10px;
+}
+
+.premiumdescstyle ul li::marker {
+    content: '✓';
+    color: white;
+}
+
+.premium-line {
+    width: 200px;
+    color: #ffb46f;
+    margin: 10px 0px 20px 0px;
+    border: 1px solid;
+}
+
+.protext {
+    font-size: 13pt;
+    color: #566be2;
+    margin-top: 8px;
+}
+
+.creditsection .q-toggle__inner--truthy {
+    color: #ffc154;
+}
+
+.creditsection .q-toggle__track {
+    border: 4px solid #ffc154;
+}
+
+.creditsection .q-toggle__thumb:after {
+    background-color: #ffc154;
+}
+
+.creditpremiumsupport {
+    font-size: 13pt;
+    font-weight: bold;
+    color: #50575e;
+    margin-top: 8px;
+}
+
+.poweredbyption_desc2 {
+    color: rgb(255, 180, 111);
+}
+
+.register_desc {
+    color: #459eeb;
+}
+
+.protooltip {
+    background: #f4f9ff;
+    color: #566be2;
+}
+
+.protooltip_label {
+    color: #566be2;
+    font-size: 12pt;
+}
+
+.protooltip_icon {
+    color: #ffb46f;
+}
