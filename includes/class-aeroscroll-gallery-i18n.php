@@ -33,15 +33,10 @@ class Aeroscroll_Gallery_i18n {
 	 */
 	public function load_plugin_textdomain() {
 
-        //echo "------------------------------------> LANG: " . dirname( dirname( plugin_basename( __FILE__ ) ) );
 		load_plugin_textdomain(
 			'aeroscroll-gallery',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
-
 	}
-
-
-
 }

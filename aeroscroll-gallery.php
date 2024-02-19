@@ -3,7 +3,7 @@
 * Plugin Name: Aeroscroll Gallery
 * Plugin URI: https://www.aeroscroll.com
 * Description: Aeroscroll Gallery empowers you to create captivating and interactive image galleries like never before. With a diverse set of advanced features, our plugin offers a seamless and immersive image browsing experience that leaves a lasting impression on your website visitors.
-* Version: 1.0.0.0
+* Version: 1.0.0.1
 * Author: Aeroscroll Team
 * Author URI: https://www.aeroscroll.com
 * License: GPL2
@@ -36,8 +36,8 @@ if (!defined('ABSPATH')) {
 /**
  * Currently plugin version
  */
-define('AEROSCROLL_GALLERY_VERSION', '1.0.0.0');
-define('AEROSCROLL_GALLERY_ITERATION', '1');
+define('AEROSCROLL_GALLERY_VERSION', '1.0.0.1');
+define('AEROSCROLL_GALLERY_ITERATION', '3');
 define("PLUGIN_CHECK_TRANSIENT_EXPIRATION", 3600); // 12 hours
 
 

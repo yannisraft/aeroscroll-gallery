@@ -63,7 +63,6 @@ export default {
         let IDGenerated = Math.floor(Math.random() * 999999) + 1000000;
 
         // ---- Reactive Attributes
-
         if (props.layout === "justified") {
             var percentLeft = 100;
 
@@ -78,7 +77,7 @@ export default {
         }
 
         onMounted(() => {
-            //console.log("cells : ",props.col.cells);
+            //
         });
 
         function GetCellStyle(cell) {

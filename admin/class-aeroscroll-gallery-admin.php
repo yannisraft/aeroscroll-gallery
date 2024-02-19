@@ -244,7 +244,7 @@ class aeroscroll_gallery_Admin
                 ),
             );
 
-            
+                        
 
             wp_localize_script($this->plugin_name, 'APEX', $APEX_obj);
             wp_localize_script('app.js', 'APEX', $APEX_obj);

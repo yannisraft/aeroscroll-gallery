@@ -9,7 +9,7 @@ window["pro_func"] = {
 
         let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=get`;
         fetch(finalurl, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "X-WP-Nonce": NONCE

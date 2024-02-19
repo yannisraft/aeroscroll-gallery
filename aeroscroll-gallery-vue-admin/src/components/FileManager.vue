@@ -1203,7 +1203,7 @@ export default {
                         file.type === "image/webp" ||
                         file.type === "image/jfif" ||
                         file.type === "image/gif") &&
-                    ((file) => file.size < 10000)
+                    ((file) => file.size < 15000)
                 );
             });
         }

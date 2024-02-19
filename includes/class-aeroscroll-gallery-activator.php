@@ -57,10 +57,7 @@ class aeroscroll_gallery_Activator
             // ------------------
             $table_name = $wpdb->prefix . 'aeroscroll_gallery';
             if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) === $table_name) {
-                //error_log( 'Table exists' . ': ' . print_r( $table_name, true ) );
             } else {
-                //error_log('Table does not exist' . ': ' . print_r($table_name, true));
-                //echo "------------------------> COLATE: " . $collate;
                 
                 $schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery (
@@ -138,9 +135,7 @@ class aeroscroll_gallery_Activator
             // ------------------
             $table_name2 = $wpdb->prefix . 'aeroscroll_gallery_imagegalleries';
             if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name2)) === $table_name2) {
-                //error_log( 'Table exists' . ': ' . print_r( $table_name, true ) );
-            } else {
-                //error_log('Table does not exist' . ': ' . print_r($table_name2, true));                
+            } else {              
 
                 $schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegalleries (
@@ -162,10 +157,7 @@ class aeroscroll_gallery_Activator
             // ------------------
             $table_name3 = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
             if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name3)) === $table_name3) {
-                //error_log( 'Table exists' . ': ' . print_r( $table_name3, true ) );
             } else {
-                //error_log('Table does not exist' . ': ' . print_r($table_name3, true));
-
                 $schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -189,9 +181,7 @@ class aeroscroll_gallery_Activator
             // ------------------
             $table_name = $wpdb->prefix . 'aeroscroll_gallery_settings';
             if ($wpdb->get_var($wpdb->prepare("SHOW TABLES LIKE %s", $table_name)) === $table_name) {
-            } else {
-                //error_log('Table does not exist' . ': ' . print_r($table_name, true));
-                
+            } else {                
                 $schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_settings (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,                    

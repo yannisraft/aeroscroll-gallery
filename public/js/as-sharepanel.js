@@ -16,18 +16,12 @@ export default {
             <a v-if="social_share_pinterest === 1 || social_share_pinterest === '1'" data-pin-do="buttonPin" data-pin-config="none" class="pi-h" @click="social_pinterest_click(title, description, image)" target="_blank">
                 <img :src="get_social_image_url('icons8-pinterest-48.png')">
             </a>
-            <!-- <a v-if="social_share_instagram === 1 || social_share_instagram === '1'" class="in-h" @click="social_instagram_click(title, description, image)" target="_blank">
-                <img :src="get_social_image_url('icons8-instagram-48.png')">
-            </a> -->
             <a v-if="social_share_tumblr === 1 || social_share_tumblr === '1'" class="tu-h" @click="social_tumblr_click(title, description)" target="_blank">
                 <img :src="get_social_image_url('icons8-tumblr-48.png')">
             </a>
             <a v-if="social_share_email === 1 || social_share_email === '1'" class="em-h" :href="'mailto:?subject='+title+'&body='+GetEmailBody()" class="social-share-button social-share-button-email" target="_blank" rel="nofollow noopener noreferrer" aria-label="Share via Email" title="Share via Email" @click="social_email_click(title, description)">
                 <img :src="get_social_image_url('icons8-email-48.png')">    
             </a>
-            <!-- <a v-if="social_share_email === 1 || social_share_email === '1'" class="em-h" @click="social_email_click(title, description)" target="_blank">
-                <img :src="get_social_image_url('icons8-email-48.png')">
-            </a> -->
         </div>        
     `,
     name: "SharePanel",
@@ -121,10 +115,6 @@ export default {
             this.share_link = window.location.href;
             this.share_title = _title;
 
-            //window.open(`mailto:?subject=${_title}&body=${this.share_link}`);
-            //window.open(`mailto:?subject=sdasdasdasd&body=1234`);
-
-            //window.open(`http://www.facebook.com/sharer.php?u=${this.share_link}&quote=${this.share_title}`, "sharer", "toolbar=0,status=0,width=626,height=436");
             return false;
         }
 

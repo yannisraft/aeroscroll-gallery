@@ -1,18 +1,7 @@
 <template>
     <div class="home">
         <div class="q-fit q-column q-no-wrap q-justify-start q-items-stretch q-content-start">
-            <!-- <div class="q-row q-py-md">
-                <h5 style="margin: 0px;">{{ t('manage_imagegalleries') }}</h5>
-            </div> -->
             <q-card flat bordered class="admin-card" style="position: relative;">
-                <!-- <div v-if="!editMode" class="q-row q-py-sm text-right">
-                <div class="q-col">
-
-                </div>
-                <div class="q-col q-px-sm">
-                    <q-btn color="primary" label="Create" @click="CreateGalleryClicked"></q-btn>
-                </div>
-            </div> -->
                 <div class="q-row q-py-sm aeroscroll-page-header">
                     <span>{{ t("manage_imagegalleries") }}</span>
                 </div>
@@ -95,7 +84,6 @@
                     <q-tabs v-model="tab" no-caps align="left" class="q-pl-md">
                         <q-tab name="settings" icon="settings" :label="t('settings')" />
                         <q-tab name="images" icon="images" :label="t('images')" :disable="createMode" />
-                        <!-- <q-tab name="upgrade" icon="upgrade" label="Upgrade" /> -->
                     </q-tabs>
                     <q-tab-panels v-model="tab" animated>
                         <q-tab-panel name="settings">
@@ -119,37 +107,17 @@
                                     <q-input class="condensed-width" outlined v-model="editingItem.title" dense></q-input>
                                 </div>
                             </div>
-                            <!-- <div class="q-row q-py-sm">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t("slug") }}</div>
-                                    <div class="text-caption">{{ t("imagegal_slug_desc") }}</div>
-                                </div>
-                                <div class="q-col">
-                                    <q-input class="condensed-width text-lowercase" outlined v-model="editingItem.slug" dense></q-input>
-                                </div>
-                            </div> -->
                             <div class="q-row q-py-sm">
                                 <div class="q-col-2 text-left q-px-sm">
                                     <div class="text-field-header">{{ t("description") }}</div>
-                                    <!-- <div class="text-caption">{{ t('slug') }}</div> -->
                                 </div>
                                 <div class="q-col">
                                     <q-input class="condensed-width" outlined v-model="editingItem.description" type="textarea" dense></q-input>
                                 </div>
                             </div>
-                            <!-- <div class="q-row q-py-sm">
-                            <div class="q-col-2 text-left q-px-sm">
-                                <div class="text-field-header">Ordering</div>
-                                <div class="text-caption">Select Ordering</div>
-                            </div>
-                            <div class="q-col">
-                                <q-input class="condensed-width" outlined v-model="editingItem.ordering" type="number" dense></q-input>
-                            </div>
-                        </div> -->
                             <div class="q-row q-py-sm q-items-center">
                                 <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t("published") }}</div>
-                                    <!-- <div class="text-caption">Enable or Disable the Grid</div> -->
+                                    <div class="text-field-header">{{ t("published") }}</div>                                    
                                 </div>
                                 <div class="q-col">
                                     <q-toggle v-model="editingItem.published"></q-toggle>
@@ -170,16 +138,6 @@
                             <div v-if="createMode" class="q-row q-py-sm">
                                 <span style="color: #f85c2f;">Please Save first in order to activate Images selection Tab!</span>
                             </div>
-
-                            <!-- <div class="q-row q-py-sm">
-                            <div class="q-col"></div>
-                            <div class="q-col-1 text-right">
-                                <q-btn color="primary" label="Cancel" @click="CancelEditingClicked"></q-btn>
-                            </div>
-                            <div class="q-col-1 text-right q-mx-sm">
-                                <q-btn color="primary" label="Save" @click="SaveEditingClicked"></q-btn>
-                            </div>
-                        </div> -->
                         </q-tab-panel>
 
                         <q-tab-panel name="images">
@@ -189,19 +147,6 @@
                             <!-- Images Grid -->
                             <div>
                                 <div class="q-row q-py-lg q-pl-lg">
-                                    <!-- <div class="q-col imagesdraggable-header-cell" style="flex-basis: 80px; flex-grow: 0;">
-                                        <div style="color: rgb(69, 158, 235); font-weight: bold; font-size: 16px;">#</div>
-                                    </div> -->
-                                    <!-- <div class="q-col text-left">
-                                        <q-checkbox
-                                            @update:model-value="
-                                                (value) => {
-                                                    CheckboxSelectAllImages($event);
-                                                }
-                                            "
-                                            v-model="allimagesselected"
-                                        /><span style="margin-left: 30px; font-weight: bold; font-size: 1rem;">{{ t('selectall') }}</span>
-                                    </div> -->
                                     <div class="q-col text-right">
                                         <q-btn
                                             color="primary"
@@ -240,7 +185,7 @@
                                                 @uploaded="onUploadedImportGallery"
                                                 @added="onUploaderFilesAdded"
                                                 @failed="onUploaderFilesFailed"
-                                            />
+                                            />                                            
                                             <q-tooltip v-if="!ispro" class="protooltip bg-blue-1" :offset="[10, 10]">
                                                 <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span
                                                     class="protooltip_label"
@@ -277,7 +222,6 @@
                                     <div v-if="imagegallery_loading" class="aeroscroll-imagegallery-list-empty">
                                         <q-inner-loading showing color="primary" />
                                     </div>
-                                    <!-- <div>{{ element.name }}</div> -->
                                     <!-- LINK Draggable-->
                                     <q-table
                                         v-if="imagegallery_rows.length > 0"
@@ -332,98 +276,13 @@
                                                 >
                                             </div>
                                             <div class="qtb_bottom">
-                                                <!-- {{ t("page") }}: {{ scope.pagination.page }} {{ t("of") }}: {{ scope.pagesNumber }}
-
-                                                {{ t("rowsperpage") }}: <q-select outlined dense v-model="scope.pagination.rowsPerPage" :options="[10, 25, 50, 100, 200, 500, 0]" />
-
-                                                <q-btn
-                                                    v-if="scope.pagesNumber > 2"
-                                                    icon="first_page"
-                                                    color="grey-8"
-                                                    round
-                                                    dense
-                                                    flat
-                                                    :disable="scope.isFirstPage"
-                                                    @click="scope.firstPage"
-                                                />
-
-                                                <q-btn
-                                                    icon="chevron_left"
-                                                    color="grey-8"
-                                                    round
-                                                    dense
-                                                    flat
-                                                    :disable="scope.isFirstPage"
-                                                    @click="scope.prevPage"
-                                                />
-
-                                                <q-btn
-                                                    icon="chevron_right"
-                                                    color="grey-8"
-                                                    round
-                                                    dense
-                                                    flat
-                                                    :disable="scope.isLastPage"
-                                                    @click="scope.nextPage"
-                                                />
-
-                                                <q-btn
-                                                    v-if="scope.pagesNumber > 2"
-                                                    icon="last_page"
-                                                    color="grey-8"
-                                                    round
-                                                    dense
-                                                    flat
-                                                    :disable="scope.isLastPage"
-                                                    @click="scope.lastPage"
-                                                /> -->
                                                 <div>{{ t("totalimages") }} : {{ imagegallery_rows.length }}</div>
                                             </div>
                                         </template>
                                     </q-table>
-                                    <!-- <Container 
-                                        orientation="vertical" 
-                                        drag-class="card-ghost" 
-                                        drop-class="card-ghost-drop" 
-                                        :get-ghost-parent="getGhostParent" 
-                                        :remove-on-drop-out="true" 
-                                        @drop-ready="onDropReady"
-                                        @drop="onDrop">
-                                        <Draggable v-for="(item, i) in imagegallery_rows" :key="item.id">
-                                            <div class="draggable-item">{{ i + 1 }} -> {{ item.name }}</div>
-                                        </Draggable>
-                                    </Container> -->
                                 </div>
-
-                                <!-- <q-table id="igtable" ref="igtableref" grid title="Images" class="aeroscroll-table-imagegalleries" :rows="imagegallery_rows" :columns="imagegallery_columns" row-key="id" :filter="searchValue_images" :filter-method="SearchMethodImages" hide-header>
-                                <template v-slot:top-right>
-                                    <q-input outlined dense debounce="300" v-model="searchValue_images" placeholder="Search">
-                                        <template v-slot:append>
-                                            <q-icon name="search" />
-                                        </template>
-                                    </q-input>
-                                </template>
-                                <template v-slot:item="props">
-                                    <div class="q-pa-md col-xs-12 col-sm-6 col-md-4">
-                                        <q-card :id="props.row.id">
-                                            <q-card-section class="text-center unselectable">
-                                                <strong>{{ props.row.name }}</strong>
-                                            </q-card-section>
-                                            <q-separator />
-                                            <q-card-section class="flex flex-center unselectable">
-                                                <q-img class="unselectable" :src="props.row.image" loading="lazy" spinner-color="primary" height="140px" style="max-width: 150px" />
-                                            </q-card-section>
-                                        </q-card>
-                                    </div>
-                                </template>
-                            </q-table> -->
                             </div>
                         </q-tab-panel>
-
-                        <!-- <q-tab-panel name="upgrade">
-                        <div class="text-h6">Movies</div>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </q-tab-panel> -->
                     </q-tab-panels>
                     <div class="aeroscroll-flex q-pa-md">
                         <div class="aeroscroll-flex-child"></div>
@@ -437,9 +296,7 @@
                 </div>
             </q-card>
         </div>
-        <!-- <q-dialog v-model="filemanager_visible" fullWidth fullHeight> -->
         <FileManager v-model="filemanager_visible" :ISNOTPRO="!ispro" @onImagesSelected="OnImagesSelected" @onCloseManager="onCloseManager" />
-        <!-- </q-dialog> -->
 
         <!-- Popp dialog for edit image -->
         <transition name="fade">
@@ -447,10 +304,6 @@
                 <div class="q-custom-dialog-bg"></div>
                 <q-card class="my-card" style="min-width: 500px;">
                     <q-img class="popupeditimage_img" loading="lazy" spinner-color="primary" :src="editimagedialog_data.image">
-                        <!-- <div class="popupeditimage_mask">
-                            <q-icon name="change_circle" color="white" size="4rem" />
-                            <span>{{ t('changeimage') }}</span>
-                        </div>  -->
                     </q-img>
                     <q-card-section>
                         <div class="q-row q-no-wrap items-center">
@@ -563,8 +416,6 @@ export default defineComponent({
 
         let initialPagination = ref({
             rowsPerPage: 25
-            //rowsNumber: imagegallery_rows.value.length
-            // rowsNumber: xx if getting data from a server
         });
 
         let licenseActive = ref(false);
@@ -611,15 +462,7 @@ export default defineComponent({
                     label: t("title"),
                     align: "left",
                     sortable: true
-                } /* ,
-                {
-                    name: "slug",
-                    field: "slug",
-                    required: true,
-                    label: "Slug",
-                    align: "left",
-                    sortable: true
-                } */,
+                },
                 {
                     name: "description",
                     field: "description",
@@ -636,14 +479,6 @@ export default defineComponent({
                     align: "left",
                     sortable: true
                 }
-                /* {
-                name: "updated_at",
-                field: "updated_at",
-                required: false,
-                label: "Update Date",
-                align: "left",
-                sortable: true
-            }, */
             ];
         });
 
@@ -702,7 +537,6 @@ export default defineComponent({
         ];
 
         const DeleteGalleryClicked = (val) => {
-            //console.log("deleteItem: ", val);
             $q.dialog({
                 title: "Confirm",
                 message: "Are you sure you want to delete the specific Image Gallery?",
@@ -718,8 +552,6 @@ export default defineComponent({
                 persistent: true
             })
                 .onOk(() => {
-                    // console.log('>>>> OK')
-                    //var rest_url = "http://localhost/wp_playground/wp-json";
                     $q.loading.show();
 
                     let _REST_URL = "http://localhost/";
@@ -727,7 +559,6 @@ export default defineComponent({
                         _REST_URL = window["REST_URL"].url;
                     }
 
-                    //let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/updateimagegallery`;
                     let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/deleteimagegallery`;
 
                     let _APEX = window["APEX"];
@@ -743,26 +574,26 @@ export default defineComponent({
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                //console.log("POST delete result: ", data);
                                 $q.loading.hide();
                                 GetGalleries();
                             });
                     }
                 })
                 .onCancel(() => {
-                    // console.log('>>>> Cancel')
+                    // 
                 })
                 .onDismiss(() => {
-                    // console.log('I am triggered on both OK and Cancel')
+                    // 
                 });
         };
 
         const EditGalleryClicked = (val) => {
             if (licenseActive.value === true) {
-                console.log("editItem: ", JSON.parse(JSON.stringify(val)));
                 editMode.value = true;
                 createMode.value = false;
                 editingItem.value = JSON.parse(JSON.stringify(val));
+                GetUploaderHeaders();
+
                 imagegallery_rows.value = [];
                 imagegallery_rows_selected.value = {};
                 imagegallery_rows_selected_arr.value = [];
@@ -776,7 +607,6 @@ export default defineComponent({
         };
 
         const TogglePublished = (val) => {
-            //console.log("editItem: ", JSON.parse(JSON.stringify(val)));
             editMode.value = false;
             createMode.value = false;
             editingItem.value = JSON.parse(JSON.stringify(val));
@@ -799,9 +629,6 @@ export default defineComponent({
             }
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/updateimagegallery`;
-            //let addimagesurl = `${_REST_URL}/wp-json/aeroscroll/v1/addgalleryimages`;
-            //let updateimagesurl = `${_REST_URL}/wp-json/aeroscroll/v1/updategalleryimages`;
-
             if (createMode.value) {
                 finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/addimagegallery`;
             }
@@ -895,10 +722,7 @@ export default defineComponent({
         }
 
         function GetGalleries() {
-            //console.log("Get Image Collections");
-
             loading.value = true;
-
             tablerows.value = [];
 
             let _REST_URL = "http://localhost/";
@@ -908,7 +732,6 @@ export default defineComponent({
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/getimagegalleries`;
             let _APEX = window["APEX"];
-            //console.log(_APEX);
             if (_APEX) {
                 fetch(finalurl, {
                     method: "GET",
@@ -919,14 +742,12 @@ export default defineComponent({
                     }
                 })
                     .then((response) => {
-                        //console.log("GetGalleries response: ", response);
                         return response.json();
                     })
                     .then((result) => {
                         let data = result.imagegalleries;
 
                         // Set All categories
-                        //console.log("imagegalleries: ", data);
                         if (data.length > 0) {
                             data.forEach((element) => {
                                 element["published"] === 1 || element["published"] === "1"
@@ -974,30 +795,17 @@ export default defineComponent({
                         imagegallery_loading.value = false;
 
                         // Set All categories
-                        console.log("gallery images: ", data);
                         if (data.galleryimages) {
                             for (var f = 0; f < data.galleryimages.length; f++) {
                                 data.galleryimages[f].selected = false;
                                 data.galleryimages[f].edit = true;
-
-                                //data.galleryimages[f].title = "Test Title"; // REVIEW
-                                //data.galleryimages[f].description = "Test a very very long description with text that is very very long"; // REVIEW
                             }
 
                             imagegallery_rows.value = data.galleryimages;
 
                             // For TEST
-                            //imagegallery_rows.value = data.galleryimages.slice(1, 30);
                             imagegallery_rows_selected.value = {};
-                            imagegallery_rows_selected_arr.value = [];
-
-                            //initialPagination.value.rowsNumber = imagegallery_rows.value.length;
-
-                            /* initialPagination.value = {            
-                                rowsPerPage: 25
-                                rowsNumber: imagegallery_rows.value.length
-                            } */
-                            //console.log("IN PA : ", initialPagination.value);
+                            imagegallery_rows_selected_arr.value = [];                            
                         }
 
                         loading.value = false;
@@ -1038,62 +846,24 @@ export default defineComponent({
             });
             return filteredRows;
         }
-
-        /* function onDragEnter(evt, item) {
-            console.log("onDragEnter");
-        }
-
-        function onDragLeave(evt, list) {
-            console.log("onDragLeave");
-        }
-
-        function onDragOver(evt, list) {
-            console.log("onDragOver");
-        }
-
-        function onDrop(dropResult) {
-            console.log("onDrop: ", dropResult);
-            imagegallery_rows.value = applyDrag(imagegallery_rows.value, dropResult);
-        }
-
-        function onDropReady(dropResult) {
-            console.log('drop ready', dropResult);
-        } */
-
+        
         function getGhostParent() {
             return document.body;
         }
 
-        /* function applyDrag(arr, dragResult) {
-            const { removedIndex, addedIndex, payload } = dragResult;
-
-            if (removedIndex === null && addedIndex === null) return arr;
-            const result = [...arr];
-            let itemToAdd = payload;
-
-            if (removedIndex !== null) {
-                itemToAdd = result.splice(removedIndex, 1)[0];
-            }
-            if (addedIndex !== null) {
-                result.splice(addedIndex, 0, itemToAdd);
-            }
-            return result;
-        } */
-
         function AddDragListeners() {
             var igtable = document.getElementById("igtable");
-            //console.log("AddDragListeners: ", igtable);
             if (igtable) {
                 igtable.addEventListener("mousedown", (e) => {
-                    console.log("mousedown");
+                    //
                 });
 
                 igtable.addEventListener("mouseup", (e) => {
-                    console.log("mouseup");
+                    //
                 });
 
                 igtable.addEventListener("mousemove", (e) => {
-                    console.log("mousemove");
+                    //
                 });
             }
         }
@@ -1104,48 +874,8 @@ export default defineComponent({
             }
         }
 
-        function RefreshTableImages() {
-            GetGalleryImages();
-        }
-
         function DraggableEnded(evt) {
             drag.value = false;
-
-            /* // Set new Order
-            imagegallery_rows.value[evt.oldIndex].order = evt.newIndex+1;
-            imagegallery_rows.value[evt.oldIndex].updated = true;
-
-            // Also update all previous images by the amount +1 or -1
-            if(evt.newIndex < evt.oldIndex)
-            {
-                for(var j=evt.oldIndex-1; j >= evt.newIndex; j--)
-                {
-                    imagegallery_rows.value[j].order = imagegallery_rows.value[j].order+1;
-                    imagegallery_rows.value[j].updated = true;
-                }
-            } else {
-                for(var i=evt.oldIndex+1; i < evt.newIndex-1; i++)
-                {
-                    imagegallery_rows.value[i].order = imagegallery_rows.value[i].order-1;
-                    imagegallery_rows.value[i].updated = true;
-                }
-            } */
-
-            //console.log("evt: ", evt);
-
-            /* var A_ItemOrder = imagegallery_rows.value[evt.oldIndex].order;
-            var B_ItemOrder = imagegallery_rows.value[evt.newIndex].order;
-
-            console.log("oldIndex: ", evt.oldIndex);
-            console.log("newIndex: ", evt.newIndex);
-
-            console.log("oldOrder: ", A_ItemOrder);
-            console.log("newOrder: ", B_ItemOrder);
-
-            imagegallery_rows.value[evt.oldIndex].order = B_ItemOrder;
-            imagegallery_rows.value[evt.oldIndex].updated = true;
-            imagegallery_rows.value[evt.newIndex].order = A_ItemOrder;
-            imagegallery_rows.value[evt.newIndex].updated = true; */
         }
 
         function OnAddImagesClicked() {
@@ -1154,10 +884,6 @@ export default defineComponent({
         }
 
         function OnImagesSelected(images) {
-            // TODO
-            // HERE INSERT IN DATABASE Immediatelly
-            console.log("OnImagesSelected: ", images);
-
             var last_index = imagegallery_rows.value.length;
 
             var _index = last_index;
@@ -1167,7 +893,6 @@ export default defineComponent({
                 if (img.folder !== 1) {
                     var item = {
                         id: img.id,
-                        //id: Math.floor(Math.random() * 1000000000) + 10000000000,
                         order: _index + 1,
                         name: img.name,
                         image: img.image,
@@ -1181,7 +906,6 @@ export default defineComponent({
                         title: "",
                         description: ""
                     };
-                    //console.log("img.relativedir: ", img.relativedir);
 
                     if (img.optimized) {
                         item.optimized = img.optimized;
@@ -1189,14 +913,11 @@ export default defineComponent({
                     }
 
                     // Will update on Refresh
-                    //imagegallery_rows.value.push(item);
                     imagestoadd.push(item);
 
                     _index++;
                 }
             }
-
-            console.log("... imagestoadd: ", imagestoadd);
 
             if (imagestoadd.length > 0) {
                 // Insert into DB and Refresh
@@ -1233,7 +954,6 @@ export default defineComponent({
                 })
                     .then((response) => response.json())
                     .then((data) => {
-                        //console.log("POST delete image from gallery result: ", data);
                         $q.loading.hide();
 
                         var listToDelete = [img_id];
@@ -1244,14 +964,12 @@ export default defineComponent({
                             )
                         );
 
-                        //delete imagegallery_rows_selected.value[img_id];
                         imagegallery_rows.value = RemoveItemFromArraywithID(imagegallery_rows.value, image.id);
                     });
             }
         }
 
         function EditGalleryImageClicked(imageobj) {
-            console.log("Edit: ", imageobj);
             editimagedialog_data.value = {
                 id: imageobj.id,
                 image: imageobj.image,
@@ -1263,39 +981,22 @@ export default defineComponent({
         }
 
         function CheckboxSelectAllImages() {
-            //console.log("imagegallery_rows: ", imagegallery_rows.value);
             imagegallery_rows_selected_arr.value = [];
 
             for (var k = 0; k < imagegallery_rows.value.length; k++) {
-                //imagegallery_rows_selected.value[imagegallery_rows.value[k].id] = true;
                 imagegallery_rows_selected_arr.value.push(imagegallery_rows.value[k].id);
                 imagegallery_rows.value[k].selected = !allimagesselected.value;
             }
         }
 
-        /* function CheckboxSelectedImage(value, element, evt) {
-            element.selected = value;
-            allimagesselected.value = false;
-
-            if (value === true) {
-                imagegallery_rows_selected.value[element.id] = true;
-            } else {
-                delete imagegallery_rows_selected.value[element.id];
-            }
-        } */
-
         function OnDeleteMultipleGalleryImagesClicked() {
             var total_images = [];
 
             if (imagegallery_rows_selected_arr.value.length > 0) {
-                //if (Object.keys(imagegallery_rows_selected.value).length > 0) {
                 for (var k = 0; k < imagegallery_rows_selected_arr.value.length; k++) {
-                    //for (var key in imagegallery_rows_selected.value) {
                     var it = imagegallery_rows_selected_arr.value[k];
                     total_images.push(it);
                 }
-
-                //console.log("total_images: ", JSON.stringify(total_images) );
 
                 $q.loading.show();
 
@@ -1310,7 +1011,6 @@ export default defineComponent({
                 });
 
                 let _APEX = window["APEX"];
-                console.log("X-WP-Nonce: ", _APEX.deletegalleryimages.nonce);
                 if (_APEX) {
                     fetch(finalurl, {
                         method: "POST",
@@ -1322,11 +1022,9 @@ export default defineComponent({
                         body: body_data
                     })
                         .then((response) => {
-                            //console.log("RES::: ", response.text());
                             return response.json();
                         })
-                        .then((data) => {
-                            console.log("POST delete MULTIPLE image from gallery result: ", data);
+                        .then((data) => {                            
                             $q.loading.hide();
 
                             imagegallery_rows_selected.value = {};
@@ -1348,7 +1046,6 @@ export default defineComponent({
         }
 
         function SaveImageDetails() {
-            //console.log(editimagedialog_data.value);
             editimagedialog.value = false;
 
             let _REST_URL = "http://localhost/";
@@ -1420,7 +1117,6 @@ export default defineComponent({
 
         function PaginationUpdated(newPagination) {
             if (newPagination && !justLoaded) {
-                console.log("newPagination: ", newPagination.rowsPerPage);
                 $q.sessionStorage.set("ig_table_rowsperpage", newPagination.rowsPerPage);
                 initialPagination.value.rowsPerPage = newPagination.rowsPerPage;
             }
@@ -1437,52 +1133,10 @@ export default defineComponent({
         const dragOptions = computed(() => {
             return {
                 animation: 0,
-                /* group: "description", */
                 ghostClass: "ghost"
             };
         });
-
-        /* function CheckLicense(callback) {
-            console.log("CheckLicense");
-
-            var body_data = JSON.stringify({
-                request: "check",
-                email: "imoufa@gmail.com",
-                serial_key: "",
-                product_id: 806
-            });
-
-            let _REST_URL = "http://localhost/";
-            if (window["REST_URL"]) {
-                _REST_URL = window["REST_URL"].url;
-            }
-
-            var rdata_email = "imoufa@gmail.com";
-            var rdata_serial_key = "123";
-            var rdata_product_id = 806;
-
-            let _APEX = window["APEX"];
-
-            let finalurl =
-                `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=get`;
-
-            fetch(finalurl, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-WP-Nonce": _APEX.manageserial.nonce
-                }
-            })
-                .then((response) => {
-                    //console.log("GET LICENSE response: ", response.text());
-                    return response.json();
-                })
-                .then((result) => {
-                    console.log("LICENSE: ", result);
-                    callback(result);
-                });
-        } */
-
+        
         function ExportGallery() {
             let _REST_URL = "http://localhost/";
             let _NONCENAME = "exportimagegallery";
@@ -1516,10 +1170,8 @@ export default defineComponent({
                 })
                     .then((response) => response.json())
                     .then(async (data) => {
-                        console.log("RSULT:", data);
                         if (data) {
                             if (data.success === true) {
-                                console.log("exportfile: ", data.exportfile);
                                 if (data.exportfile !== "") {
                                     document.location.href = data.exportfile;
                                 }
@@ -1550,14 +1202,11 @@ export default defineComponent({
                 _REST_URL = window["REST_URL"].url;
             }
 
-            let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/importimagegallery`;
-            //let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/importimagegallery?imagegallery_id=` + editingItem.value.id;
-
+            let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/importimagegallery?imagegallery_id=` + editingItem.value.id;
             return finalurl;
         }
 
         function onUploaderFilesAdded(info) {
-            console.log("onUploaderFilesAdded: ", info);
 
             $q.loading.show({
                 message: t("uploadingimportfile")
@@ -1565,56 +1214,10 @@ export default defineComponent({
             GetUploaderHeaders();
 
             fileImporterElement.value.upload();
-
-
-           /*  let _REST_URL = "http://localhost/";
-            let _NONCENAME = "importimagegallery";
-
-            if (window["REST_URL"]) {
-                _REST_URL = window["REST_URL"].url;
-                _NONCENAME = "importimagegallery";
-            }
-
-            // Update directly in DB
-            let updateimagesurl = `${_REST_URL}/wp-json/aeroscroll/v1/importimagegallery`;
-
-            $q.loading.show({
-                message: t("exportinggalleryimages")
-            });
-
-            var body_data = JSON.stringify({
-                imagegallery_id: editingItem.value.id
-            });
-
-            let _APEX = window["APEX"];
-            if (_APEX) {
-                fetch(updateimagesurl, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-WP-Nonce": _APEX[_NONCENAME].nonce
-                    },
-                    body: body_data
-                })
-                    .then((response) => response.json())
-                    .then(async (data) => {
-                        console.log("RSULT:", data);
-                        if (data) {
-                            if (data.success === true) {
-                                console.log("exportfile: ", data.exportfile);
-                                if (data.exportfile !== "") {
-                                    document.location.href = data.exportfile;
-                                }
-                            }
-                        }
-                        $q.loading.hide();
-                    });
-            } */
         }
 
         function onUploadedImportGallery(info) {
             $q.loading.hide();
-            console.log("onUploadedImportGallery: ", info);
 
             try {
                 var ressp = JSON.parse(info.xhr.responseText);
@@ -1626,8 +1229,6 @@ export default defineComponent({
 
         function onUploaderFilesFailed(info) {
             $q.loading.hide();
-
-            console.log("onUploaderFilesFailed: ", info);
 
             $q.dialog({
                 title: t("error"),
@@ -1659,7 +1260,6 @@ export default defineComponent({
                     }
                 ];
             }
-            console.log("_headers: ", _headers);
             uploaderHeaders.value = _headers;
         }
 
@@ -1804,9 +1404,7 @@ export default defineComponent({
 }
 
 .fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active below version 2.1.8 */ {
+.fade-leave-to {
     opacity: 0;
 }
 </style>

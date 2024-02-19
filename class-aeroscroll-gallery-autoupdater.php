@@ -121,6 +121,7 @@ class AeroscrollGalleryAutoUpdater
             && version_compare($remote->requires, get_bloginfo('version'), '<=')
             && version_compare($remote->requires_php, PHP_VERSION, '<')
         ) {
+            //echo "HAS UPDATE new version: " . $remote->version;
             $res = new stdClass();
             $res->slug = $this->plugin_slug;
             $res->plugin = "aeroscroll-gallery/aeroscroll-gallery.php";

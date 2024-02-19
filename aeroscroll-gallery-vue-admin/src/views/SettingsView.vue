@@ -139,7 +139,7 @@ export default defineComponent({
             let _APEX = window["APEX"];
             
             fetch(finalurl, {
-                method: "GET",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "X-WP-Nonce": _APEX.manageserial.nonce
@@ -152,7 +152,6 @@ export default defineComponent({
                 .then((result) => {
                     loading_license.value = false;
 
-                    console.log("GetLicense: ", result);
                     if (result) {
                         license_active.value = result.active;
 
@@ -163,13 +162,11 @@ export default defineComponent({
                             serial_key.value = result.storedserialkey;
                         }
 
-                        console.log("result.code: ", result.code);
                         if(result.code === "server_error") {
                             license_servererror.value = true;                            
                         }
 
                         var found = productoptions.find(item => item.value === result.productid);
-                        console.log("found: ", found);
                         if(found !== null && typeof found !== 'undefined')
                         {
                             productselected.value = found;
@@ -180,20 +177,21 @@ export default defineComponent({
 
         function CheckLicense() {
             loading_license.value = true;
-            notification_active.value = false;
-            serial_key.value = "";
+            notification_active.value = false;            
 
             let _REST_URL = "http://localhost/";
             if (window["REST_URL"]) {
                 _REST_URL = window["REST_URL"].url;
             }
+            let _APEX = window["APEX"];
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=check`;
 
             fetch(finalurl, {
-                method: "GET",
+                method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "X-WP-Nonce": _APEX.manageserial.nonce
                 }
             })
                 .then((response) => {
@@ -203,12 +201,14 @@ export default defineComponent({
                 .then((result) => {
                     loading_license.value = false;
 
-                    console.log("CheckLicense: ", result);
                     if (result) {
                         license_active.value = result.active;
-                        console.log("result.code: ", result.code);
                         if(result.code === "server_error") {
                             license_servererror.value = true;                            
+                        }
+
+                        if(result.serialkey) {
+                            serial_key.value = result.serialkey;
                         }
 
                         var found = productoptions.find(item => item.value === result.productid);
@@ -218,12 +218,13 @@ export default defineComponent({
         }
 
         function ActivateLicense() {
-            console.log("Activate License");
             notification_active.value = false;
 
             if (serial_key.value != "") {
                 activating_license.value = true;
                 let _REST_URL = "http://localhost/";
+                let _APEX = window["APEX"];
+
                 if (window["REST_URL"]) {
                     _REST_URL = window["REST_URL"].url;
                 }
@@ -235,10 +236,12 @@ export default defineComponent({
                     productselected.value.value;
 
                 fetch(finalurl, {
-                    method: "GET",
+                    method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
-                    }
+                        "Content-Type": "application/json",
+                        // eslint-disable-next-line
+                        "X-WP-Nonce": _APEX["manageserial"].nonce
+                    },
                 })
                     .then((response) => {
                         //console.log("GET LICENSE response: ", response.text());
@@ -246,8 +249,6 @@ export default defineComponent({
                     })
                     .then((result) => {
                         activating_license.value = false;
-
-                        console.log("ActivateLicense: ", result);
                         if (result) {
                             if (result.active === true) {
                                 notification_status.value = 1;
@@ -256,7 +257,6 @@ export default defineComponent({
                                 var found = productoptions.find(item => item.value === result.productid);
                                 productselected.value = found;
                             } else {
-                                console.log("result.code :: ", result.code);
                                 if (result.code === "instance_already_activated") {
                                     notification_status.value = 1;
                                     notification_text.value = t("serialkey_already_activated");
@@ -278,7 +278,6 @@ export default defineComponent({
         }
 
         function DeactivateLicense() {
-            console.log("Deactivate License");
             notification_active.value = false;
 
             activating_license.value = true;
@@ -286,14 +285,17 @@ export default defineComponent({
             if (window["REST_URL"]) {
                 _REST_URL = window["REST_URL"].url;
             }
+            let _APEX = window["APEX"];
 
             let finalurl =
                 `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=deactivate`;
 
             fetch(finalurl, {
-                method: "GET",
+                method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    // eslint-disable-next-line
+                    "X-WP-Nonce": _APEX["manageserial"].nonce
                 }
             })
                 .then((response) => {
@@ -303,26 +305,11 @@ export default defineComponent({
                 .then((result) => {
                     activating_license.value = false;
 
-                    console.log("DeactivateLicense: ", result);
                     if (result) {
                         if(result.code === "key_deactivated") {
                             notification_status.value = 1;
                             notification_text.value = t("serialkey_deactivated");
                         }
-                        /* if (result.active === true) {
-                            notification_status.value = 1;
-                            notification_text.value = t("serialkey_valid_activated");
-                        } else {
-                            console.log("result.code :: ", result.code);
-                            if (result.code === "instance_already_activated") {
-                                notification_status.value = 1;
-                                notification_text.value = t("serialkey_already_activated");
-                            } else {
-                                notification_status.value = 0;
-                                notification_text.value = t("serialkey_invalid");
-                            }
-                        } */
-                        
 
                         notification_active.value = true;
                         license_active.value = result.active;

@@ -15,10 +15,7 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div>
-    <!-- <h3>Aeroscroll Grid</h3> -->
-
     <div id="wp-vue-app-admin"></div>
-    <!-- <script>window.gdloaded = false;</script> -->
     <?php echo '<script>window["MEDIA_URL"] = "'.plugin_dir_url( __FILE__ ).'";</script>' ?>
     <?php
     if (extension_loaded('gd')) {
@@ -27,10 +24,4 @@
         echo '<script>window.gdloaded = false;</script>';
     }
     ?>
-
-    <!-- <?php
-            settings_fields('aeroscrollgrid');
-            do_settings_sections('aeroscrollgrid');
-            submit_button();
-            ?> -->
 </div>

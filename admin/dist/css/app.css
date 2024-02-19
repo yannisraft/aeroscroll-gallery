@@ -34,9 +34,7 @@
     transition: opacity 0.5s;
 }
 .fade-enter[data-v-9ea40744],
-.fade-leave-to[data-v-9ea40744]
-
-/* .fade-leave-active below version 2.1.8 */ {
+.fade-leave-to[data-v-9ea40744] {
     opacity: 0;
 }
 label[data-v-9ea40744] {

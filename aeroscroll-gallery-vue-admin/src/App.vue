@@ -36,14 +36,12 @@ export default {
         }
     },
     setup(props) {
-        //let pageID = ref("");
-
         function GetHeadImage() {
             return window["MEDIA_URL"] + 'images/logo_head.png';
         }
 
         onMounted(() => {
-            //pageID.value = props.page;
+            //
         });
 
         return {

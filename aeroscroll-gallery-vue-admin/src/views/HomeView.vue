@@ -94,7 +94,6 @@
                         <q-tab name="dimensions" icon="photo_size_select_small" :label="t('dimensions')" />
                         <q-tab name="socialshare" icon="share" :label="t('socialshare')" />
                         <q-tab name="watermark" icon="branding_watermark" :label="t('watermark')" />
-                        <!-- <q-tab name="advertisement" icon="picture_in_picture_small" :label="t('advertisement')" /> -->
                     </q-tabs>
                     <q-tab-panels v-model="settingstab" animated>
                         <!-- LINK TAB GENERAL-->
@@ -453,7 +452,6 @@
                             <div class="q-row q-py-md items-center">
                                 <div class="q-col text-left q-px-sm aeroscroll-edit-label-col">
                                     <div class="text-field-header">{{ t("published") }}</div>
-                                    <!-- <div class="text-caption">Enable or Disable the Grid</div> -->
                                 </div>
                                 <div class="q-col">
                                     <q-toggle v-model="editingItem.published"></q-toggle>
@@ -614,15 +612,6 @@
                         <!-- LINK TAB DIMENSIONS-->
                         <q-tab-panel name="dimensions">
                             <!-- ON FUTURE Release -->
-                            <!-- <div class="q-row q-py-md">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t('isinfinite') }}</div>
-                                    <div class="text-caption">{{ t('isinfinite_desc') }}</div>
-                                </div>
-                                <div class="q-col">
-                                    <q-toggle v-model="editingItem.isinfinite"></q-toggle>
-                                </div>
-                            </div> -->
 
                             <div class="q-row q-py-md">
                                 <div class="q-col text-left q-px-sm aeroscroll-edit-label-col">
@@ -1229,29 +1218,6 @@ export default defineComponent({
                 title: t("layout_masonry")
             }
         ]);
-        /* let layout_options = ref([
-            {
-                id: "grid",
-                name:
-                    '<div class="aeroscroll-layout-option-box"><div class="aeroscroll-layout-option-image"><img src="' +
-                    window["MEDIA_URL"] +
-                    'images/aeroscroll_layout_icon_grid.png" alt="Grid Layout image"/></div><div class="aeroscroll-layout-option-text"><span>Grid Layout</span></div></div>'
-            },
-            {
-                id: "justified",
-                name:
-                    '<div class="aeroscroll-layout-option-box"><div class="aeroscroll-layout-option-image"><img src="' +
-                    window["MEDIA_URL"] +
-                    'images/aeroscroll_layout_icon_mosaic.png" alt="Justified Layout image"/></div><div class="aeroscroll-layout-option-text"><span>Justified Layout</span></div></div>'
-            },
-            {
-                id: "masonry",
-                name:
-                    '<div class="aeroscroll-layout-option-box"><div class="aeroscroll-layout-option-image"><img src="' +
-                    window["MEDIA_URL"] +
-                    'images/aeroscroll_layout_icon_mosaic.png" alt="Masonry Layout image"/></div><div class="aeroscroll-layout-option-text"><span>Masonry Layout</span></div></div>'
-            }
-        ]); */
 
         let type_options = ref([
             {
@@ -1309,7 +1275,6 @@ export default defineComponent({
             descending: false,
             page: 1,
             rowsPerPage: 25
-            // rowsNumber: xx if getting data from a server
         });
 
         const tablecolumns = computed(() => {
@@ -1362,14 +1327,6 @@ export default defineComponent({
                     align: "left",
                     sortable: true
                 },
-                /* {
-                name: "layout",
-                field: "layout",
-                required: true,
-                label: "Layout",
-                align: "left",
-                sortable: true
-            }, */
                 {
                     name: "theme",
                     field: "theme",
@@ -1378,30 +1335,6 @@ export default defineComponent({
                     align: "left",
                     sortable: true
                 },
-                /* {
-                name: "numrows",
-                field: "numrows",
-                required: true,
-                label: "q-rows",
-                align: "left",
-                sortable: true
-            },
-            {
-                name: "numcolumns",
-                field: "numcolumns",
-                required: true,
-                label: "q-columns",
-                align: "left",
-                sortable: true
-            }, */
-                /* {
-                name: "cellsquared",
-                field: "cellsquared",
-                required: true,
-                label: "Square Cells",
-                align: "left",
-                sortable: true
-            }, */
                 {
                     name: "created_at",
                     field: "created_at",
@@ -1422,7 +1355,6 @@ export default defineComponent({
         });
 
         const DeleteGridClicked = (val) => {
-            console.log("deleteItem: ", val);
             $q.dialog({
                 title: "Confirm",
                 message: "Are you sure you want to delete the specific Grid?",
@@ -1445,10 +1377,6 @@ export default defineComponent({
                     }
 
                     let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/deletegrid`;
-
-                    /* var rest_url = "http://localhost/wp_playground/wp-json";
-                    let finalurl = `${rest_url}/aeroscroll/v1/deletegrid`; */
-
                     let _APEX = window["APEX"];
                     if (_APEX) {
                         fetch(finalurl, {
@@ -1462,17 +1390,16 @@ export default defineComponent({
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log("POST delete result: ", data);
                                 $q.loading.hide();
                                 GetGrids();
                             });
                     }
                 })
                 .onCancel(() => {
-                    // console.log('>>>> Cancel')
+                    //
                 })
                 .onDismiss(() => {
-                    // console.log('I am triggered on both OK and Cancel')
+                    //
                 });
         };
 
@@ -1481,8 +1408,6 @@ export default defineComponent({
                 editMode.value = true;
                 createMode.value = false;
                 editingItem.value = JSON.parse(JSON.stringify(val));
-
-                console.log("EDIT", editingItem.value);
 
                 let imagegallery_exists = false;
                 for (var f = 0; f < imagegalleries_options.value.length; f++) {
@@ -1503,9 +1428,6 @@ export default defineComponent({
                 if (!imagegallery_exists) {
                     delete editingItem.value.imagegallery;
                 }
-
-                // Analyze Height
-                //editingItem.value.height = 400;
 
                 if (editingItem.value.height) {
                     var numericHeight = editingItem.value.height.match(/\d/g);
@@ -1544,9 +1466,6 @@ export default defineComponent({
                 editingItem.value.social_share_email === "1"
                     ? (editingItem.value.social_share_email = 1)
                     : (editingItem.value.social_share_email = 0);
-                /* editingItem.value.poweredbyactive === "1"
-                    ? (editingItem.value.poweredbyactive = 1)
-                    : (editingItem.value.poweredbyactive = 0); */
 
                 // Watermark TYPE
                 switch (editingItem.value.watermark_type) {
@@ -1582,8 +1501,6 @@ export default defineComponent({
         };
 
         const TogglePublished = (val) => {
-            console.log("editItem: ", JSON.parse(JSON.stringify(val)));
-
             editMode.value = false;
             createMode.value = false;
             editingItem.value = JSON.parse(JSON.stringify(val));
@@ -1610,8 +1527,6 @@ export default defineComponent({
                 if (createMode.value) {
                     finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/addgrid`;
                 }
-
-                console.log("SAVE: ", editingItem.value);
 
                 if (typeof editingItem.value.layout === "object") {
                     editingItem.value.layout = editingItem.value.layout.id;
@@ -1645,15 +1560,6 @@ export default defineComponent({
                     editingItem.value.watermark_type = parseInt(editingItem.value.watermark_type.value);
                 }
 
-                console.log("editingItem.value.social_share_facebook: ", editingItem.value.social_share_facebook);
-
-                /* editingItem.value.social_share_facebook === true ? editingItem.value.social_share_facebook = 1 : editingItem.value.social_share_facebook = 0;
-                editingItem.value.social_share_twitter === true ? editingItem.value.social_share_twitter = 1 : editingItem.value.social_share_twitter = 0;
-                editingItem.value.social_share_pinterest === true ? editingItem.value.social_share_pinterest = 1 : editingItem.value.social_share_pinterest = 0;
-                editingItem.value.social_share_instagram === true ? editingItem.value.social_share_instagram = 1 : editingItem.value.social_share_instagram = 0;
-                editingItem.value.social_share_tumblr === true ? editingItem.value.social_share_tumblr = 1 : editingItem.value.social_share_tumblr = 0;
-                editingItem.value.social_share_email === true ? editingItem.value.social_share_email = 1 : editingItem.value.social_share_email = 0; */
-
                 var height_numeric = editingItem.value.height;
                 var height_unit = editingItem.value.heightunit;
 
@@ -1662,11 +1568,6 @@ export default defineComponent({
                 }
 
                 editingItem.value.height = String(height_numeric) + height_unit;
-
-                /* if (editingItem.value.imagegallery === null || typeof editingItem.value.imagegallery === "undefined") {
-                    editingItem.value.imagegallery_id = 0;
-                } */
-
                 if (editingItem.value.categories) {
                     var _final = [];
                     if (editingItem.value.categories.length > 0) {
@@ -1683,10 +1584,6 @@ export default defineComponent({
 
                 let _APEX = window["APEX"];
 
-                console.log("editingItem: ", JSON.stringify(editingItem.value));
-                console.log("_APEX[_NONCENAME]: ", _APEX[_NONCENAME]);
-                console.log("finalurl: ", finalurl);
-
                 if (_APEX) {
                     fetch(finalurl, {
                         method: "POST",
@@ -1698,12 +1595,10 @@ export default defineComponent({
                         body: JSON.stringify(editingItem.value)
                     })
                         .then((response) => {
-                            //console.log("On Response : ", response.text());
                             var return_response = response.json();
                             return return_response;
                         })
                         .then((data) => {
-                            console.log("POST update result: ", data);
                             editMode.value = false;
                             $q.loading.hide();
                             GetGrids();
@@ -1799,7 +1694,6 @@ export default defineComponent({
         }
 
         function GetGrids() {
-            console.log("GetGrids");
             loading.value = true;
 
             let _REST_URL = "http://localhost/";
@@ -1820,7 +1714,6 @@ export default defineComponent({
                     }
                 })
                     .then((response) => {
-                        console.log("GetGrids response: ", response);
                         return response.json();
                     })
                     .then((result) => {
@@ -1830,7 +1723,6 @@ export default defineComponent({
                         let allcategories = result.allcategories;
 
                         // Set All categories
-                        //console.log("allcategories: ", allcategories);
                         if (allcategories) {
                             var fcats = [];
                             Object.keys(allcategories).forEach((key) => {
@@ -1896,14 +1788,11 @@ export default defineComponent({
                                 element["categories"] = _final;
                             }
                         });
-
-                        console.log("GRIDS: ", data);
                     });
             }
         }
 
         function GetGalleries(callback) {
-            console.log("GetGalleries");
             imagegalleries_options.value = [];
 
             let _REST_URL = "http://localhost/";
@@ -1912,7 +1801,6 @@ export default defineComponent({
             }
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/getimagegalleries`;
-            console.log("finalurl: ", finalurl);
             let _APEX = window["APEX"];
             if (_APEX) {
                 fetch(finalurl, {
@@ -1944,9 +1832,6 @@ export default defineComponent({
                                 label: data[k].title
                             });
                         }
-
-                        //imagegalleries_options.value = data;
-                        console.log("imagegalleries_options.value: ", imagegalleries_options.value);
 
                         callback();
                     });
@@ -2000,50 +1885,13 @@ export default defineComponent({
 
         function PaginationUpdated(newPagination) {
             if (newPagination && !justLoaded) {
-                console.log("newPagination: ", newPagination.rowsPerPage);
                 $q.sessionStorage.set("ig_table_rowsperpage", newPagination.rowsPerPage);
                 initialPagination.value.rowsPerPage = newPagination.rowsPerPage;
             }
         }
 
-        /* function CheckLicense(callback) {
-            console.log("CheckLicense");
-
-            var body_data = JSON.stringify({
-                request: "check",
-                email: "imoufa@gmail.com",
-                serial_key: "",
-                product_id: 806
-            });
-
-            let _REST_URL = "http://localhost/";
-            if (window["REST_URL"]) {
-                _REST_URL = window["REST_URL"].url;
-            }
-
-            let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=get`;
-            let _APEX = window["APEX"];
-
-            fetch(finalurl, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-WP-Nonce": _APEX.manageserial.nonce
-                }
-            })
-                .then((response) => {
-                    //console.log("GET LICENSE response: ", response.text());
-                    return response.json();
-                })
-                .then((result) => {
-                    console.log("LICENSE: ", result);
-                    callback(result);
-                });
-        } */
-
         function GetWaterMarkPosition(_pos) {
             var _final = "0px";
-            //var _watermark_image_size = parseInt(editingItem.value.watermark_image_size/100 * document.getElementById('watermark_overlay_image').clientWidth);
             if (editingItem.value.watermark_position > 6) {
                 if (_pos === "top") _final = "unset";
                 if (_pos === "bottom") _final = "0px";
@@ -2090,14 +1938,9 @@ export default defineComponent({
         }
 
         function OnImagesSelected(images) {
-            console.log("FileManager OnImagesSelected: ", images);
-            console.log("IMAGE: ", images[Object.keys(images)[0]].image);
-
             if (Object.keys(images).length > 0) {
                 editingItem.value.watermark_image_url = images[Object.keys(images)[0]].image;
             }
-
-            //editingItem.watermark_image_url
         }
 
         function BrowseImage() {
@@ -2112,7 +1955,6 @@ export default defineComponent({
             return {
                 width: "100%",
                 color: "#fff",
-                //backgroundImage: 'url('+encodeURI(GetImageBaseURL('logo_head.png'))+');'
                 backgroundImage: "url(" + GetImageBaseURL("bg_blue_features2.jpg") + ")"
             };
         }
@@ -2140,7 +1982,6 @@ export default defineComponent({
                 serviceactive: finalval
             });
 
-            
 
             // Make API Call
             fetch(finalurl, {
@@ -2156,10 +1997,7 @@ export default defineComponent({
                 })
                 .then((result) => {
                     let data = result;
-                    console.log("data.result: ", data.result);
-
                     if (data.result.result === 3 && finalval === 1) {
-                        //console.log("SHOW REGISTER SCREEN");
                         showregisterbutton.value = true;
                     }
                 });
@@ -2184,7 +2022,6 @@ export default defineComponent({
 
         onMounted(() => {
             document.addEventListener("DOMContentLoaded", function () {
-                //console.log("pro_func: ", document.defaultView.window["pro_func"]);
                 var pro_func = document.defaultView.window["pro_func"];
 
                 if (IS_PRO === true) {
@@ -2210,9 +2047,6 @@ export default defineComponent({
 
             categories_options.value = [];
             imagegalleries_options.value = [];
-
-            /* console.log("MEDIA_URL: ", window["MEDIA_URL"]);
-            console.log("TRANSLATIONS: ", window["TRANSLATIONS"]); */
 
             if ($q.sessionStorage.getItem("ig_table_rowsperpage")) {
                 if ($q.sessionStorage.getItem("ig_table_rowsperpage") !== "undefined") {
@@ -2286,9 +2120,7 @@ export default defineComponent({
 }
 
 .fade-enter,
-.fade-leave-to
-
-/* .fade-leave-active below version 2.1.8 */ {
+.fade-leave-to {
     opacity: 0;
 }
 

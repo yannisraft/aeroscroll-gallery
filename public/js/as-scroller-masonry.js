@@ -65,13 +65,6 @@ export class ASScrollerMasonry {
                 newMarginTop = Math.floor((Math.random() * this.props.cellSize) / 4);
             }
             this.data.value[f] = new MasonryColumn(newMarginTop);
-            /* this.data.value[f] = {
-                cells: {}, // Cells inside each column
-                backwardPosition: newMarginTop,
-                forwardPosition: newMarginTop,
-                backwardOrder: 0,
-                forwardOrder: 0
-            }; */
         }
     }
 
@@ -93,7 +86,6 @@ export class ASScrollerMasonry {
             newcell.height = newHeight;
 
             newcell.order = first[key].order;
-            //console.log("this.props: ", this.props);            
 
             this.data.value[mancolindex].forwardPosition += newHeight;
             this.data.value[mancolindex].cells[key] = newcell;
@@ -143,14 +135,11 @@ export class ASScrollerMasonry {
 
 
 
-                        var testPosition = this.asScroller.viewport.getBoundingClientRect().y - viewportSize; // NEW
-                        //var testPosition = -viewportSize; // OLD
+                        var testPosition = this.asScroller.viewport.getBoundingClientRect().y - viewportSize;
                         if (testPosition_backwards < testPosition) {
                             this.DeleteMasonryCell(1, f, backwardscellkey, backwards_element, this.celldataindex_forward);
                         }
                     }
-
-                    //console.log("Total : ", Object.keys(this.data.value[f].cells).length );
 
                     // Get Most Forward Cell
                     var mostforwardcellkey = GetObjectMaxKeyByIndex(masonrydataCol.cells);
@@ -163,13 +152,9 @@ export class ASScrollerMasonry {
 
                             // Get Newest Cache Cell
                             var lastcache_cell = this.asScroller.cellsdata_cache.value[this.asScroller.cellsdata_cache.value.length - 1];
-                            //var lastcache_cell = GetArrayMaxKeyByIndex(this.asScroller.cellsdata_cache.value);    
-                            //console.log("lastcache_cell: ", lastcache_cell);                               
 
                             if (typeof lastcache_cell !== "undefined") {
                                 if (parseInt(lastcache_cell.index) < this.celldataindex_forward) {
-                                    /* console.log("this.celldataindex_forward A: ", this.celldataindex_forward);
-                                    console.log("lastcache_cell.index B: ", lastcache_cell.index); */
                                     if (this.canRerunUpdateNext) {
                                         this.BlockRerunUpdateNext();
 
@@ -177,19 +162,14 @@ export class ASScrollerMasonry {
                                             "on-update-data-next",
                                             (newdataobj) => {
                                                 this.asScroller.UpdateDummyCells(1);
-                                                //console.log("UpdateDummyCells A");   
                                             },
                                             (postdataobj, postsLessThenPredicted) => {
                                                 if (postdataobj !== null) {
                                                     delete postdataobj["indexFirst"];
                                                     delete postdataobj["indexLast"];
 
-                                                    //console.log("on-update-data-next: ", postdataobj);
-                                                    //console.log("as-scroller-masonry U P D A T E 2: \o/");
-
                                                     this.asScroller.UpdateCellsCache(1, postdataobj, context);
                                                     this.asScroller.UpdateDummyCells(1);
-                                                    //console.log("UpdateDummyCells B");   
                                                 }
                                             },
                                             celldataindex_backward,
@@ -212,10 +192,7 @@ export class ASScrollerMasonry {
                             // user has scrolled the page, this changes
                             var testPosition = this.asScroller.viewport.getBoundingClientRect().y + viewportSize;
 
-                            //console.log("A: "+testPosition+"  B: "+testPosition_forward);
-
                             if (testPosition_forward < testPosition) {
-                                //console.log("FORWARD ELEMENT: ", forwardcell.order);
                                 this.AddMasonryCell(f, 1);
                             }
                         }
@@ -234,18 +211,13 @@ export class ASScrollerMasonry {
         }
 
 
-        //for (var f = 0; f < this.asScroller.GetTotalColumns(); f++) {
         for (var f = this.asScroller.GetTotalColumns() - 1; f >= 0; f--) {
             var masonrydataCol = this.data.value[f];
             if (masonrydataCol) {
                 if (Object.keys(masonrydataCol.cells).length > 0) {
 
-                    // DELETE Backward cells
-                    // 
-                    // Get most Forward Cell
-                    // TODO                    
+                    // DELETE Backward cells            
                     var forwardcellkey = GetObjectMaxKeyByIndex(masonrydataCol.cells);
-                    //var forwardcellkey = Object.keys(masonrydataCol.cells)[0]; // wRONG
                     var forwardcell = masonrydataCol.cells[forwardcellkey];
                     var forward_element = document.getElementById("item" + forwardcell.uid);
 
@@ -253,9 +225,7 @@ export class ASScrollerMasonry {
                         var forward_elementBounds = forward_element.getBoundingClientRect();
 
 
-                        var testPosition = this.asScroller.viewport.getBoundingClientRect().y + 3 * viewportSize; // NEW
-                        //var testPosition = 3 * viewportSize; // OLD
-
+                        var testPosition = this.asScroller.viewport.getBoundingClientRect().y + 3 * viewportSize;
                         var testPosition_forward = forward_elementBounds.y;
 
 
@@ -265,34 +235,22 @@ export class ASScrollerMasonry {
 
 
                         if (testPosition_forward > testPosition) {
-                            //console.log("DeleteMasonryCell");
                             this.DeleteMasonryCell(-1, f, forwardcellkey, forward_element, this.celldataindex_backward);
                         }
                     }
-
-                    //console.log("Total : ", Object.keys(this.data.value[f].cells).length );
 
 
                     // Get Most Bacward Cell
                     var mostbackwardcellkey = GetObjectMinKeyByIndex(masonrydataCol.cells);
                     if (mostbackwardcellkey) {
                         var backwardcell = masonrydataCol.cells[mostbackwardcellkey];
-                        //console.log("backwardcell: ", backwardcell);
-
                         var backward_element = document.getElementById("item" + backwardcell.uid);
                         if (backward_element) {
                             var backward_elementBounds = backward_element.getBoundingClientRect();
 
                             // Get Newest Cache Cell
-
-                            //var firstcache_cell = this.asScroller.cellsdata_cache.value[0];    
-                            //console.log("# cellsdata_cache: ", this.asScroller.cellsdata_cache.value);
-
                             var firstcache_cell = GetArrayMinKeyByIndex(this.asScroller.cellsdata_cache.value);
-                            //var firstcache_cell = this.asScroller.cellsdata_cache.value[0];                            
                             if (typeof firstcache_cell !== "undefined") {
-                                /* console.log("A firstcache_cell.index: ", parseInt(firstcache_cell.index));
-                                console.log("B this.celldataindex_backward.index: ", parseInt(this.celldataindex_backward)); */
 
                                 if (parseInt(firstcache_cell.index) > this.celldataindex_backward) {
 
@@ -308,8 +266,6 @@ export class ASScrollerMasonry {
                                                 if (postdataobj !== null) {
                                                     delete postdataobj["indexFirst"];
                                                     delete postdataobj["indexLast"];
-
-                                                    //console.log("on-update-data-previous: ", postdataobj);
 
                                                     this.asScroller.UpdateCellsCache(-1, postdataobj, context);
                                                     this.asScroller.UpdateDummyCells(-1);
@@ -372,8 +328,6 @@ export class ASScrollerMasonry {
 
             newkey = this.data.value[colindex].backwardColumnIndex * this.asScroller.GetTotalColumns() + colindex;
         }
-        /* console.log("AddMasonryCell newkey: ", newkey);
-        console.log("forwardColumnIndex: ", this.data.value[colindex].forwardColumnIndex ); */
 
         var newcell = new MasonryCell(newkey);
         newcell.height = newHeight;
@@ -397,16 +351,13 @@ export class ASScrollerMasonry {
             } else {
                 searchCacheKey_order = Math.floor(Math.abs(parseInt(newkey)) % this.asScroller.totalDataAvailable) + 1;
             }
-            //if(searchCacheKey_order > this.asScroller.totalDataAvailable) searchCacheKey_order = this.asScroller.totalDataAvailable;
-            if (searchCacheKey_order > this.asScroller.totalDataAvailable) searchCacheKey_order = 1; // REVIEW changed here
+            if (searchCacheKey_order > this.asScroller.totalDataAvailable) searchCacheKey_order = 1;
 
             var cellsdata_cacheElement_index = this.asScroller.cellsdata_cache.value
                 .map(function(x) {
                     return x.order;
                 })
                 .indexOf(searchCacheKey_order);
-
-            //console.log("searchCacheKey_order: : : "+ searchCacheKey_order+" index: "+cellsdata_cacheElement_index);
 
             if (searchCacheKey_order !== -1) {
                 this.data.value[colindex].cells[newkey].order = searchCacheKey_order;
@@ -426,7 +377,6 @@ export class ASScrollerMasonry {
 
     // LINK > DeleteMasonryCell
     DeleteMasonryCell(direction, colindex, cellkey, element) {
-        //console.log("DeleteMasonryCell direction: ", direction);    
         if (direction === 1) {
             this.data.value[colindex].backwardColumnIndex++;
             this.data.value[colindex].backwardPosition += this.data.value[colindex].cells[cellkey].height;

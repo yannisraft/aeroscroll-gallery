@@ -1,5 +1,4 @@
 import { createI18n, LocaleMessages, VueMessageType } from 'vue-i18n'
-//import messages from '@/i18n';
 
 import en_texts from './locale/en.js';
 import el_texts from './locale/el.js';
@@ -58,19 +57,4 @@ export default createI18n({
     'zh_CN': zh_texts,
     'ru_RU': ru_texts,
   }
-  /* messages: () => {
-    const locales = require.context('./locale', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-    const messages = {}
-    console.log("locales: ", locales);
-    console.log("locale: ", locale);
-    locales.keys().forEach(key => {
-        const matched = key.match(/([A-Za-z0-9-_]+)\./i)
-        if (matched && matched.length > 1) {
-        const locale = matched[1]
-        messages[locale] = locales(key).default
-        }
-    })
-    return messages
-  } */
-  //messages: messages
 })
