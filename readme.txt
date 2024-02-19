@@ -166,5 +166,9 @@ Yes of course. You may find the documentation here:
 
 
 == Changelog ==
+
+= 1.0.0.1 =
+* Minor Bug Fixes
+
 = 1.0.0 =
 * Initial version.
