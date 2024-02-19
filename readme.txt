@@ -1,9 +1,10 @@
-=== Aeroscroll Gallery Plugin ===
+=== Aeroscroll Gallery - Transforming Scrolling Experience ===
 Contributors: yannisraft
 Author URI: https://www.aeroscroll.com
 Plugin URI: https://www.aeroscroll.com
-Tags: photo gallery, gallery, image gallery, responsive gallery, image portfolio, wordpress gallery plugin, image collection, scroller, post grid, infinite gallery, media gallery, watermark
+Tags: photo gallery, image gallery, image portfolio, post grid, media gallery, gallery, responsive gallery, wordpress gallery plugin, image collection, scroller, infinite gallery, watermark
 Requires at least: 4.8
+Requires PHP: 7.1
 Tested up to: 6.4
 Stable tag: 6.3
 License: GPLv2 or later
@@ -114,7 +115,7 @@ Get started with ease by installing our plugin directly from the WordPress direc
 6. Images List Page
 7. Responsive edit Page
 
->== Frequently Asked Questions ==
+== Frequently Asked Questions ==
 
 = How can I add a new Gallery? =
 
