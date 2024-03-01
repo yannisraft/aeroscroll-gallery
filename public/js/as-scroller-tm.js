@@ -9,7 +9,7 @@ export class ASCredit extends HTMLElement {
         super();
 
         var shd = this.attachShadow({
-            mode: "closed"
+            mode: "open"
         });
         shd.innerHTML = `
             <style>

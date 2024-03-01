@@ -2,8 +2,12 @@ const {
     ref,
     onMounted
 } = Vue;
-import LazyLoadDirective from "./utils/LazyLoad";
-import AutoplayObserver from "./utils/AutoplayObserver";
+
+let LazyLoadDirective = await import("./utils/LazyLoad.js?v=" + window.AEROSCROLL_GALLERY_ITERATION).then((module) => module?.default);
+let AutoplayObserver = await import("./utils/AutoplayObserver.js?v=" + window.AEROSCROLL_GALLERY_ITERATION).then((module) => module?.default);
+
+//import LazyLoadDirective from "./utils/LazyLoad";
+//import AutoplayObserver from "./utils/AutoplayObserver";
 import {
     disableBodyScroll,
     enableBodyScroll
@@ -36,7 +40,8 @@ export default {
                     <path d="M6.5 5.4v13.2l11-6.6z"></path>
                     </svg>
 
-                    <img :src="itemThumb(getItemSrc(itemIndex), itemIndex)" alt="" />
+                    <img v-if="(getMediaType(imgIndex) !== 'link')" :src="itemThumb(getItemSrc(itemIndex), itemIndex)" alt="" />
+                    <img v-if="(getMediaType(imgIndex) === 'link')" :src="itemThumbPost(getItemSrc(itemIndex), itemIndex)" alt="" />
                 </button>
                 </div>
             </div>
@@ -1138,6 +1143,15 @@ export default {
             return itemUrl;
         },
 
+        itemThumbPost(itemUrl, itemIndex) {
+            var thumb = this.getItemThumbPost(itemIndex);
+            if (thumb) {
+                return thumb.replace("link:", "");
+            }
+
+            return itemUrl;
+        },
+
         isItemPicture(imgIndex) {
             if (imgIndex === null) {
                 return false;
@@ -1246,6 +1260,24 @@ export default {
 
             return item;
         },
+
+        getItemThumbPost(imgIndex) {
+            if (imgIndex === null) {
+                return false;
+            }
+
+            const item = this.items[imgIndex];
+
+            let itemthumb = "";
+            try {
+                itemthumb = item.thumbnail;
+            } catch (ex) {
+
+            }
+
+            return itemthumb;
+        },
+
 
         // get item media type
         getMediaType(imgIndex) {

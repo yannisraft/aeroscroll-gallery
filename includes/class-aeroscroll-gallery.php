@@ -189,11 +189,9 @@ if (!class_exists('aeroscroll_gallery')) {
             // Add our Shortcodes
             // 1. First retrieve all aeroscroll grids from database
             global $wpdb;
-            $table = $wpdb->prefix . 'aeroscroll_gallery';
-            $query = "SELECT shortcode FROM $table";
-            $grids = $wpdb->get_results($query);
+            $grids = $wpdb->get_results($wpdb->prepare("SELECT shortcode FROM {$wpdb->prefix}aeroscroll_gallery"));
 
-            // 2. Then register all shortcodes for active grids        
+            // 2. Then register all shortcodes for active grids
             foreach ($grids as $grid) {
                 $grid_short_code = "aeroscroll_" . $grid->shortcode;
                 $this->loader->add_shortcode($grid_short_code, $plugin_public, 'register_grid_shortcode');

@@ -352,7 +352,7 @@ export default {
         },
         // LINK onInitialized
         onInitialized(data) {
-            if (this.cellsPerPage > 100) this.cellsPerPage = 100; /// TODO Check if needed
+            if (this.cellsPerPage > 100) this.cellsPerPage = 100;
             this.MINCELLSREQUIRED = data.minCellsRequired;
             this.cellsPerPage = data.cellsPerPage;
             let indexFirst = this.lastindex;
@@ -400,6 +400,7 @@ export default {
                     databj["totalpages"] = returned.data.totalpages;
 
                     this.isready = true;
+                    console.log("GetPosts databj: : : ", databj);
 
                     if (_dataposts.length === 0) {
                         this.scrollerdata["state"] = "nodata";
@@ -414,7 +415,6 @@ export default {
                             }
                             currentIndex++;
                         }
-                        console.log("databj: : : ", databj);
 
                         this.scrollerdata = databj;
                     }

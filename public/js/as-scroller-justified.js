@@ -112,8 +112,6 @@ export class ASScrollerJustified {
 
             this.data.value.rows.push(newrow);
         }
-
-        console.log("JUSTIFIED DATA: ", this.data.value);
     }
 
     // LINK > AddNextCells

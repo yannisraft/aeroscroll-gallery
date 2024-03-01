@@ -62,91 +62,47 @@ var SplitNumberIntoParts = (length, sum) => {
 
     var collection = [];
     var remaining = surplus;
-    for (var i = 0; i < length; i++)
-    {
+    for (var i = 0; i < length; i++) {
         collection.push(initialcellsize);
     }
 
-    var index = 0;
-    var safecount = 100;
-    while (remaining > 0 && safecount > 0) {
-        var max = maxsurplus;
-        if(max > remaining) max = remaining;
-
+    if (length === 2) {
         var P = getRandomInt(0, 1);
-        
-        if(P >= probability)
-        {
-            var diff = maxcellsize - collection[index];
-            if(diff > 0)
-            {
-                var R = getRandomInt(0, maxsurplus);
-                if(R > diff) R = diff;
-                collection[index] += R;
+        var R = getRandomInt(0, maxsurplus);        
 
-                remaining -= R;
+        if (P >= probability) {
+            var newNum = collection[0] + R;            
+        } else {
+            var newNum = collection[0] - R;
+        }
+
+        collection[0] = newNum;
+        collection[1] = 100 - newNum;
+    } else {
+        var index = 0;
+        var safecount = 100;
+        while (remaining > 0 && safecount > 0) {
+            var max = maxsurplus;
+            if (max > remaining) max = remaining;
+            var P = getRandomInt(0, 1);
+
+            if (P >= probability) {
+                var diff = maxcellsize - collection[index];
+                if (diff > 0) {
+                    var R = getRandomInt(0, maxsurplus);
+                    if (R > diff) R = diff;
+                    collection[index] += R;
+
+                    remaining -= R;
+                }
             }
-        }
-        safecount--;
-        index++;
-        if(index > collection.length - 1) index = 0;
-    }
-
-    //console.log("collection: ", collection);
-
-    /* var min = sum / length / 2;
-    var max = (sum / length) * 2;
-
-    var collection = [];
-    var leftSum = sum - (min - 1);
-
-    for (var i = 0; i < length - 1; i++) {
-        var number = getRandomInt(min, Math.min(Math.ceil(leftSum / (length - i)), max));
-        leftSum -= number;
-        collection.push(number);
-    }
-    leftSum += min - 1;
-    while (leftSum > max) {
-        var randomIndex = Math.floor(Math.random() * collection.length);
-        if (collection[randomIndex] < max) {
-            collection[randomIndex]++;
-            leftSum--;
+            safecount--;
+            index++;
+            if (index > collection.length - 1) index = 0;
         }
     }
 
-    collection.push(leftSum);
-
-    console.log("collection: ", collection); */
     return collection;
 };
-
-
-// OLD
-/* var SplitNumberIntoParts = (length, sum) => {
-    var min = sum / length / 2;
-    var max = (sum / length) * 2;
-
-    var collection = [];
-    var leftSum = sum - (min - 1);
-
-    for (var i = 0; i < length - 1; i++) {
-        var number = getRandomInt(min, Math.min(Math.ceil(leftSum / (length - i)), max));
-        leftSum -= number;
-        collection.push(number);
-    }
-    leftSum += min - 1;
-    while (leftSum > max) {
-        var randomIndex = Math.floor(Math.random() * collection.length);
-        if (collection[randomIndex] < max) {
-            collection[randomIndex]++;
-            leftSum--;
-        }
-    }
-
-    collection.push(leftSum);
-
-    console.log("collection: ", collection);
-    return collection;
-}; */
 
 export { GetObjectMinKeyByIndex, GetObjectMaxKeyByIndex, GetArrayMaxKeyByIndex, GetArrayMinKeyByIndex, SplitNumberIntoParts };

@@ -1,6 +1,7 @@
 <?php
 
 require_once plugin_dir_path(dirname(__FILE__)) . 'includes/aeroscroll-utils.php';
+
 use Aeroscroll\utils;
 
 class aeroscroll_gallery_Api_Endpoint
@@ -238,11 +239,9 @@ class aeroscroll_gallery_Api_Endpoint
             'permission_callback' => function () {
                 return current_user_can('edit_others_posts');
             },
-            'permission_callback' => '__return_true',
+            //'permission_callback' => '__return_true',
             'args' => array()
         ]);
-
-        
     }
 
     /**
@@ -360,9 +359,10 @@ class aeroscroll_gallery_Api_Endpoint
             // Get categories for specific Grid
             global $wpdb;
 
-            $table = $wpdb->prefix . 'aeroscroll_gallery';
-            $query = "SELECT * FROM $table WHERE id = " . $gridid;
-            $results = $wpdb->get_results($query);
+            $results = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}aeroscroll_gallery WHERE id = %d",
+                array($gridid)
+            ));
 
             $grid_data = $results[0];
 
@@ -487,12 +487,12 @@ class aeroscroll_gallery_Api_Endpoint
 
                 $post->featured_image = $url;
                 $post->thumbnail_image = $thumbnail;
-                $post->uid = (int)($post->ID . "0" . rand(100000, 999999));
+                $post->uid = (int)($post->ID . "0" . wp_rand(100000, 999999));
 
                 $neworder = $_order_index + ($page - 1) * $perpage;
                 $post->order = $neworder;
                 $post->permalink = get_permalink($post->ID);
-                $post->timestamp = get_the_date( 'U', $post->ID );
+                $post->timestamp = get_the_date('U', $post->ID);
                 $image_title = get_the_title($thumbnail_post_id);
                 $relative_url = wp_make_link_relative($url);
                 $relative_path = str_replace($image_title, "", $relative_url);
@@ -561,9 +561,9 @@ class aeroscroll_gallery_Api_Endpoint
     {
         global $wpdb;
 
-        $table = $wpdb->prefix . 'aeroscroll_gallery';
-        $query = "SELECT * FROM $table";
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}aeroscroll_gallery"
+        ));
 
         $categories = get_categories(array(
             'orderby' => 'name',
@@ -624,7 +624,7 @@ class aeroscroll_gallery_Api_Endpoint
         $theme = $params['theme'];
         $themeonhover = $params['themeonhover'];
         $showreadmore = $params['showreadmore'];
-        
+
         $autoscroll = $params['autoscroll'];
         $numrows = $params['numrows'];
         $numcolumns = $params['numcolumns'];
@@ -695,8 +695,7 @@ class aeroscroll_gallery_Api_Endpoint
             $poweredbyactive == true ? $poweredbyactive = 1 : $poweredbyactive = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_facebook) == 'boolean') {
                 $social_share_facebook == true ? $social_share_facebook = 1 : $social_share_facebook = 0;
             }
@@ -704,8 +703,7 @@ class aeroscroll_gallery_Api_Endpoint
             $social_share_facebook = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_twitter) == 'boolean') {
                 $social_share_twitter == true ? $social_share_twitter = 1 : $social_share_twitter = 0;
             }
@@ -713,8 +711,7 @@ class aeroscroll_gallery_Api_Endpoint
             $social_share_twitter = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_pinterest) == 'boolean') {
                 $social_share_pinterest == true ? $social_share_pinterest = 1 : $social_share_pinterest = 0;
             }
@@ -722,8 +719,7 @@ class aeroscroll_gallery_Api_Endpoint
             $social_share_pinterest = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_instagram) == 'boolean') {
                 $social_share_instagram == true ? $social_share_instagram = 1 : $social_share_instagram = 0;
             }
@@ -731,8 +727,7 @@ class aeroscroll_gallery_Api_Endpoint
             $social_share_instagram = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_tumblr) == 'boolean') {
                 $social_share_tumblr == true ? $social_share_tumblr = 1 : $social_share_tumblr = 0;
             }
@@ -740,15 +735,14 @@ class aeroscroll_gallery_Api_Endpoint
             $social_share_tumblr = 0;
         }
 
-        if($this->utils->is_pro())
-        {
+        if ($this->utils->is_pro()) {
             if (gettype($social_share_email) == 'boolean') {
                 $social_share_email == true ? $social_share_email = 1 : $social_share_email = 0;
             }
         } else {
             $social_share_email = 0;
         }
-        
+
 
         global $wpdb;
         $table = $wpdb->prefix . 'aeroscroll_gallery';
@@ -770,7 +764,7 @@ class aeroscroll_gallery_Api_Endpoint
             'categories' => $finalcategories,
             'theme' => $theme,
             'themeonhover' => $themeonhover,
-            'showreadmore' => $showreadmore,            
+            'showreadmore' => $showreadmore,
             'autoscroll' => $autoscroll,
             'color_bg' => $color_bg,
             'color_theme_a' => $color_theme_a,
@@ -786,7 +780,7 @@ class aeroscroll_gallery_Api_Endpoint
             'scrollspeed' => $scrollspeed,
             'isinfinite' => $isinfinite,
             'scrollbar' => $scrollbar,
-            'updated_at' => date('Y-m-d H:m:s'),
+            'updated_at' => gmdate('Y-m-d H:m:s'),
             'sortby' => $sortby,
             'sortbydir' => $sortbydir,
             'social_share_facebook' => $social_share_facebook,
@@ -934,8 +928,8 @@ class aeroscroll_gallery_Api_Endpoint
             'scrollspeed' => $scrollspeed,
             'isinfinite' => $isinfinite,
             'scrollbar' => $scrollbar,
-            'updated_at' => date('Y-m-d H:m:s'),
-            'created_at' => date('Y-m-d H:m:s'),
+            'updated_at' => gmdate('Y-m-d H:m:s'),
+            'created_at' => gmdate('Y-m-d H:m:s'),
             'sortby' => $sortby,
             'sortbydir' => $sortbydir,
             'social_share_facebook' => $social_share_facebook,
@@ -988,14 +982,12 @@ class aeroscroll_gallery_Api_Endpoint
     public function get_imagegalleries($params)
     {
         global $wpdb;
-
-        $table = $wpdb->prefix . 'aeroscroll_gallery_imagegalleries';
-        $query = "SELECT * FROM $table";
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegalleries"
+        ));
 
         $returnobj = new stdClass();
         $returnobj->imagegalleries = $results;
-
         return $returnobj;
     }
 
@@ -1013,8 +1005,8 @@ class aeroscroll_gallery_Api_Endpoint
             'slug' => $slug,
             'description' => $description,
             'published' => $published,
-            'updated_at' => date('Y-m-d H:m:s'),
-            'created_at' => date('Y-m-d H:m:s')
+            'updated_at' => gmdate('Y-m-d H:m:s'),
+            'created_at' => gmdate('Y-m-d H:m:s')
         ), array('%s', '%s', '%s', '%d', '%s', '%s'));
 
         return $results;
@@ -1035,7 +1027,7 @@ class aeroscroll_gallery_Api_Endpoint
             'slug' => $slug,
             'description' => $description,
             'published' => $published,
-            'updated_at' => date('Y-m-d H:m:s'),
+            'updated_at' => gmdate('Y-m-d H:m:s'),
         ), array('id' => $id));
 
         return $results;
@@ -1058,9 +1050,10 @@ class aeroscroll_gallery_Api_Endpoint
     }
 
     // Uploader
-
     public function upload_images($params)
     {
+        $success = false;
+        $debug = "";
         $relativedir = "";
         foreach (getallheaders() as $name => $value) {
             if ($name == "relativedir") {
@@ -1068,37 +1061,66 @@ class aeroscroll_gallery_Api_Endpoint
             }
         }
 
-        $result = 0;
-
         if (isset($_FILES)) {
             $files = array();
 
-            //echo "relativedir: " . $relativedir . "\n";
-            //echo "getallheaders: " . var_export(getallheaders(), true) . "\n";
             if ($relativedir != null && $relativedir != '') {
                 $relativefullpath = getcwd() . $relativedir;
 
                 if (!file_exists($relativefullpath)) {
-                    mkdir($relativefullpath, 0777, true);
+                    wp_mkdir_p($relativefullpath, 0777, true);
                 }
 
                 foreach ($_FILES as $var => $value) {
                     $filename = $value['name'];
                     $type = $value['type'];
                     $file_tmp = $value['tmp_name'];
+                    $uploadedfile = array(
+                        'name'     => $value['name'],
+                        'type'     => $value['type'],
+                        'tmp_name' => $value['tmp_name'],
+                        'error'    => $value['error'],
+                        'size'     => $value['size']
+                    );
 
+                    try {
+                        $finalpath = $relativefullpath . "/" . $filename;
 
-                    $finalpath = $relativefullpath . "/" . $filename;
-                    //$fileContent = file_get_contents($value['tmp_name']);
-                    move_uploaded_file($value['tmp_name'], $finalpath);
+                        $upload_overrides = array(
+                            'test_form' => false
+                        );
 
-                    array_push($files, $finalpath);
-                    $result = 1;
+                        require_once ABSPATH . 'wp-admin/includes/file.php';
+                        $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+
+                        if ($movefile && !isset($movefile['error'])) {
+                            array_push($files, $finalpath);
+                            $success = true;
+
+                            try {
+                                require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                                require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+                                $wp_filesystem = new WP_Filesystem_Direct(null);
+                                $wp_filesystem->move($movefile["file"], $finalpath, true);
+                            } catch (Error $e) {
+                                $debug = $e->getMessage() . " movefile: " . $movefile["file"] . " finalpath: " . $finalpath;
+                            }
+                        } else {
+                            $success = false;
+                            $debug = "Error Uploading Image : " . $movefile['error'];
+                        }
+                    } catch (Error $e) {
+                        $debug = $e->getMessage() . " movefile: " . $movefile["file"] . " finalpath: " . $finalpath;
+                    }
                 }
             }
         }
 
-        echo '{ "result": ' . $result . ', "files": "' . var_export($_FILES, true) . '"}';
+        $obj = new stdClass();
+        $obj->success = $success;
+        $obj->debug = $debug;
+
+        return $obj;
     }
 
     // File Manager
@@ -1106,11 +1128,11 @@ class aeroscroll_gallery_Api_Endpoint
     public function list_folder($params)
     {
         if (!file_exists(getcwd() . '/wp-content/uploads/aeroscroll-gallery')) {
-            mkdir(getcwd() . '/wp-content/uploads/aeroscroll-gallery', 0777, true);
+            wp_mkdir_p(getcwd() . '/wp-content/uploads/aeroscroll-gallery', 0777, true);
         }
 
         if (!file_exists(getcwd() . '/wp-content/uploads/aeroscroll-gallery/__optimized')) {
-            mkdir(getcwd() . '/wp-content/uploads/aeroscroll-gallery/__optimized', 0777, true);
+            wp_mkdir_p(getcwd() . '/wp-content/uploads/aeroscroll-gallery/__optimized', 0777, true);
         }
 
         $errors = array();
@@ -1202,7 +1224,7 @@ class aeroscroll_gallery_Api_Endpoint
         }
 
         if (empty($errors) == true) {
-            return '{ "result": 1, "list": ' . json_encode($listarray) . ', "path": ' . json_encode($relativedir) . ', "target":"' . $target . '", "debug": "' . $debug . '", "isroot": ' . $isroot . '}';
+            return '{ "result": 1, "list": ' . wp_json_encode($listarray) . ', "path": ' . wp_json_encode($relativedir) . ', "target":"' . $target . '", "debug": "' . $debug . '", "isroot": ' . $isroot . '}';
         } else {
             return '{ "result": 1 }';
         }
@@ -1226,43 +1248,35 @@ class aeroscroll_gallery_Api_Endpoint
 
                         $fullpath = getcwd() . $paramrelativedir . "/" . $filename;
 
-                        //echo "fullpath: " . $fullpath;
-                        if ($isfolder == 1 || $isfolder == "1") {
-                            if (!empty($fullpath) && is_dir($fullpath)) {
-                                //echo "EXECUTED";
-                                $dir  = new RecursiveDirectoryIterator($fullpath, RecursiveDirectoryIterator::SKIP_DOTS); //upper dirs are not included,otherwise DISASTER HAPPENS :)
-                                $files = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::CHILD_FIRST);
-                                foreach ($files as $f) {
-                                    if (is_file($f)) {
-                                        unlink($f);
-                                    } else {
-                                        $empty_dirs[] = $f;
+                        try {
+                            if ($isfolder == 1 || $isfolder == "1") {
+                                if (!empty($fullpath) && is_dir($fullpath)) {
+                                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+                                    $wp_filesystem = new WP_Filesystem_Direct(null);
+
+                                    $wp_filesystem->delete($fullpath, true, 'd');
+                                }
+
+                                $result = 1;
+                            } else {
+                                $fullpath = getcwd() . $paramrelativedir . "/" . $filename;
+
+                                if (file_exists($fullpath)) {
+                                    if (wp_delete_file($fullpath)) {
+                                        $result = 1;
                                     }
                                 }
-                                if (!empty($empty_dirs)) {
-                                    foreach ($empty_dirs as $eachDir) {
-                                        rmdir($eachDir);
-                                    }
-                                }
-                                rmdir($fullpath);
                             }
-
-                            $result = 1;
-                        } else {
-                            $fullpath = getcwd() . $paramrelativedir . "/" . $filename;
-
-                            if (file_exists($fullpath)) {
-                                if (unlink($fullpath)) {
-                                    $result = 1;
-                                }
-                            }
+                        } catch (Exception $e) {
+                            $error = $e->getMessage();
                         }
                     }
                 }
             }
         } catch (Exception $ex) {
-            var_dump($ex);
-            //$error = $ex->getMessage();
+            //var_dump($ex);
+            $error = $ex->getMessage();
         }
 
 
@@ -1282,7 +1296,15 @@ class aeroscroll_gallery_Api_Endpoint
             $newfilepath = $dir . "/" . $newname;
 
             if (file_exists($oldfilepath)) {
-                $renameres = rename($oldfilepath, $newfilepath);
+
+                try {
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-base.php';
+                    require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
+                    $wp_filesystem = new WP_Filesystem_Direct(null);
+                    $wp_filesystem->move($oldfilepath, $newfilepath, true);
+                } catch (Error $e) {
+                }
+
                 $result = 1;
             }
         }
@@ -1300,7 +1322,7 @@ class aeroscroll_gallery_Api_Endpoint
         if ($foldername != null) {
             $newfolderpath = $dir . "/" . $foldername;
             if (!file_exists($newfolderpath)) {
-                mkdir($newfolderpath, 0777, true);
+                wp_mkdir_p($newfolderpath, 0777, true);
                 $result = 1;
             }
         }
@@ -1344,7 +1366,7 @@ class aeroscroll_gallery_Api_Endpoint
                             'image_name' => $image_name,
                             'image_order' => $image_order,
                             'relativedir' => $after_encoded_relativedir,
-                            'created_at' => date('Y-m-d H:m:s')
+                            'created_at' => gmdate('Y-m-d H:m:s')
                         ), array('%d', '%s', '%s', '%s', '%d', '%s', '%s'));
                     }
 
@@ -1366,7 +1388,6 @@ class aeroscroll_gallery_Api_Endpoint
     {
         $error = "-";
         global $wpdb;
-        $table = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
         $results = null;
 
         try {
@@ -1374,8 +1395,9 @@ class aeroscroll_gallery_Api_Endpoint
             $result = 0;
 
             if ($imagegallery_id != null) {
-                $query = "SELECT * FROM $table WHERE imagegallery_id = " . $imagegallery_id . " ORDER BY image_order";
-                $results = $wpdb->get_results($query);
+                $results = $wpdb->get_results($wpdb->prepare(
+                    "SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = {$imagegallery_id} ORDER BY image_order"
+                ));
 
                 $img__order = 1;
                 for ($x = 0; $x < count($results); $x++) {
@@ -1466,13 +1488,11 @@ class aeroscroll_gallery_Api_Endpoint
         $error = "-";
 
         global $wpdb;
-        $table = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
         $result = 0;
 
         try {
             if ($images != null) {
                 if (is_array($images)) {
-                    $query = "INSERT INTO  $table (id, title, description, image_order) VALUES ";
 
                     for ($x = 0; $x < count($images); $x++) {
                         $_image = $images[$x];
@@ -1480,13 +1500,10 @@ class aeroscroll_gallery_Api_Endpoint
                         $_title = $_image["title"];
                         $_description = $_image["description"];
                         $_order = $_image["order"];
-                        $query .= "($_id, '$_title', '$_description', $_order)";
-                        if ($x < count($images) - 1) $query .= ",";
+
+                        $results = $wpdb->get_results($wpdb->prepare("INSERT INTO {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (id, title, description, image_order) VALUES (%d, %s, %s, %d)  ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description)", array($_id, $_title, $_description, $_order)));
                     }
 
-                    $query .= " ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description);";
-
-                    $results = $wpdb->get_results($query);
                     $result = 1;
                 }
             }
@@ -1546,7 +1563,7 @@ class aeroscroll_gallery_Api_Endpoint
                 $page = $page_int_value;
             }
         }
-        
+
         $totalpages = 1;
         $totalcount = 0;
 
@@ -1558,8 +1575,9 @@ class aeroscroll_gallery_Api_Endpoint
             $table_gallery = $wpdb->prefix . 'aeroscroll_gallery';
 
             // First Image Gallery Parameters
-            $query_gallery_properties = "SELECT * FROM $table_gallery WHERE id = " . $galleryid;
-            $results_gallery_properties = $wpdb->get_results($query_gallery_properties);
+            $results_gallery_properties = $wpdb->get_results($wpdb->prepare(
+                "SELECT * FROM {$table_gallery} WHERE id = {$galleryid}"
+            ));
 
             $sort_by = "id";
             $sort_by_dir = "ASC";
@@ -1576,8 +1594,9 @@ class aeroscroll_gallery_Api_Endpoint
             }
 
             // FIRST MAKE QUERY COUNT IMAGES
-            $query_count = "SELECT COUNT(*) AS totalimages FROM $table WHERE imagegallery_id = " . $imagegalleryid;
-            $results_count = $wpdb->get_results($query_count);
+            $results_count = $wpdb->get_results($wpdb->prepare(
+                "SELECT COUNT(*) AS totalimages FROM {$table} WHERE imagegallery_id = {$imagegalleryid}"
+            ));
 
             $totalcount = intval($results_count[0]->totalimages);
             $maincount = $totalcount;
@@ -1604,13 +1623,15 @@ class aeroscroll_gallery_Api_Endpoint
                     // Now add posts until we reach the desired number
                     $missingimages = $perpage - $maincount;
 
-                    $query = "SELECT * FROM $table WHERE imagegallery_id = " . $imagegalleryid . " ORDER BY " . $sort_by . " " . $sort_by_dir;
-                    $results = $wpdb->get_results($query);
+                    $results = $wpdb->get_results($wpdb->prepare(
+                        "SELECT * FROM {$table} WHERE imagegallery_id = {$imagegalleryid} ORDER BY '{$sort_by}' '{$sort_by_dir}'"
+                    ));
+
                     $newpage_query_images = $results;
                     $galleryimages = $results;
 
                     foreach ($galleryimages as $img) {
-                        $img->uid = (int)($img->id . "0" . rand(1000000, 9999999));
+                        $img->uid = (int)($img->id . "0" . wp_rand(1000000, 9999999));
                     }
 
 
@@ -1623,7 +1644,7 @@ class aeroscroll_gallery_Api_Endpoint
                             foreach ($newpage_query_images as $newimage) {
                                 if ($added >= $missingimages)
                                     break;
-                                $newimage->uid = (int)($newimage->id . "0" . rand(1000000, 9999999));
+                                $newimage->uid = (int)($newimage->id . "0" . wp_rand(1000000, 9999999));
                                 array_push($galleryimages, clone $newimage);
                                 $added++;
                             }
@@ -1632,7 +1653,7 @@ class aeroscroll_gallery_Api_Endpoint
                         foreach ($newpage_query_images as $newimage) {
                             if ($added >= $missingimages)
                                 break;
-                            $newimage->uid = (int)($newimage->id . "0" . rand(1000000, 9999999));
+                            $newimage->uid = (int)($newimage->id . "0" . wp_rand(1000000, 9999999));
                             array_push($galleryimages, clone $newimage);
                             $added++;
                         }
@@ -1671,9 +1692,11 @@ class aeroscroll_gallery_Api_Endpoint
                 } else {
                     // B: MORE THAN PERPAGE
                     $offset = ($perpage * ($page - 1)); // offset = (limit * pageNumber) - limit;
-                    //$offset = ($perpage * $page) - $perpage; // offset = (limit * pageNumber) - limit;
-                    $query = "SELECT * FROM $table WHERE imagegallery_id = " . $imagegalleryid . " ORDER BY " . $sort_by . " ASC LIMIT " . $perpage . " OFFSET " . $offset;
-                    $results = $wpdb->get_results($query);
+
+                    $results = $wpdb->get_results($wpdb->prepare(
+                        "SELECT * FROM {$table} WHERE imagegallery_id = {$imagegalleryid} ORDER BY '{$sort_by}' ASC LIMIT {$perpage} OFFSET {$offset}"
+                    ));
+
                     $galleryimages = $results;
 
                     foreach ($galleryimages as $index => $img) {
@@ -1724,7 +1747,8 @@ class aeroscroll_gallery_Api_Endpoint
         return $obj;
     }
 
-    public function activateonempremium($request) {
+    public function activateonempremium($request)
+    {
         $serviceactive = 0;
         $debug = "";
 
@@ -1732,20 +1756,16 @@ class aeroscroll_gallery_Api_Endpoint
             $serviceactive = $request->get_param('serviceactive');
 
         $api_url = 'http://www.aeroscroll.com/wp-json/aeroscroll-manager/v1/onemonthpremiumservice';
-        if ($serviceactive == "1" || $serviceactive == 1 || $serviceactive == true)
-        {
+        if ($serviceactive == "1" || $serviceactive == 1 || $serviceactive == true) {
             $serviceactive = 1;
         } else {
             $serviceactive = 0;
         }
 
         $domain = "";
-        try
-        {
+        try {
             $domain = urlencode(get_site_url());
-        } catch(Exception $ex)
-        {
-
+        } catch (Exception $ex) {
         }
 
         $current_user = wp_get_current_user();
@@ -1760,7 +1780,7 @@ class aeroscroll_gallery_Api_Endpoint
             'serviceactive' => $serviceactive,
             'domain' => $domain
         );
-        $body = json_encode($data_arr);
+        $body = wp_json_encode($data_arr);
 
         $remote = wp_remote_post($api_url, array(
             'method'  => 'POST',
@@ -1774,10 +1794,9 @@ class aeroscroll_gallery_Api_Endpoint
             $debug = "ERROR: " . $remote['body'];
         }
 
-        
+
         $result = '{ "r": -1 }';
-        if($remote['response']['code'] == 200)
-        {
+        if ($remote['response']['code'] == 200) {
             $result = json_decode($remote['body']);
         }
 

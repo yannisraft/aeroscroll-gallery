@@ -16,7 +16,6 @@ window["pro_func"] = {
             }
         })
             .then((response) => {
-                //console.log("GET LICENSE response: ", response.text());
                 return response.json();
             })
             .then((result) => {

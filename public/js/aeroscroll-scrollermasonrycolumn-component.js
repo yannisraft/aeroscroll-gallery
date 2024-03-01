@@ -7,7 +7,7 @@ const {
 } = Vue;
 export default {
     template: `
-        <div :class="['scroller-masonrycolumn-v']" :style="GetColumnStyle()">
+        <div :class="(orientation === 'vertical') ? 'scroller-masonrycolumn-v' : 'scroller-masonrycolumn-v-horizontal'" :style="GetColumnStyle()">
             <slot name="row" :data="rowData">
                 <div v-for="(cell, cellkey) in colSorted" :class="[{ 'aeroscroll-cell-scale-animation': (GetHoverAnimation() === 'scale')} ,'scroller-cell-v', (theme === 'theme_a') ? 'onhoverscalecellimage' : '']" :key="cellkey" :id="'item'+cell.uid" :style="GetCellStyle(cell)">
                     <slot name="cell" :data="cell">
@@ -40,6 +40,10 @@ export default {
         numcolumns: {
             type: Number,
             default: 3
+        },
+        colindex: {
+            type: Number,
+            default: -1
         },
         col: {
             type: Object,
@@ -115,7 +119,13 @@ export default {
                     'background-color': 'none',
                     'flex-basis': flexbasis + 'px'
                 };
+            } else {
+
+                if (props.colindex === 0) finalStyle['margin-left'] = props.cellgap + 'px';
+                if (props.colindex === props.numcolumns - 1) finalStyle['margin-right'] = props.cellgap + 'px';
+
             }
+
 
             return finalStyle;
         }

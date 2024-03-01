@@ -39,12 +39,13 @@ import {
 export default {
     template: `
         <div :id="scrollerId" class="scroller noselect">
-            <div :id="viewportId" class="scroller-viewport" :style="{ 'background-color': color_bg, 'padding-right': sidegap + 'px' }">
+            <div :id="viewportId" class="scroller-viewport" :style="GetViewportStyle()">
                 <div :id="containerId" v-if="layout === 'grid'" :key="renderKey" class="scroller-container" :style="GetContainerStyle()">
                     <VScrollerGridColumn
-                        v-for="(col, colkey) in data"
+                        v-for="(col, colkey, index) in data"
                         :key="colkey"
                         :col="col"
+                        :colindex="index"
                         :cellgap="cellgap"
                         :theme="theme"
                         :containerheight="GetContainerHeight()"
@@ -76,7 +77,7 @@ export default {
                         </template>
                     </VScrollerJustifiedRow>
                 </div>
-                <as-credit v-if="poweredbyactive === 1 || poweredbyactive === '1' || poweredbyactive === true"></as-credit>
+                <!-- <as-credit v-if="poweredbyactive === 1 || poweredbyactive === '1' || poweredbyactive === true"></as-credit> -->
             </div>
             <div v-if="overlay_visible" class="aeroscroll-overlay-notification">            
                 <img :src="GetEmbarassedImageUrl()" class="aeroscroll-overlay-icon"/>
@@ -732,13 +733,30 @@ export default {
         }
 
         function AddMadebyLogo() {
-            var ascredit_element = document.getElementsByTagName('as-credit');
-
-            if (ascredit_element.length > 0) {
+            /* var ascredit_element = document.getElementsByTagName('as-credit');
+            
+            if(ascredit_element.length > 0)
+            {
                 console.log("ascredit_element: ", ascredit_element[0]);
                 ascredit_element[0].style.display = 'block !important;';
-            }
+            } */
 
+        }
+
+        function GetViewportStyle() {
+            // { 'background-color': color_bg, 'padding-right': sidegap + 'px' }
+            var finalStyle = {
+                "background-color": props.color_bg,
+                'padding-right': props.sidegap + 'px'
+            };
+            if (props.layout === "justified") {
+
+                var padright = props.sidegap + props.cellgap;
+                finalStyle['padding-left'] = props.cellgap + 'px';
+                finalStyle['padding-right'] = padright + 'px';
+
+            }
+            return finalStyle;
         }
 
         const data = computed(() => {
@@ -904,7 +922,8 @@ export default {
             onBackwardsClicked,
             onForwardClicked,
             GetContainerStyle,
-            GetEmbarassedImageUrl
+            GetEmbarassedImageUrl,
+            GetViewportStyle
         };
     }
 };

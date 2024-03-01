@@ -1,12 +1,12 @@
 === Aeroscroll Gallery - Transforming Scrolling Experience ===
 Contributors: yannisraft
 Author URI: https://www.aeroscroll.com
-Plugin URI: https://www.aeroscroll.com
+Plugin URI: https://github.com/yannisraft/aeroscroll-gallery
 Tags: photo gallery, image gallery, image portfolio, post grid, media gallery, gallery, responsive gallery, wordpress gallery plugin, image collection, scroller, infinite gallery, watermark
 Requires at least: 4.8
 Requires PHP: 7.1
 Tested up to: 6.4
-Stable tag: 6.3
+Stable tag: 1.0.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,8 +168,16 @@ Yes of course. You may find the documentation here:
 
 == Changelog ==
 
-= 1.0.0.1 =
+= 1.0.1 - 2024-03-01 =
+* Bug Fix: Fixed sides padding when gap was set
+* Bug Fix: Credit Location
+* Bug Fix: Loading previous cells delay
+
+= 1.0.0 - 2024-02-019 =
+* Initial version.
+
+= 1.0.0.1 - 2024-02-16 =
 * Minor Bug Fixes
 
-= 1.0.0 =
-* Initial version.
+
+

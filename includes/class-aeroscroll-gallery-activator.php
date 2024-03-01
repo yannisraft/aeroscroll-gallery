@@ -196,12 +196,12 @@ class aeroscroll_gallery_Activator
 
                 dbDelta($schema);
 
-                $query = "INSERT IGNORE INTO '".$table_name."' (email,serial_key_product_id) VALUES ('','','');";
-                $table_cols = $wpdb->get_results($query);
+                //$query = "INSERT IGNORE INTO '".$table_name."' (email,serial_key_product_id) VALUES ('','','');";
+                $table_cols = $wpdb->get_results($wpdb->prepare('INSERT IGNORE INTO %s (email,serial_key_product_id) VALUES (``,``);', array($table_name)));
 
             }
         } catch (Exception $e) {
-            echo $e;
+            //error_log(esc_html_e($e));
         }
     }
 }
