@@ -23,15 +23,13 @@
  * @package    Aeroscroll_Gallery
  * @subpackage Aeroscroll_Gallery/includes
  */
-class Aeroscroll_Gallery_i18n {
-
-
+class Aeroscroll_Gallery_I18n {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
 	 * @since    1.0.0
 	 */
-	public function load_plugin_textdomain() {
+	public function aeroscroll_load_plugin_textdomain() {
 
 		load_plugin_textdomain(
 			'aeroscroll-gallery',

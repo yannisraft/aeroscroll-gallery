@@ -28,8 +28,6 @@ class Aeroscroll_Gallery_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
-
+	public static function aeroscroll_deactivate() {
 	}
-
 }

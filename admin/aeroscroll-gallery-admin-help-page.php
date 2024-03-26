@@ -15,8 +15,8 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <div>
-    <div id="wp-vue-app-admin"></div>
-    <?php 
-        printf( '<script>window["MEDIA_URL"] = "%s";</script>', esc_attr(  plugin_dir_url( __FILE__ ) ) );
-    ?>    
+	<div id="wp-vue-app-admin"></div>
+	<?php
+		printf( '<script>window["MEDIA_URL"] = "%s";</script>', esc_attr( plugin_dir_url( __FILE__ ) ) );
+	?>
 </div>
