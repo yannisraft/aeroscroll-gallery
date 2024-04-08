@@ -5,9 +5,9 @@ Plugin URI: https://github.com/yannisraft/aeroscroll-gallery
 Tags: photo gallery, image gallery, image portfolio, post grid, media gallery, gallery, responsive gallery, wordpress gallery plugin, image collection, scroller, infinite gallery, watermark
 Requires at least: 4.8
 Requires PHP: 7.1
-Tested up to: 6.4.3
-Stable tag: 1.0.3
-Version: 1.0.3
+Tested up to: 6.5.0
+Stable tag: 1.0.4
+Version: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -168,6 +168,9 @@ Yes of course. You may find the documentation here:
 
 
 == Changelog ==
+
+= 1.0.4 - 2024-04-08 =
+* Updated to support Wordpress version 6.5.0
 
 = 1.0.3 - 2024-03-26 =
 * Change: Changed Class and Function names to match Wordpress guidelines

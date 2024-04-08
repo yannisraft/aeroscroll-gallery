@@ -576,7 +576,7 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 				$url               = wp_get_attachment_url( $thumbnail_post_id, 'full' );
 				$thumbnail         = $url;
 
-				$thumbnail_result = wp_get_attachment_image_src( $thumbnail_post_id, 'medium', true );
+				$thumbnail_result = wp_get_attachment_image_src( $thumbnail_post_id, 'large', true ); // thumbnail, medium, large, full
 				if ( null !== $thumbnail_result ) {
 					if ( null !== is_array( $thumbnail_result ) ) {
 						$thumbnail = $thumbnail_result[0];
@@ -1618,13 +1618,13 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 
 					$total_images = count( $images );
 					for ( $x = 0; $x < $total_images; $x++ ) {
-						$_image       = sanitize_key( $images[ $x ] );
+						$_image       = $images[ $x ];
 						$_id          = sanitize_key( $_image['id'] );
-						$_title       = sanitize_text_field( $str )( $_image['title'] );
+						$_title       = sanitize_text_field( $_image['title'] );
 						$_description = sanitize_text_field( $_image['description'] );
 						$_order       = sanitize_key( $_image['order'] );
 
-						$results = $wpdb->get_results( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (id, title, description, image_order) VALUES (%d, %s, %s, %d)  ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description)", array( $_id, $_title, $_description, $_order ) ) );
+						$results = $wpdb->get_results( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (id, title, description, image_order) VALUES ({$_id}, '{$_title}', '{$_description}', {$_order})  ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description)") );
 					}
 
 					$result = 1;

@@ -3,15 +3,15 @@
 * Plugin Name: Aeroscroll Gallery
 * Plugin URI: https://github.com/yannisraft/aeroscroll-gallery
 * Description: Aeroscroll Gallery empowers you to create captivating and interactive image galleries like never before. With a diverse set of advanced features, our plugin offers a seamless and immersive image browsing experience that leaves a lasting impression on your website visitors.
-* Version: 1.0.3
+* Version: 1.0.4
 * Author: Aeroscroll Team
 * Author URI: https://www.aeroscroll.com
 * License: GPL2
 * Text Domain: aeroscroll-gallery
-* Tested up to: 6.4.3
+* Tested up to: 6.5.0
 * Requires PHP: 7.1
 * Requires at least: 4.8
-* Stable tag: 1.0.3
+* Stable tag: 1.0.4
 *
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -37,8 +37,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Currently plugin version
  */
-define( 'AEROSCROLL_GALLERY_VERSION', '1.0.3' );
-define( 'AEROSCROLL_GALLERY_ITERATION', '5' );
+define( 'AEROSCROLL_GALLERY_VERSION', '1.0.4' );
+define( 'AEROSCROLL_GALLERY_ITERATION', '6' );
 define( 'PLUGIN_CHECK_TRANSIENT_EXPIRATION', 3600 ); // 12 hours
 
 if ( in_array( 'aeroscroll-gallery-pro/aeroscroll-gallery-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
