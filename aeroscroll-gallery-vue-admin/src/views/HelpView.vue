@@ -29,7 +29,7 @@
                     <p>{{ t("for_documentation_desc") }}</p>
                 </div>
                 <div class="q-row q-px-lg q-pb-lg">
-                    <a href="https://aeroscroll.com/gallery/documentation">Aeroscroll Gallery Documentation</a>
+                    <a href="https://aeroscroll.com/gallery/documentation" target="_blank">Aeroscroll Gallery Documentation</a>
                 </div>
                 <!------------------>
                 <div style="padding: 20px;">
@@ -91,11 +91,6 @@ export default defineComponent({
                 id: 6,
                 question_t: "faq_can_i_use_posts",
                 answer_t: "faq_can_i_use_posts_answer",
-            },
-            {
-                id: 7,
-                question_t: "faq_how_to_make_horizontal",
-                answer_t: "faq_how_to_make_horizontal_answer",
             },
             {
                 id: 8,

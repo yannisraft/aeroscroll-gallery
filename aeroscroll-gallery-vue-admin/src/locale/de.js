@@ -237,5 +237,6 @@ export default {
     signup: "Anmelden oder Einloggen",
     showarticleonlightbox: "Artikel im Lightbox anzeigen",
     showarticleonlightbox_desc: "Verbessern Sie Ihr Leseerlebnis! Klicken Sie, um den vollständigen Artikel nahtlos in einer fesselnden Lightbox zu erkunden.",
-    changeimage: "Bild ändern"
+    changeimage: "Bild ändern",
+    upload_max_filesize_error: "Fehler: Die hochgeladene Datei überschreitet die 'upload_max_filesize'-Richtlinie in der php.ini. Bitte erhöhen Sie das Dateigrößenlimit in Ihren PHP-Einstellungen."
 };

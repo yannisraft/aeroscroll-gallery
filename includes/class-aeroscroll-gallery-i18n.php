@@ -23,6 +23,11 @@
  * @package    Aeroscroll_Gallery
  * @subpackage Aeroscroll_Gallery/includes
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Aeroscroll_Gallery_I18n {
 	/**
 	 * Load the plugin text domain for translation.

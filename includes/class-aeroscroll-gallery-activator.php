@@ -19,6 +19,10 @@
  * @package    aeroscroll_gallery
  * @subpackage aeroscroll_gallery/includes
  */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 class Aeroscroll_Gallery_Activator {
 
 
@@ -53,7 +57,7 @@ class Aeroscroll_Gallery_Activator {
 			// Create the GRIDS TABLE
 			// ------------------
 			$table_name = $wpdb->prefix . 'aeroscroll_gallery';
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) !== $table_name ) {
+			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery" ) !== $table_name ) {
 				$schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -129,7 +133,7 @@ class Aeroscroll_Gallery_Activator {
 			// Create the IMAGE GALLERIES TABLE
 			// ------------------
 			$table_name2 = $wpdb->prefix . 'aeroscroll_gallery_imagegalleries';
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name2 ) ) !== $table_name2 ) {
+			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegalleries" ) !== $table_name2 ) {
 				$schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegalleries (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -149,7 +153,7 @@ class Aeroscroll_Gallery_Activator {
 			// Create the UPLOADED IMAGES TABLE
 			// ------------------
 			$table_name3 = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name3 ) ) !== $table_name3 ) {
+			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images" ) !== $table_name3 ) {
 				$schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -171,7 +175,7 @@ class Aeroscroll_Gallery_Activator {
 			// Create the SETTINGS TABLE
 			// ------------------
 			$table_name = $wpdb->prefix . 'aeroscroll_gallery_settings';
-			if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name ) ) !== $table_name ) {
+			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_settings" ) !== $table_name ) {
 				$schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_settings (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,                    
@@ -186,7 +190,7 @@ class Aeroscroll_Gallery_Activator {
 
 				dbDelta( $schema );
 
-				$table_cols = $wpdb->get_results( $wpdb->prepare( 'INSERT IGNORE INTO %s (email,serial_key_product_id) VALUES (``,``);', array( $table_name ) ) );
+				$table_cols = $wpdb->get_results( "INSERT IGNORE INTO {$wpdb->prefix}aeroscroll_gallery_settings (email,serial_key_product_id) VALUES (``,``);" );
 			}
 		} catch ( Exception $e ) {
 			throw new Exception( 'Aeroscroll Gallery Error : {esc_html_e( $e->getMessage() )}' );

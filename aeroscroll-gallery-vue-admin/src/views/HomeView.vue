@@ -5,7 +5,14 @@
                 <div class="q-row q-py-sm aeroscroll-page-header">
                     <span>{{ t("manage_galleries") }}</span>
                 </div>
-                <div v-if="!editMode" class="q-row q-pb-sm">
+                <div v-if="!editMode" class="q-row q-pb-sm">   
+                    <div v-if="loading" class="panelloader">
+                        <q-spinner
+                            color="white"
+                            size="3em"
+                        />
+                        <span style="color: white; margin-top: 10px;">{{ t('loading') + '...' }}</span>
+                    </div>         
                     <div v-if="!licenseActive" class="license_inactive_panel">
                         <span v-if="licenseNotActive">{{ t("please_activate_license") }}</span>
                     </div>
@@ -22,7 +29,9 @@
                         @update:pagination="PaginationUpdated"
                     >
                         <template v-slot:loading>
-                            <q-inner-loading :label="t('loading') + '...'" showing color="primary" />
+                            <!-- <q-inner-loading :label="t('loading') + '...'" showing color="white">
+                                <q-spinner-gears size="50px" color="primary" />
+                            </q-inner-loading> -->
                         </template>
                         <template v-slot:top-right>
                             <div class="q-col q-px-sm" style="flex: 0;">
@@ -415,10 +424,9 @@
                                 </div>
                             </div>
                             <div
-                                v-if="!ispro"
                                 :class="['q-row', 'q-py-md', { creditsection: !ispro }]"
                                 :style="{
-                                    backgroundColor: ispro ? '' : '#fff2db'
+                                    backgroundColor: '#fff2db'
                                 }"
                             >
                                 <div class="q-col text-left q-px-sm aeroscroll-edit-label-col">
@@ -623,7 +631,6 @@
                                         {{ $t("columnsbyscreenwidth_desc") }}
                                     </div>
                                     <!-- Breakpoints for Responsive Web Design in 2023 -->
-                                    <!-- https://pbs.twimg.com/media/E8hOdAqWUAIGI-g?format=jpg&name=large -->
                                     <div class="q-row q-py-md">
                                         <div class="q-col screensizes_col q-mr-md">
                                             <span class="screensizes_col_label_left">240 px</span>
@@ -745,7 +752,7 @@
                                                 <div class="premiumdescstyle" v-html="t('premiumfeaturedesc')"></div>
                                             </q-card-section>
                                             <q-card-section>
-                                                <q-btn color="blue-10" text-color="white">
+                                                <q-btn color="blue-10" text-color="white" @click="UpgradeToProClicked()">
                                                     {{ t("upgradetopro") }}
                                                 </q-btn>
                                             </q-card-section>
@@ -820,7 +827,7 @@
                                                 <div class="premiumdescstyle" v-html="t('premiumfeaturedesc')"></div>
                                             </q-card-section>
                                             <q-card-section>
-                                                <q-btn color="blue-10" text-color="white">
+                                                <q-btn color="blue-10" text-color="white" @click="UpgradeToProClicked()">
                                                     {{ t("upgradetopro") }}
                                                 </q-btn>
                                             </q-card-section>
@@ -1271,7 +1278,7 @@ export default defineComponent({
         ]);
 
         let initialPagination = ref({
-            sortBy: "desc",
+            sortBy: "DESC",
             descending: false,
             page: 1,
             rowsPerPage: 25
@@ -2009,6 +2016,11 @@ export default defineComponent({
             window.open(_url, '_blank').focus();
         }
 
+        function UpgradeToProClicked() {
+            var _url = "https://www.aeroscroll.com";
+            window.open(_url, '_blank').focus();
+        }
+
         onBeforeMount(() => {
             var incomingLocale = window["TRANSLATIONS"].locale;
             if (incomingLocale) {
@@ -2022,6 +2034,7 @@ export default defineComponent({
 
         onMounted(() => {
             document.addEventListener("DOMContentLoaded", function () {
+                loading.value = true;
                 var pro_func = document.defaultView.window["pro_func"];
 
                 if (IS_PRO === true) {
@@ -2038,10 +2051,13 @@ export default defineComponent({
                             licenseNotActive.value = true;
                             licenseActive.value = false;
                         }
-                    }, _APEX.manageserial.nonce);
+
+                        loading.value = false;
+                    }, _APEX.manageserial.nonce);                    
                 } else {
                     GetGrids();
                     licenseActive.value = true;
+                    loading.value = false;
                 }
             });
 
@@ -2103,7 +2119,8 @@ export default defineComponent({
             GetProFeaturesStyle,
             layoutValueSelected,
             PoweredByClicked,
-            RegisterClicked
+            RegisterClicked,
+            UpgradeToProClicked
         };
     }
 });

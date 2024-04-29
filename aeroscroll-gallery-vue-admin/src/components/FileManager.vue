@@ -152,7 +152,8 @@
                                             <span>{{ props.row.name }}</span>
                                         </q-card-section>
                                         <q-card-section class="filemitemsize text-center unselectable">
-                                            <div v-if="props.row.id !== 'uponefolder'">{{ CalculateSize(props.row.size) }}</div>
+                                            <div v-if="props.row.id !== 'uponefolder' && !props.row.optimized">{{ CalculateSize(props.row.size) }}</div>
+                                            <div class="optimized_size" v-if="props.row.id !== 'uponefolder' && props.row.optimized"><span class="non_optimized_size_text">{{ CalculateSize(props.row.size) }}</span><span class="optimized_size_text">{{ CalculateSize(props.row.optimizedsize) }}</span></div>
                                         </q-card-section>
                                         <q-card-section
                                             v-if="GDLOADED"
@@ -409,7 +410,7 @@ export default {
             sortBy: "id",
             descending: false,
             page: 1,
-            rowsPerPage: 25
+            rowsPerPage: 50
             // rowsNumber: xx if getting data from a server
         };
 
@@ -578,11 +579,6 @@ export default {
                     body: JSON.stringify(listfolder_params)
                 })
                     .then(async (response) => {
-                        /* response.text().then((txt)=> {
-                            let restxt = JSON.parse(txt);
-
-                            return restxt;
-                        }); */
                         var txt = await response.text();
                         //console.log("RESPONSE: ", JSON.parse(txt));
                         return JSON.parse(txt);
@@ -591,13 +587,12 @@ export default {
                     })
                     .then((dataStr) => {
                         //dataStr = unescape(dataStr);
-                        //console.log("data: ", dataStr);
 
                         try {
                             filegridloading.value = false;
 
                             let jsdata = JSON.parse(dataStr);
-                            //console.log("POST listfolder result: ", jsdata);
+                            console.log("POST listfolder result: ", jsdata);
 
                             if (jsdata.list) {
                                 filemanager_rows.value = [];
@@ -1214,7 +1209,7 @@ export default {
         }
 
         function onUploadedImages(info) {
-            //console.log("onUploadedImages: ", info);
+            console.log("onUploadedImages: ", info);
             setTimeout(() => {
                 uploadDialog.value = false;
                 ListFolder("refresh");
@@ -1234,7 +1229,6 @@ export default {
             const filteredRows = rows.filter((row) => {
                 for (var k = 0; k < imagegallery_columns.length; k++) {
                     let col = imagegallery_columns[k];
-                    console.log("A: ", row.id);
                     if (row.id === "uponefolder") {
                         return true;
                     }

@@ -10,6 +10,10 @@
  * @subpackage aeroscroll_gallery/public
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 require_once plugin_dir_path( __DIR__ ) . 'includes/class-aeroscroll-utils.php';
 
 use Aeroscroll\Aeroscroll_Utils;
@@ -248,13 +252,7 @@ class Aeroscroll_Gallery_Public {
 				$color_cell_bg = $grid[0]->color_cell_bg;
 			}
 
-			
-
-			
-
 			$poweredbyactive = false;
-
-			
 
 			if ( isset( $grid[0]->poweredbyactive ) ) {
 				$poweredbyactive = $grid[0]->poweredbyactive;
@@ -357,9 +355,7 @@ class Aeroscroll_Gallery_Public {
                     cellSquared: ' . $cell_squared . ",
                     scrollSpeed: '" . $grid[0]->scrollspeed . "',
                     hasScrollbar: " . $has_scrollbar . ",
-                    hoveranimation: '" . $hoveranimation . "',
-                    
-                    
+                    hoveranimation: '" . $hoveranimation . "',                    
                     
                     poweredbyactive: '" . $poweredbyactive . "',
 

@@ -252,5 +252,6 @@ export default {
     signup: "साइन अप या लॉग इन करें",
     showarticleonlightbox: "लाइटबॉक्स में लेख दिखाएँ",
     showarticleonlightbox_desc: "अपने पठन अनुभव को बढ़ावा दें! पूरे लेख को एक आकर्षक लाइटबॉक्स में से अनसीमित रूप से जानें के लिए क्लिक करें।",
-    changeimage: "छवि बदलें"
+    changeimage: "छवि बदलें",
+    upload_max_filesize_error: "त्रुटि: अपलोड किया गया फ़ाइल 'upload_max_filesize' निर्देशिका को php.ini में पार करता है। कृपया अपनी PHP सेटिंग्स में फ़ाइल का आकार सीमा बढ़ाएं।"
 };

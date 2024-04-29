@@ -137,6 +137,8 @@ export default defineComponent({
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/manageserial?request=get`;
             let _APEX = window["APEX"];
+            console.log("APEX: ", _APEX);
+            console.log("APEX: ", window["APEX"]);
             
             fetch(finalurl, {
                 method: "POST",

@@ -236,5 +236,6 @@ export default {
     signup: "Εγγραφή ή Σύνδεση",
     showarticleonlightbox: "Προβολή Άρθρου σε Παράθυρο Lightbox",
     showarticleonlightbox_desc: "Βελτιώστε την εμπειρία ανάγνωσής σας! Κάντε κλικ για να εξερευνήσετε απροβλημάτιστα το πλήρες άρθρο σε ένα επιβλητικό lightbox.",
-    changeimage: "Αλλαγή Εικόνας"
+    changeimage: "Αλλαγή Εικόνας",
+    upload_max_filesize_error: "Σφάλμα: το μεταφορτωμένο αρχείο υπερβαίνει την οδηγία 'upload_max_filesize' στο php.ini. Παρακαλώ αυξήστε το όριο μεγέθους αρχείου στις ρυθμίσεις PHP σας."
 };

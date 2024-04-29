@@ -11,8 +11,10 @@
  * @package    Aeroscroll_Gallery
  * @subpackage Aeroscroll_Gallery/admin
  */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 ?>
-
 
 <div id="wp-vue-app-admin"></div> 
 <?php

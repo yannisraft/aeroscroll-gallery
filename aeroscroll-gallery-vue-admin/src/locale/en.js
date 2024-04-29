@@ -235,5 +235,6 @@ export default {
     signup: "Sign Up or Login",
     showarticleonlightbox: "Display Article in Lightbox",
     showarticleonlightbox_desc: "Enhance your reading experience! Click to seamlessly explore the full article in a captivating lightbox.",
-    changeimage: "Change Image"
+    changeimage: "Change Image",
+    upload_max_filesize_error: "Error the uploaded file exceeds the 'upload_max_filesize' directive in php.ini. Please increase the file size limit in your PHP settings."
 }

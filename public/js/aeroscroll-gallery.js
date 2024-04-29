@@ -54,15 +54,22 @@ export default {
                     <div :class="['aeroscroll-content-container', 'container-theme-title', GetOnHoverStyle()]">
                             <!-- Theme A -->
                             <!-- ...On hover aeroscroll-postcell-image -->
-                            <div v-if="(DEBUG === true && theme === 'theme_a')" class="aeroscroll-cell-header-title"><span style="color: #000; background-color: #fff;" @click.stop="HeaderTitleClicked(slotProps.data.dt, $event)">O: {{ slotProps.data.order }} -- I: {{ slotProps.data.globalindex }} | E: {{ slotProps.data.id }}  </span></div>
+                            <div v-if="(DEBUG === true && theme === 'theme_a')" class="aeroscroll-cell-header-title">
+                                <span style="color: #000; background-color: #fff;" @click.stop="HeaderTitleClicked(slotProps.data.dt, $event)">O: {{ slotProps.data.order }} -- I: {{ slotProps.data.globalindex }} | E: {{ slotProps.data.id }}  </span>
+                            </div>
+                            <div v-if="(theme === 'theme_a')" class="container-theme-a">
+                                <div class="text-container text-container-a" v-if="!slotProps.data.loading">
+                                    
+                                </div>
+                            </div>
 
                             <!-- Theme B -->
                             <div v-if="(theme === 'theme_b')" class="container-theme-b">
                                 <div  class="bg-theme-b"></div>
+                                
                                 <div class="text-container text-container-b" v-if="!slotProps.data.loading">
                                     <div class="theme-title-b" :style="{ 'color': color_theme_title }">{{ slotProps.data.dt.title }}</div>
-                                    <div class="theme-desc-b" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>
-                                           
+                                    <div class="theme-desc-b" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>    
                                     <span class="theme-datetime theme-datetime-b" v-if="slotProps.data.dt.timestamp">{{ FormatPostDateTime(slotProps.data.dt.timestamp) }}</span>                             
                                     <a class="theme-readmore-b" v-if="type === 'posts' && (showreadmore === true || showreadmore === 'true')" href="javascript:void(0)" @click.stop="NavigateToPost(slotProps.data.dt.permalink)" :style="{ 'color': color_theme_desc }">Read More</a>
                                 </div>
@@ -71,10 +78,10 @@ export default {
                             <!-- Theme C -->
                             <div v-if="(theme === 'theme_c')" class="container-theme-c">
                                 <div  class="bg-theme-c"></div>
+                                
                                 <div class="text-container text-container-c"  v-if="!slotProps.data.loading">
                                     <div class="theme-title-c" :style="{ 'color': color_theme_title }">{{ slotProps.data.dt.title }}</div>
                                     <div class="theme-desc-c" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>
-                                    
                                     <span class="theme-datetime theme-datetime-c" v-if="slotProps.data.dt.timestamp">{{ FormatPostDateTime(slotProps.data.dt.timestamp) }}</span>
                                     <a class="theme-readmore-c" v-if="type === 'posts' && (showreadmore === true || showreadmore === 'true')" href="javascript:void(0)" @click.stop="NavigateToPost(slotProps.data.dt.permalink)" :style="{ 'color': color_theme_desc }">Read More</a>
                                 </div>
@@ -83,11 +90,10 @@ export default {
                             <!-- Theme D -->
                             <div v-if="(theme === 'theme_d')" class="container-theme-d">
                                 <div  class="bg-theme-d"></div>
+                                
                                 <div class="text-container text-container-d"  v-if="!slotProps.data.loading" :style="{ 'background-color': color_theme_a }">
                                     <div class="theme-title-d" :style="{ 'color': color_theme_title }">{{ slotProps.data.dt.title }}</div>
                                     <div class="theme-desc-d" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>
-                                    
-
                                     <span class="theme-datetime theme-datetime-d" v-if="slotProps.data.dt.timestamp">{{ FormatPostDateTime(slotProps.data.dt.timestamp) }}</span>
                                     <a class="theme-readmore-d" v-if="(type === 'posts') && (showreadmore === true || showreadmore === 'true')" href="javascript:void(0)" @click.stop="NavigateToPost(slotProps.data.dt.permalink)" :style="{ 'color': color_theme_desc }">Read More</a>
                                 </div>
@@ -96,10 +102,10 @@ export default {
                             <!-- Theme E -->
                             <div v-if="(theme === 'theme_e')" class="container-theme-e">
                                 <div  class="bg-theme-e"></div>
+                                
                                 <div class="text-container text-container-e"  v-if="!slotProps.data.loading">
                                     <div class="theme-title-e" :style="{ 'color': color_theme_title }">{{ slotProps.data.dt.title }}</div>
                                     <div class="theme-desc-e" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>
-                                    
                                     <span class="theme-datetime theme-datetime-e" v-if="slotProps.data.dt.timestamp">{{ FormatPostDateTime(slotProps.data.dt.timestamp) }}</span>
                                     <a class="theme-readmore-e" v-if="type === 'posts' && (showreadmore === true || showreadmore === 'true')" href="javascript:void(0)" @click.stop="NavigateToPost(slotProps.data.dt.permalink)" :style="{ 'color': color_theme_desc }">Read More</a>
                                 </div>
@@ -108,6 +114,7 @@ export default {
                             <!-- Theme F -->
                             <div v-if="(theme === 'theme_f')" class="container-theme-f" :style="{ '-webkit-box-shadow': 'inset 0px 0px 0px 10px '+color_theme_a, '-moz-box-shadow': 'inset 0px 0px 0px 10px '+color_theme_a, 'box-shadow': 'inset 0px 0px 0px 10px '+color_theme_a  }">
                                 <div  class="bg-theme-f"></div>
+                                
                                 <div class="text-container text-container-f"  v-if="!slotProps.data.loading" :style="{ 'background-color': color_theme_a }">
                                     <div class="theme-title-f" :style="{ 'color': color_theme_title }">{{ slotProps.data.dt.title }}</div>
                                     <div class="theme-desc-f" :style="{ 'color': color_theme_desc }" v-html="slotProps.data.dt.content"></div>
@@ -421,6 +428,7 @@ export default {
                 });
             } else if (this.type === "imagegallery") {
                 this.GetImageGalleryData(this.perPage, "asc", indexFirst, this.lastindex, async (returned) => {
+
                     let _indexFirst = returned.indexFirst;
                     let _indexLast = returned.indexLast;
                     let _datagalleryimages = returned.data.galleryimages;
@@ -526,7 +534,7 @@ export default {
             } else if (this.type === "imagegallery") {
                 if (this.totalDataAvailable > Object.keys(this.cachereference).length) {
                     this.GetImageGalleryData(this.perPage, "asc", _new_firstindex, _new_lastindex, async (returned) => {
-                        let _indexFirst = returned.indexFirst; // FIXME add +1 ??
+                        let _indexFirst = returned.indexFirst;
                         let _indexLast = returned.indexLast;
                         let _datagalleryimages = returned.data.galleryimages;
 
@@ -696,12 +704,18 @@ export default {
             });
         },
 
+        StripHTML(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            return doc.body.textContent || "";
+        },
+
         // LINK GetPosts
         GetPosts(cellsPerPage, order, indexFirst, indexLast, callback) {
             let _REST_URL = "http://localhost/";
             if (window["REST_URL"]) {
                 _REST_URL = window["REST_URL"];
             }
+            var self = this;
 
             let finalurl =
                 `${_REST_URL}/wp-json/aeroscroll/v1/getposts?page=` +
@@ -717,6 +731,19 @@ export default {
                     return response.json();
                 })
                 .then((data) => {
+                    //console.log("GetPosts: ", data);
+                    // if (meta_desc_size > 160) meta_desc = meta_desc.substr(0, 160);
+                    if (data.posts) {
+                        if (data.posts.length > 0) {
+                            for (var k = 0; k < data.posts.length; k++) {
+                                var _post = data.posts[k];
+                                var _shortdesc = self.StripHTML(_post.post_content);
+                                if (_shortdesc.length > 250) _shortdesc = _shortdesc.substr(0, 250);
+                                data.posts[k].shortdesc = _shortdesc;
+                            }
+                        }
+                    }
+
                     callback({
                         indexFirst: indexFirst,
                         indexLast: indexLast,
@@ -747,6 +774,7 @@ export default {
                     }
                 })
                 .then((response) => {
+                    //console.log(response.text());
                     return response.json();
                 })
                 .then((data) => {
@@ -789,6 +817,9 @@ export default {
                 var _imageexists = true;
                 if (_postData.imageexists) _imageexists = _postData.imageexists;
 
+                var _shortdesc = this.StripHTML(_postData.post_content);
+                if (_shortdesc.length > 250) _shortdesc = _shortdesc.substr(0, 250);
+
                 finalObj = {
                     id: _postData.ID,
                     uid: _postData.uid,
@@ -800,7 +831,8 @@ export default {
                         timestamp: _postData.timestamp,
                         title: _postData.post_title,
                         subtitle: _postData.post_subtitle,
-                        content: _postData.post_content,
+                        content: _shortdesc,
+                        shortdesc: _postData.shortdesc,
                         feature_image: feature_img,
                         thumbnail_image: thumbnail_image,
                         image_visible: true

@@ -3,6 +3,9 @@
 /**
  *  Custom Endpoints
  */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 require_once plugin_dir_path( __DIR__ ) . 'includes/class-aeroscroll-utils.php';
 
@@ -20,16 +23,11 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 	public function aeroscroll_cendpoints_init() {
 		$this->utils = new Aeroscroll_Utils();
 
-		
-
 		add_action( 'rest_api_init', array( $this, 'aeroscroll_register_rest_routes' ) );
 	}
 
 	// LINK # aeroscroll_register_rest_routes
 	public function aeroscroll_register_rest_routes() {
-		if ( $this->proendpoints !== null ) {
-			$this->proendpoints->aeroscroll_register_pro_rest_routes();
-		}
 
 		register_rest_route(
 			'aeroscroll/v1',
@@ -596,8 +594,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 				$relative_path   = str_replace( $image_title, '', $relative_url );
 				$image_id        = get_post_thumbnail_id( $post->ID );
 
-				
-
 				++$_order_index;
 				if ( $_order_index > $totalcount ) {
 					$_order_index = 1;
@@ -655,9 +651,7 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		global $wpdb;
 
 		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery"
-			)
+			"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery"
 		);
 
 		$categories = get_categories(
@@ -741,32 +735,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		$sortby            = sanitize_key( $params['sortby'] );
 		$sortbydir         = sanitize_key( $params['sortbydir'] );
 
-		$social_share_facebook  = sanitize_key( $params['social_share_facebook'] );
-		$social_share_twitter   = sanitize_key( $params['social_share_twitter'] );
-		$social_share_pinterest = sanitize_key( $params['social_share_pinterest'] );
-		$social_share_instagram = sanitize_key( $params['social_share_instagram'] );
-		$social_share_tumblr    = sanitize_key( $params['social_share_tumblr'] );
-		$social_share_email     = sanitize_key( $params['social_share_email'] );
-
-		$watermark_type       = sanitize_key( $params['watermark_type'] );
-		$watermark_text       = sanitize_key( $params['watermark_text'] );
-		$watermark_fontsize   = sanitize_key( $params['watermark_fontsize'] );
-		$watermark_color      = sanitize_text_field( $params['watermark_color'] );
-		$watermark_opacity    = sanitize_key( $params['watermark_opacity'] );
-		$watermark_position   = sanitize_key( $params['watermark_position'] );
-		$watermark_image_url  = sanitize_text_field( $params['watermark_image_url'] );
-		$watermark_image_size = sanitize_key( $params['watermark_image_size'] );
-
-		$advertisment_type       = sanitize_key( $params['advertisment_type'] );
-		$advertisment_text       = sanitize_key( $params['advertisment_text'] );
-		$advertisment_link       = sanitize_key( $params['advertisment_link'] );
-		$advertisment_fontsize   = sanitize_key( $params['advertisment_fontsize'] );
-		$advertisment_color      = sanitize_text_field( $params['advertisment_color'] );
-		$advertisment_opacity    = sanitize_key( $params['advertisment_opacity'] );
-		$advertisment_position   = sanitize_key( $params['advertisment_position'] );
-		$advertisment_image_url  = sanitize_text_field( $params['advertisment_image_url'] );
-		$advertisment_image_size = sanitize_key( $params['advertisment_image_size'] );
-
 		$poweredbyactive   = sanitize_key( $params['poweredbyactive'] );
 		$articleinlightbox = sanitize_key( $params['articleinlightbox'] );
 
@@ -785,8 +753,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		}
 		$finalcategories .= ']';
 
-		//var_dump( $finalcategories );
-
 		if ( gettype( $published ) === 'boolean' ) {
 			true === $published ? $published = 1 : $published = 0;
 		}
@@ -795,120 +761,49 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 			true === $poweredbyactive ? $poweredbyactive = 1 : $poweredbyactive = 0;
 		}
 
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_facebook ) === 'boolean' ) {
-				true === $social_share_facebook ? $social_share_facebook = 1 : $social_share_facebook = 0;
-			}
-		} else {
-			$social_share_facebook = 0;
-		}
-
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_twitter ) === 'boolean' ) {
-				true === $social_share_twitter ? $social_share_twitter = 1 : $social_share_twitter = 0;
-			}
-		} else {
-			$social_share_twitter = 0;
-		}
-
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_pinterest ) === 'boolean' ) {
-				true === $social_share_pinterest ? $social_share_pinterest = 1 : $social_share_pinterest = 0;
-			}
-		} else {
-			$social_share_pinterest = 0;
-		}
-
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_instagram ) === 'boolean' ) {
-				true === $social_share_instagram ? $social_share_instagram = 1 : $social_share_instagram = 0;
-			}
-		} else {
-			$social_share_instagram = 0;
-		}
-
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_tumblr ) === 'boolean' ) {
-				$social_share_tumblr === true ? $social_share_tumblr = 1 : $social_share_tumblr = 0;
-			}
-		} else {
-			$social_share_tumblr = 0;
-		}
-
-		if ( $this->utils->aeroscroll_is_pro() ) {
-			if ( gettype( $social_share_email ) === 'boolean' ) {
-				$social_share_email === true ? $social_share_email = 1 : $social_share_email = 0;
-			}
-		} else {
-			$social_share_email = 0;
-		}
-
 		global $wpdb;
 		$table   = $wpdb->prefix . 'aeroscroll_gallery';
 		$results = $wpdb->update(
 			$table,
 			array(
-				'published'               => $published,
-				'title'                   => $title,
-				'sidegap'                 => $sidegap,
-				'cellgap'                 => $cellgap,
-				'marginX'                 => $margin_x,
-				'marginY'                 => $margin_y,
-				'usemousewheel'           => $usemousewheel,
-				'imagegallery_id'         => $imagegallery_id,
-				'subtitle'                => $subtitle,
-				'shortcode'               => $shortcode,
-				'height'                  => $height,
-				'orientation'             => $orientation,
-				'layout'                  => $layout,
-				'type'                    => $type,
-				'categories'              => $finalcategories,
-				'theme'                   => $theme,
-				'themeonhover'            => $themeonhover,
-				'showreadmore'            => $showreadmore,
-				'autoscroll'              => $autoscroll,
-				'color_bg'                => $color_bg,
-				'color_theme_a'           => $color_theme_a,
-				'color_theme_title'       => $color_theme_title,
-				'color_theme_desc'        => $color_theme_desc,
-				'color_cell_bg'           => $color_cell_bg,
-				'numrows'                 => $numrows,
-				'numcolumns'              => $numcolumns,
-				'numcolumns_mid'          => $numcolumns_mid,
-				'numcolumns_low'          => $numcolumns_low,
-				'cellsize'                => $cellsize,
-				'cellsquared'             => $cellsquared,
-				'scrollspeed'             => $scrollspeed,
-				'isinfinite'              => $isinfinite,
-				'scrollbar'               => $scrollbar,
-				'updated_at'              => gmdate( 'Y-m-d H:m:s' ),
-				'sortby'                  => $sortby,
-				'sortbydir'               => $sortbydir,
-				'social_share_facebook'   => $social_share_facebook,
-				'social_share_twitter'    => $social_share_twitter,
-				'social_share_pinterest'  => $social_share_pinterest,
-				'social_share_instagram'  => $social_share_instagram,
-				'social_share_tumblr'     => $social_share_tumblr,
-				'social_share_email'      => $social_share_email,
-				'watermark_type'          => $watermark_type,
-				'watermark_text'          => $watermark_text,
-				'watermark_fontsize'      => $watermark_fontsize,
-				'watermark_color'         => $watermark_color,
-				'watermark_opacity'       => $watermark_opacity,
-				'watermark_position'      => $watermark_position,
-				'watermark_image_url'     => $watermark_image_url,
-				'watermark_image_size'    => $watermark_image_size,
-				'advertisment_type'       => $advertisment_type,
-				'advertisment_text'       => $advertisment_text,
-				'advertisment_link'       => $advertisment_link,
-				'advertisment_fontsize'   => $advertisment_fontsize,
-				'advertisment_color'      => $advertisment_color,
-				'advertisment_opacity'    => $advertisment_opacity,
-				'advertisment_position'   => $advertisment_position,
-				'advertisment_image_url'  => $advertisment_image_url,
-				'advertisment_image_size' => $advertisment_image_size,
-				'poweredbyactive'         => $poweredbyactive,
-				'articleinlightbox'       => $articleinlightbox,
+				'published'         => $published,
+				'title'             => $title,
+				'sidegap'           => $sidegap,
+				'cellgap'           => $cellgap,
+				'marginX'           => $margin_x,
+				'marginY'           => $margin_y,
+				'usemousewheel'     => $usemousewheel,
+				'imagegallery_id'   => $imagegallery_id,
+				'subtitle'          => $subtitle,
+				'shortcode'         => $shortcode,
+				'height'            => $height,
+				'orientation'       => $orientation,
+				'layout'            => $layout,
+				'type'              => $type,
+				'categories'        => $finalcategories,
+				'theme'             => $theme,
+				'themeonhover'      => $themeonhover,
+				'showreadmore'      => $showreadmore,
+				'autoscroll'        => $autoscroll,
+				'color_bg'          => $color_bg,
+				'color_theme_a'     => $color_theme_a,
+				'color_theme_title' => $color_theme_title,
+				'color_theme_desc'  => $color_theme_desc,
+				'color_cell_bg'     => $color_cell_bg,
+				'numrows'           => $numrows,
+				'numcolumns'        => $numcolumns,
+				'numcolumns_mid'    => $numcolumns_mid,
+				'numcolumns_low'    => $numcolumns_low,
+				'cellsize'          => $cellsize,
+				'cellsquared'       => $cellsquared,
+				'scrollspeed'       => $scrollspeed,
+				'isinfinite'        => $isinfinite,
+				'scrollbar'         => $scrollbar,
+				'updated_at'        => gmdate( 'Y-m-d H:m:s' ),
+				'sortby'            => $sortby,
+				'sortbydir'         => $sortbydir,
+				'poweredbyactive'   => $poweredbyactive,
+				'articleinlightbox' => $articleinlightbox,
 			),
 			array( 'id' => $id )
 		);
@@ -953,32 +848,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		$sortby            = sanitize_key( $params['sortby'] );
 		$sortbydir         = sanitize_key( $params['sortbydir'] );
 
-		$social_share_facebook  = sanitize_key( $params['social_share_facebook'] );
-		$social_share_twitter   = sanitize_key( $params['social_share_twitter'] );
-		$social_share_pinterest = sanitize_key( $params['social_share_pinterest'] );
-		$social_share_instagram = sanitize_key( $params['social_share_instagram'] );
-		$social_share_tumblr    = sanitize_key( $params['social_share_tumblr'] );
-		$social_share_email     = sanitize_key( $params['social_share_email'] );
-
-		$watermark_type       = sanitize_key( $params['watermark_type'] );
-		$watermark_text       = sanitize_key( $params['watermark_text'] );
-		$watermark_fontsize   = sanitize_key( $params['watermark_fontsize'] );
-		$watermark_color      = sanitize_key( $params['watermark_color'] );
-		$watermark_opacity    = sanitize_key( $params['watermark_opacity'] );
-		$watermark_position   = sanitize_key( $params['watermark_position'] );
-		$watermark_image_url  = sanitize_text_field( $params['watermark_image_url'] );
-		$watermark_image_size = sanitize_key( $params['watermark_image_size'] );
-
-		$advertisment_type       = sanitize_key( $params['advertisment_type'] );
-		$advertisment_text       = sanitize_key( $params['advertisment_text'] );
-		$advertisment_link       = sanitize_key( $params['advertisment_link'] );
-		$advertisment_fontsize   = sanitize_key( $params['advertisment_fontsize'] );
-		$advertisment_color      = sanitize_key( $params['advertisment_color'] );
-		$advertisment_opacity    = sanitize_key( $params['advertisment_opacity'] );
-		$advertisment_position   = sanitize_key( $params['advertisment_position'] );
-		$advertisment_image_url  = sanitize_text_field( $params['advertisment_image_url'] );
-		$advertisment_image_size = sanitize_key( $params['advertisment_image_size'] );
-
 		$poweredbyactive   = sanitize_key( $params['poweredbyactive'] );
 		$articleinlightbox = sanitize_key( $params['articleinlightbox'] );
 
@@ -1002,70 +871,46 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		$results = $wpdb->insert(
 			$table,
 			array(
-				'title'                   => $title,
-				'sidegap'                 => $sidegap,
-				'cellgap'                 => $cellgap,
-				'marginX'                 => $margin_x,
-				'marginY'                 => $margin_y,
-				'usemousewheel'           => $usemousewheel,
-				'imagegallery_id'         => $imagegallery_id,
-				'subtitle'                => $subtitle,
-				'shortcode'               => $shortcode,
-				'height'                  => $height,
-				'orientation'             => $orientation,
-				'layout'                  => $layout,
-				'type'                    => $type,
-				'categories'              => $finalcategories,
-				'theme'                   => $theme,
-				'themeonhover'            => $themeonhover,
-				'showreadmore'            => $showreadmore,
-				'autoscroll'              => $autoscroll,
-				'color_bg'                => $color_bg,
-				'color_theme_a'           => $color_theme_a,
-				'color_theme_title'       => $color_theme_title,
-				'color_theme_desc'        => $color_theme_desc,
-				'color_cell_bg'           => $color_cell_bg,
-				'numrows'                 => $numrows,
-				'numcolumns'              => $numcolumns,
-				'numcolumns_mid'          => $numcolumns_mid,
-				'numcolumns_low'          => $numcolumns_low,
-				'cellsize'                => $cellsize,
-				'cellsquared'             => $cellsquared,
-				'scrollspeed'             => $scrollspeed,
-				'isinfinite'              => $isinfinite,
-				'scrollbar'               => $scrollbar,
-				'updated_at'              => gmdate( 'Y-m-d H:m:s' ),
-				'created_at'              => gmdate( 'Y-m-d H:m:s' ),
-				'sortby'                  => $sortby,
-				'sortbydir'               => $sortbydir,
-				'social_share_facebook'   => $social_share_facebook,
-				'social_share_twitter'    => $social_share_twitter,
-				'social_share_pinterest'  => $social_share_pinterest,
-				'social_share_instagram'  => $social_share_instagram,
-				'social_share_tumblr'     => $social_share_tumblr,
-				'social_share_email'      => $social_share_email,
-				'watermark_type'          => $watermark_type,
-				'watermark_text'          => $watermark_text,
-				'watermark_fontsize'      => $watermark_fontsize,
-				'watermark_color'         => $watermark_color,
-				'watermark_opacity'       => $watermark_opacity,
-				'watermark_position'      => $watermark_position,
-				'watermark_image_url'     => $watermark_image_url,
-				'watermark_image_size'    => $watermark_image_size,
-				'advertisment_type'       => $advertisment_type,
-				'advertisment_text'       => $advertisment_text,
-				'advertisment_link'       => $advertisment_link,
-				'advertisment_fontsize'   => $advertisment_fontsize,
-				'advertisment_color'      => $advertisment_color,
-
-				'advertisment_opacity'    => $advertisment_opacity,
-				'advertisment_position'   => $advertisment_position,
-				'advertisment_image_url'  => $advertisment_image_url,
-				'advertisment_image_size' => $advertisment_image_size,
-				'poweredbyactive'         => $poweredbyactive,
-				'articleinlightbox'       => $articleinlightbox,
+				'title'             => $title,
+				'sidegap'           => $sidegap,
+				'cellgap'           => $cellgap,
+				'marginX'           => $margin_x,
+				'marginY'           => $margin_y,
+				'usemousewheel'     => $usemousewheel,
+				'imagegallery_id'   => $imagegallery_id,
+				'subtitle'          => $subtitle,
+				'shortcode'         => $shortcode,
+				'height'            => $height,
+				'orientation'       => $orientation,
+				'layout'            => $layout,
+				'type'              => $type,
+				'categories'        => $finalcategories,
+				'theme'             => $theme,
+				'themeonhover'      => $themeonhover,
+				'showreadmore'      => $showreadmore,
+				'autoscroll'        => $autoscroll,
+				'color_bg'          => $color_bg,
+				'color_theme_a'     => $color_theme_a,
+				'color_theme_title' => $color_theme_title,
+				'color_theme_desc'  => $color_theme_desc,
+				'color_cell_bg'     => $color_cell_bg,
+				'numrows'           => $numrows,
+				'numcolumns'        => $numcolumns,
+				'numcolumns_mid'    => $numcolumns_mid,
+				'numcolumns_low'    => $numcolumns_low,
+				'cellsize'          => $cellsize,
+				'cellsquared'       => $cellsquared,
+				'scrollspeed'       => $scrollspeed,
+				'isinfinite'        => $isinfinite,
+				'scrollbar'         => $scrollbar,
+				'updated_at'        => gmdate( 'Y-m-d H:m:s' ),
+				'created_at'        => gmdate( 'Y-m-d H:m:s' ),
+				'sortby'            => $sortby,
+				'sortbydir'         => $sortbydir,
+				'poweredbyactive'   => $poweredbyactive,
+				'articleinlightbox' => $articleinlightbox,
 			),
-			array( '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%s', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%s', '%s', '%d', '%s', '%d', '%d', '%s', '%d', '%d', '%d' )
+			array( '%s', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%d', '%d' )
 		);
 		// 59
 		return $results;
@@ -1087,9 +932,7 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 	public function aeroscroll_get_imagegalleries( $params ) {
 		global $wpdb;
 		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegalleries"
-			)
+			"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegalleries"
 		);
 
 		$returnobj                 = new stdClass();
@@ -1174,7 +1017,8 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 			}
 		}
 
-		if ( isset( $_FILES ) ) {
+		$upfiles = $request->get_file_params();
+		if ( isset( $upfiles ) ) {
 			$files = array();
 
 			if ( $relativedir !== null && $relativedir !== '' ) {
@@ -1184,16 +1028,19 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 					wp_mkdir_p( $relativefullpath, 0777, true );
 				}
 
-				foreach ( $_FILES as $var => $value ) {
-					$filename     = sanitize_file_name( $value['name'] );
-					$type         = $value['type'];
-					$file_tmp     = $value['tmp_name'];
+				foreach ( $upfiles as $key => $file ) {
+					//var_dump( $file );
+					//echo '----';
+
+					$filename     = sanitize_file_name( $file['name'] );
+					$type         = $file['type'];
+					$file_tmp     = $file['tmp_name'];
 					$uploadedfile = array(
 						'name'     => $filename,
-						'type'     => $value['type'],
-						'tmp_name' => $value['tmp_name'],
-						'error'    => $value['error'],
-						'size'     => $value['size'],
+						'type'     => $file['type'],
+						'tmp_name' => $file['tmp_name'],
+						'error'    => $file['error'],
+						'size'     => $file['size'],
 					);
 
 					try {
@@ -1301,6 +1148,7 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 
 				foreach ( $iterator as $ff ) {
 					if ( $ff->isFile() ) {
+
 						if ( in_array( $ff->getExtension(), $allowed_extensions, true ) ) {
 							$item              = new stdClass();
 							$item->file        = $ff->getFilename();
@@ -1515,7 +1363,8 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 				$results = $wpdb->get_results(
 					$wpdb->prepare(
 						// phpcs:ignore
-						"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = {$imagegallery_id} ORDER BY image_order"
+						"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = %d ORDER BY image_order",
+						array( $imagegallery_id )
 					)
 				);
 
@@ -1624,7 +1473,7 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 						$_description = sanitize_text_field( $_image['description'] );
 						$_order       = sanitize_key( $_image['order'] );
 
-						$results = $wpdb->get_results( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (id, title, description, image_order) VALUES ({$_id}, '{$_title}', '{$_description}', {$_order})  ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description)") );
+						$results = $wpdb->get_results( $wpdb->prepare( "INSERT INTO {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (id, title, description, image_order) VALUES (%d, %s, %s, %d)  ON DUPLICATE KEY UPDATE image_order = VALUES(image_order), title = VALUES(title), description = VALUES(description)", array( $_id, $_title, $_description, $_order ) ) );
 					}
 
 					$result = 1;
@@ -1665,13 +1514,13 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 		}
 
 		if ( $request->get_param( 'searchkeyword' ) ) {
-			$searchkeyword = sanitize_key( $request->get_param( 'searchkeyword' ) );
+			$searchkeyword = sanitize_text_field( $request->get_param( 'searchkeyword' ) );
 		}
 		if ( $request->get_param( 'orderby' ) ) {
-			$orderby = sanitize_key( $request->get_param( 'orderby' ) );
+			$orderby = sanitize_text_field( $request->get_param( 'orderby' ) );
 		}
 		if ( $request->get_param( 'order' ) ) {
-			$order = sanitize_key( $request->get_param( 'order' ) );
+			$order = sanitize_text_field( $request->get_param( 'order' ) );
 		}
 		if ( $request->get_param( 'infinite' ) ) {
 			$infinite = sanitize_key( $request->get_param( 'infinite' ) );
@@ -1710,7 +1559,8 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 			$results_gallery_properties = $wpdb->get_results(
 				$wpdb->prepare(
                     // phpcs:ignore
-					"SELECT * FROM {$table_gallery} WHERE id = {$galleryid}"
+					"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery WHERE id = %d",
+					array( $galleryid )
 				)
 			);
 
@@ -1735,7 +1585,8 @@ class Aeroscroll_Gallery_Custom_Endpoint {
                 // phpcs:ignore
 				$wpdb->prepare(
                     // phpcs:ignore
-					"SELECT COUNT(*) AS totalimages FROM {$table} WHERE imagegallery_id = {$imagegalleryid}"
+					"SELECT COUNT(*) AS totalimages FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = %d",
+					array( $imagegalleryid )
 				)
 			);
 
@@ -1764,10 +1615,12 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 					// Now add posts until we reach the desired number
 					$missingimages = $perpage - $maincount;
 
-					$results = $wpdb->get_results(
+                    // phpcs:ignore
+                    $results = $wpdb->get_results(
 						$wpdb->prepare(
                             // phpcs:ignore
-							"SELECT * FROM {$table} WHERE imagegallery_id = {$imagegalleryid} ORDER BY '{$sort_by}' '{$sort_by_dir}'"
+                            "SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = %d ORDER BY %1s %1s",
+							array( $imagegalleryid, $sort_by, $sort_by_dir )
 						)
 					);
 
@@ -1834,9 +1687,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 						if ( file_exists( $optimizedpath ) ) {
 							$img->thumbnail_image = $optimizedurl;
 						}
-
-						
-
 					}
 				} else {
 					// B: MORE THAN PERPAGE
@@ -1845,7 +1695,8 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 					$results = $wpdb->get_results(
 						$wpdb->prepare(
                             // phpcs:ignore
-							"SELECT * FROM {$table} WHERE imagegallery_id = {$imagegalleryid} ORDER BY '{$sort_by}' ASC LIMIT {$perpage} OFFSET {$offset}"
+							"SELECT * FROM {$wpdb->prefix}aeroscroll_gallery_imagegallery_images WHERE imagegallery_id = %d ORDER BY %1s ASC LIMIT %d OFFSET %d",
+							array( $imagegalleryid, $sort_by, $perpage, $offset )
 						)
 					);
 
@@ -1874,8 +1725,6 @@ class Aeroscroll_Gallery_Custom_Endpoint {
 						if ( file_exists( $optimizedpath ) ) {
 							$img->thumbnail_image = $optimizedurl;
 						}
-
-						
 					}
 				}
 			}

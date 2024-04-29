@@ -21,9 +21,21 @@ if ( ! class_exists( 'Aeroscroll\Aeroscroll_Utils' ) ) {
 		public function __construct() {
 		}
 
+		
+
 		public static function aeroscroll_is_pro() {
 			return defined( 'AEROSCROLL_GALLERY_PRO_VERSION' );
 		}
+
+		public static function aeroscroll_has_pro() {
+			$has_pro = false;
+			if ( class_exists( 'Aeroscroll_Gallery_Pro' ) ) {
+				$has_pro = true;
+			}
+			return $has_pro;
+		}
+
+
 
 		public static function aeroscroll_get_version() {
 			$aeroscroll_gallery_version = '';

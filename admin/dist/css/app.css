@@ -12264,7 +12264,7 @@ body.desktop .q-toggle:not(.disabled):hover .q-toggle__thumb:before {
 }
 
 .filemitemsize {
-  height: 37px;
+  height: 50px;
 }
 
 .q-dialog-plugin h6 {
@@ -12700,6 +12700,21 @@ body.desktop .q-toggle:not(.disabled):hover .q-toggle__thumb:before {
   height: 100%;
   position: absolute;
   align-items: center;
+}
+
+.optimized_size {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.optimized_size_text {
+  color: #94cf96;
+}
+
+.non_optimized_size_text {
+  font-size: 10pt;
+  text-decoration: line-through;
 }
 
 @media (min-width: 800px) {

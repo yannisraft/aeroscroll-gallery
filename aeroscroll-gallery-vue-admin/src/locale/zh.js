@@ -236,5 +236,6 @@ export default {
     signup: "注册或登录",
     showarticleonlightbox: "在 Lightbox 中显示文章",
     showarticleonlightbox_desc: "增强您的阅读体验！点击以在迷人的 Lightbox 中无缝探索完整文章。",
-    changeimage: "更改图像"
+    changeimage: "更改图像",
+    upload_max_filesize_error: "错误：上传的文件超过了php.ini中的 'upload_max_filesize' 指令。请在您的 PHP 设置中增加文件大小限制。"
 };

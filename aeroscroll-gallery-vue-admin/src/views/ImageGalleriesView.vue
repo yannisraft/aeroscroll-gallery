@@ -6,6 +6,13 @@
                     <span>{{ t("manage_imagegalleries") }}</span>
                 </div>
                 <div v-if="!editMode" class="q-row q-pb-sm">
+                    <div v-if="loading" class="panelloader">
+                        <q-spinner
+                            color="white"
+                            size="3em"
+                        />
+                        <span style="color: white; margin-top: 10px;">{{ t('loading') + '...' }}</span>
+                    </div> 
                     <div v-if="!licenseActive" class="license_inactive_panel">
                         <span v-if="licenseNotActive">{{ t("please_activate_license") }}</span>
                     </div>
@@ -21,7 +28,7 @@
                         @update:pagination="PaginationUpdated"
                     >
                         <template v-slot:loading>
-                            <q-inner-loading showing color="primary" />
+                            <!-- <q-inner-loading showing color="primary" /> -->
                         </template>
                         <template v-slot:top-right>
                             <div class="q-col q-px-sm" style="flex: 0;">
@@ -1046,6 +1053,7 @@ export default defineComponent({
         }
 
         function SaveImageDetails() {
+            console.log("SaveImageDetails");
             editimagedialog.value = false;
 
             let _REST_URL = "http://localhost/";
@@ -1077,8 +1085,12 @@ export default defineComponent({
                     },
                     body: body_data
                 })
-                    .then((response) => response.json())
+                    .then((response) => {
+                        //console.log("res: ", response.text());
+                        return response.json();
+                    })
                     .then(async (data) => {
+                        console.log("SaveImageDetails: ", data);
                         $q.loading.hide();
                     });
             }
@@ -1218,11 +1230,23 @@ export default defineComponent({
 
         function onUploadedImportGallery(info) {
             $q.loading.hide();
+            console.log("onUploadedImportGallery: ", info);
 
             try {
                 var ressp = JSON.parse(info.xhr.responseText);
                 if (ressp.success === true) {
                     GetGalleryImages();
+                } else {
+                    if (ressp.error_code)
+                    {
+                        if(ressp.error_code === "upload_max_filesize")
+                        {
+                            $q.dialog({
+                                title: t("error"),
+                                message: t("upload_max_filesize_error")
+                            });                         
+                        }
+                    }
                 }
             } catch (ex) {}
         }
@@ -1244,23 +1268,26 @@ export default defineComponent({
             let _headers = [];
 
             let _APEX = window["APEX"];
-            if (_APEX) {
-                _headers = [
-                    {
-                        name: "X-WP-Nonce",
-                        value: _APEX.importimagegallery.nonce//_APEX["importimagegallery"].nonce
-                    },
-                    {
-                        name: "relativedir",
-                        value: "root"
-                    },
-                    {
-                        name: "imagegallery_id",
-                        value: editingItem.value.id
-                    }
-                ];
-            }
-            uploaderHeaders.value = _headers;
+            if(_APEX.importimagegallery)
+            {                
+                if (_APEX) {
+                    _headers = [
+                        {
+                            name: "X-WP-Nonce",
+                            value: _APEX.importimagegallery.nonce//_APEX["importimagegallery"].nonce
+                        },
+                        {
+                            name: "relativedir",
+                            value: "root"
+                        },
+                        {
+                            name: "imagegallery_id",
+                            value: editingItem.value.id
+                        }
+                    ];
+                }
+                uploaderHeaders.value = _headers;
+            }            
         }
 
         onBeforeMount(() => {
@@ -1276,6 +1303,7 @@ export default defineComponent({
 
         onMounted(() => {
             document.addEventListener("DOMContentLoaded", function () {
+                loading.value = true;
                 var pro_func = document.defaultView.window["pro_func"];
                 if (ispro.value === true) {
                     let _APEX = window["APEX"];
@@ -1291,11 +1319,14 @@ export default defineComponent({
                             licenseNotActive.value = true;
                             licenseActive.value = false;
                         }
+
+                        loading.value = false;
                     }, _APEX.manageserial.nonce);
                 } else {
                     // Else Get Galleries
                     GetGalleries();
                     licenseActive.value = true;
+                    loading.value = false;
                 }
             });
 

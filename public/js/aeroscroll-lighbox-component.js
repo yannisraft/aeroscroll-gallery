@@ -1132,7 +1132,8 @@ export default {
 
             var youtubeID = this.getYoutubeID(itemUrl);
             if (youtubeID) {
-                return "https://img.youtube.com/vi/" + youtubeID + "/mqdefault.jpg";
+                var baseUrl = window["BASE_URL"];
+                return baseUrl + "/wp-content/plugins/aeroscroll-gallery/public/images/youtube-thumb-icon.jpg";
             }
 
             var vimeoID = this.getVimeoID(itemUrl);

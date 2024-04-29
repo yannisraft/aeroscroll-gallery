@@ -27,6 +27,14 @@
  * @subpackage aeroscroll_gallery/includes
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+require_once plugin_dir_path( __DIR__ ) . 'includes/class-aeroscroll-utils.php';
+
+use Aeroscroll\Aeroscroll_Utils;
+
 if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 	#[AllowDynamicProperties]
 	class Aeroscroll_Gallery {
@@ -76,11 +84,14 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 				$this->version = '1.0.0';
 			}
 			$this->plugin_name = $name;
+			$this->utils       = new Aeroscroll_Utils();
 
 			$this->aeroscroll_load_dependencies();
 			$this->aeroscroll_set_locale();
 			$this->aeroscroll_define_admin_hooks();
-			$this->aeroscroll_define_public_hooks();
+			if ( ! $this->utils->aeroscroll_has_pro() ) {
+				$this->aeroscroll_define_public_hooks();
+			}
 		}
 
 		/**
@@ -116,7 +127,10 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 			 * The class responsible for defining all custome REST API endpointd
 			 *
 			 */
-			require_once plugin_dir_path( __DIR__ ) . 'includes/class-aeroscroll-gallery-custom-endpoint.php';
+			if ( ! $this->utils->aeroscroll_has_pro() ) {
+				require_once plugin_dir_path( __DIR__ ) . 'includes/class-aeroscroll-gallery-custom-endpoint.php';
+				$this->customendpoint = new Aeroscroll_Gallery_Custom_Endpoint();
+			}
 
 			/**
 			 * The class responsible for defining all actions that occur in the admin area.
@@ -127,10 +141,11 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 			 * The class responsible for defining all actions that occur in the public-facing
 			 * side of the site.
 			 */
-			require_once plugin_dir_path( __DIR__ ) . 'public/class-aeroscroll-gallery-public.php';
+			if ( ! $this->utils->aeroscroll_has_pro() ) {
+				require_once plugin_dir_path( __DIR__ ) . 'public/class-aeroscroll-gallery-public.php';
+			}
 
-			$this->loader         = new aeroscroll_gallery_Loader();
-			$this->customendpoint = new Aeroscroll_Gallery_Custom_Endpoint();
+			$this->loader = new aeroscroll_gallery_Loader();
 		}
 
 		/**
@@ -158,8 +173,12 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 			$plugin_admin = new Aeroscroll_Gallery_Admin( $this->aeroscroll_get_plugin_name(), $this->aeroscroll_get_version() );
 
 			// Hook our settings
-			$this->loader->aeroscroll_add_action( 'admin_init', $plugin_admin, 'register_aeroscroll_settings' );
-			$this->loader->aeroscroll_add_action( 'admin_menu', $plugin_admin, 'register_aeroscroll_settings_page' );
+			$this->loader->aeroscroll_add_action( 'admin_init', $plugin_admin, 'aeroscroll_register_settings' );
+
+			if ( ! $this->utils->aeroscroll_has_pro() ) {
+				$this->loader->aeroscroll_add_action( 'admin_menu', $plugin_admin, 'aeroscroll_register_settings_page' );
+			}
+
 			$this->loader->aeroscroll_add_action( 'admin_print_styles', $plugin_admin, 'aeroscroll_enqueue_styles' );
 			$this->loader->aeroscroll_add_action( 'admin_enqueue_scripts', $plugin_admin, 'aeroscroll_enqueue_scripts' );
 		}
@@ -180,7 +199,7 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 			// Add our Shortcodes
 			// 1. First retrieve all aeroscroll grids from database
 			global $wpdb;
-			$grids = $wpdb->get_results( $wpdb->prepare( "SELECT shortcode FROM {$wpdb->prefix}aeroscroll_gallery" ) );
+			$grids = $wpdb->get_results( "SELECT shortcode FROM {$wpdb->prefix}aeroscroll_gallery" );
 
 			// 2. Then register all shortcodes for active grids
 			foreach ( $grids as $grid ) {

@@ -23,6 +23,24 @@ Immerse your audience in a seamless experience with the integrated lightbox for 
 
 Whether you're a seasoned web design professional or a passionate enthusiast, Aeroscroll Gallery empowers you to effortlessly create visually striking galleries. Enhance your website's visual storytelling and make a lasting impression on your audience with the dynamic capabilities of Aeroscroll Gallery.
 
+== Full Source Code of the plugin ==
+
+You can find the full source code of the plugin on our GitHub repository at the following location:
+[Aeroscroll Gallery Github] (https://github.com/yannisraft/aeroscroll-gallery)
+
+Apart from the PHP and javascript code of the plugin, in order to build the project for the backend administration, Node.js at least version v18.17.0 is required
+The backend of the plugin is built using Quasar Framework [Quasar Framework] (https://quasar.dev/)
+
+To run the code you can follow the following steps:
+
+1. Clone the Project from github
+2. Open the project inside your favorite IDE editor
+3. Navigate to folder: "aeroscroll-gallery-vue-admin"
+4. Install Node if you have'nt done it already. Follow these steps to do so: [How to install Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+5. Run ```npm i -g @quasar/cli```
+6. Then run ```npm i```
+7. Finally inside the folder "aeroscroll-gallery-vue-admin" run ```npm run dev```
+
 == Live Demos ==
 
 [Essential Demos] (https://www.aeroscroll.com/essential-gallery-demos/)
@@ -116,6 +134,37 @@ Get started with ease by installing our plugin directly from the WordPress direc
 6. Images List Page
 7. Responsive edit Page
 
+
+== Privacy Policy and Terms of Service ==
+
+[Aeroscroll Gallery Privacy Policy](https://www.aeroscroll.com/gdpr-privacy-policy/)
+
+[Aeroscroll Gallery Terms and Conditions](https://www.aeroscroll.com/terms-and-conditions/)
+
+
+== Service Usage Disclosure ==
+
+This plugin utilizes a third-party service provided by Aeroscroll in order to offer certain premium features to users. Below are the details regarding this service:
+
+### Service Purpose: The service is used for the functionality to activate / Deactivate the "Powered by Logo" in order for the user to receive a free month of Premium support
+- Service URL: [http://www.aeroscroll.com/wp-json/aeroscroll-manager/v1/onemonthpremiumservice]
+- Service Description: The service allows users to activate features such as displaying a "Powered by Logo" on the frontend in exchange for one month of premium support.
+- Terms of Use: [https://www.aeroscroll.com/terms-and-conditions/]
+- Privacy Policy: [https://www.aeroscroll.com/gdpr-privacy-policy/]
+
+By using this plugin, you acknowledge and agree to the terms of use and privacy policy of the Aeroscroll service.
+
+== PRO Version Checks ==
+
+Please note that the Aeroscroll Gallery plugin includes checks to detect whether the PRO version of the plugin is installed. These checks are implemented solely to inform users about the availability of certain premium features provided by the PRO version.
+
+It's important to emphasize that the checks for the PRO version do not interfere with the functionality or performance of the plugin in any way. The Aeroscroll Gallery plugin is fully functional and usable without the PRO version, and these checks do not restrict or limit its core features.
+
+The purpose of these checks is to notify users that additional features and functionalities, exclusive to the PRO version, are available for their consideration. Users can choose to upgrade to the PRO version to unlock these premium features and enhance their experience with the plugin.
+
+We are committed to ensuring transparency and clarity regarding the functionality of the Aeroscroll Gallery plugin. If you have any questions or concerns about the PRO version checks, please don't hesitate to contact us for further clarification.
+
+
 == Frequently Asked Questions ==
 
 = How can I add a new Gallery? =
@@ -165,9 +214,17 @@ Yes, this gallery plugin seamlessly integrates with most themes and plugins, ens
 Yes of course. You may find the documentation here:
 <a href="https://www.aeroscroll.com/documentation/" target="_blank">Aeroscroll Gallery Documentation</a>
 
+= Is the Call to the aeroscroll.com service required for the plugin to function properly?
+
+No, the call to the aeroscroll.com service is not required for the basic functionality of the plugin. The plugin operates fully without it. However, the service is utilized to offer certain optional features, such as displaying a "Powered by Logo" on the frontend in exchange for one month of premium support. This is an optional feature that users can choose to enable if they wish.
+
 
 
 == Changelog ==
+
+= 1.0.5 - 2024-04-08 =
+* Updated to support Wordpress version 6.5.2
+* Security Fixes
 
 = 1.0.4 - 2024-04-08 =
 * Updated to support Wordpress version 6.5.0
