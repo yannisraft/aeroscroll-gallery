@@ -2,12 +2,12 @@
 Contributors: yannisraft
 Author URI: https://www.aeroscroll.com
 Plugin URI: https://github.com/yannisraft/aeroscroll-gallery
-Tags: photo gallery, image gallery, image portfolio, post grid, media gallery, gallery, responsive gallery, wordpress gallery plugin, image collection, scroller, infinite gallery, watermark
+Tags: photo gallery, image gallery, post grid, responsive gallery, infinite gallery
 Requires at least: 4.8
 Requires PHP: 7.1
-Tested up to: 6.5.0
-Stable tag: 1.0.4
-Version: 1.0.4
+Tested up to: 6.5.2
+Stable tag: 1.0.5
+Version: 1.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,27 +19,7 @@ Discover the power of Aeroscroll – Ιnfinite scrolling, flexible layouts, and 
 
 Aeroscroll Gallery presents the perfect solution for elevating the visual appeal of your WordPress website. Our robust WordPress plugin comes packed with advanced features that will make your image galleries truly exceptional. Enjoy the convenience of endless scrolling, choose from various layout options like grids, masonry, and justified, and customize columns, cell sizes, and color schemes to tailor your galleries to perfection.
 
-Immerse your audience in a seamless experience with the integrated lightbox for image previews, streamline file management, and benefit from built-in image optimization for superior site performance. Our fully responsive design ensures that your galleries look stunning on every device, delivering a captivating experience for your visitors.
-
-Whether you're a seasoned web design professional or a passionate enthusiast, Aeroscroll Gallery empowers you to effortlessly create visually striking galleries. Enhance your website's visual storytelling and make a lasting impression on your audience with the dynamic capabilities of Aeroscroll Gallery.
-
-== Full Source Code of the plugin ==
-
-You can find the full source code of the plugin on our GitHub repository at the following location:
-[Aeroscroll Gallery Github] (https://github.com/yannisraft/aeroscroll-gallery)
-
-Apart from the PHP and javascript code of the plugin, in order to build the project for the backend administration, Node.js at least version v18.17.0 is required
-The backend of the plugin is built using Quasar Framework [Quasar Framework] (https://quasar.dev/)
-
-To run the code you can follow the following steps:
-
-1. Clone the Project from github
-2. Open the project inside your favorite IDE editor
-3. Navigate to folder: "aeroscroll-gallery-vue-admin"
-4. Install Node if you have'nt done it already. Follow these steps to do so: [How to install Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
-5. Run ```npm i -g @quasar/cli```
-6. Then run ```npm i```
-7. Finally inside the folder "aeroscroll-gallery-vue-admin" run ```npm run dev```
+[youtube https://www.youtube.com/watch?v=VlaB439Qoyw]
 
 == Live Demos ==
 
@@ -50,6 +30,8 @@ To run the code you can follow the following steps:
 [Cell Themes Demos] (https://www.aeroscroll.com/cell-themes-demos/)
 
 [Advanced Customization Demos] (https://www.aeroscroll.com/advanced-customization-showcase/)
+
+[Watermarking and Social Sharing Demos] (https://www.aeroscroll.com/watermarking-and-social-sharing-demos/)
 
 [Documentation] (https://www.aeroscroll.com/documentation/)
 
@@ -96,8 +78,26 @@ Ensure your gallery looks fantastic on all devices with full responsiveness.
 
 Unleash the power of multilingual control in WordPress with our plugin, now available in 13 languages for your admin convenience
 
-
 And much more! Aeroscroll Gallery is designed to offer comprehensive customization and functionality to elevate your image gallery.
+
+== Full Source Code of the plugin ==
+
+You can find the full source code of the plugin on our GitHub repository at the following location:
+[Aeroscroll Gallery Github] (https://github.com/yannisraft/aeroscroll-gallery)
+
+Apart from the PHP and javascript code of the plugin, in order to build the project for the backend administration, Node.js at least version v18.17.0 is required
+The backend of the plugin is built using Quasar Framework [Quasar Framework] (https://quasar.dev/)
+
+To run the code you can follow the following steps:
+
+1. Clone the Project from github
+2. Open the project inside your favorite IDE editor
+3. Navigate to folder: "aeroscroll-gallery-vue-admin"
+4. Install Node if you have'nt done it already. Follow these steps to do so: [How to install Node.js](https://nodejs.org/en/learn/getting-started/how-to-install-nodejs)
+5. Run ```npm i -g @quasar/cli```
+6. Then run ```npm i```
+7. Finally inside the folder "aeroscroll-gallery-vue-admin" run ```npm run dev```
+
 
 == Coming soon ==
 
@@ -126,13 +126,13 @@ Get started with ease by installing our plugin directly from the WordPress direc
 
 == Screenshots ==
 
-1. Frontend Example 1
-2. Frontend Example 2
-3. Gallery Edit Page
-4. File Manager
-5. Frontend Example 3
-6. Images List Page
-7. Responsive edit Page
+1. Unique Infinite Scrolling Experience
+2. Posts Grid View
+3. Simple Grid Layout
+4. Justified Layout
+5. Read Article in Lightbox
+6. Integrated File Manager
+
 
 
 == Privacy Policy and Terms of Service ==
@@ -245,3 +245,7 @@ No, the call to the aeroscroll.com service is not required for the basic functio
 
 
 
+== Upgrade Notice ==
+
+= 1.0.5 =
+This version fixes some issues regarding optimization

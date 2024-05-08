@@ -21,4 +21,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 	printf( '<script>window["MEDIA_URL"] = "%s";</script>', esc_attr( plugin_dir_url( __FILE__ ) ) );
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->

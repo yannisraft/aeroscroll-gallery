@@ -477,42 +477,6 @@ class Aeroscroll_Gallery_Admin {
 		exit;
 	}
 
-
-
-	/**
-	 * Register the settings for our settings page.
-	 *
-	 * @since    1.0.0
-	 */
-	public function aeroscroll_register_settings() {
-		// Here we are going to register our setting.
-		register_setting(
-			'aeroscrollgallery',
-			'aeroscrollgallery_settings',
-			array(
-				'type'              => 'string',
-				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => null,
-			)
-		);
-
-		// Here we are going to add a section for our setting.
-		add_settings_section(
-			'aeroscrollgallery_settings_section',
-			__( 'Settings', 'aeroscroll-gallery' ),
-			array( $this, 'aeroscrollggallery_add_settings_section' ),
-			'aeroscrollgallery'
-		);
-
-		add_settings_field(
-			'orientation_select_field',
-			__( 'Orientation', 'aeroscroll-gallery' ),
-			array( $this, 'aeroscroll_orientation_select_field_render' ),
-			'aeroscrollgallery',
-			'aeroscrollgallery_settings_section'
-		);
-	}
-
 	public function aeroscroll_orientation_select_field_render() {
 		$orientation = get_option( 'aeroscrollgallery_settings' );
 		?>

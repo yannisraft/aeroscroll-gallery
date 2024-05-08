@@ -172,9 +172,6 @@ if ( ! class_exists( 'Aeroscroll_Gallery' ) ) {
 		private function aeroscroll_define_admin_hooks() {
 			$plugin_admin = new Aeroscroll_Gallery_Admin( $this->aeroscroll_get_plugin_name(), $this->aeroscroll_get_version() );
 
-			// Hook our settings
-			$this->loader->aeroscroll_add_action( 'admin_init', $plugin_admin, 'aeroscroll_register_settings' );
-
 			if ( ! $this->utils->aeroscroll_has_pro() ) {
 				$this->loader->aeroscroll_add_action( 'admin_menu', $plugin_admin, 'aeroscroll_register_settings_page' );
 			}
