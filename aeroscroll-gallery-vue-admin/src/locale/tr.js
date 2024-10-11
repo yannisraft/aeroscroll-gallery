@@ -238,5 +238,11 @@ export default {
     showarticleonlightbox: "Makaleyi Işıklık Kutusunda Göster",
     showarticleonlightbox_desc: "Okuma deneyiminizi geliştirin! Tam makaleyi büyüleyici bir ışıklık kutusunda sorunsuzca keşfetmek için tıklayın.",
     changeimage: "Resmi Değiştir",
-    upload_max_filesize_error: "Hata: Yüklenen dosya, php.ini'deki 'upload_max_filesize' yönergesini aşıyor. Lütfen PHP ayarlarınızda dosya boyutu sınırını artırın."
+    upload_max_filesize_error: "Hata: Yüklenen dosya, php.ini'deki 'upload_max_filesize' yönergesini aşıyor. Lütfen PHP ayarlarınızda dosya boyutu sınırını artırın.",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 };

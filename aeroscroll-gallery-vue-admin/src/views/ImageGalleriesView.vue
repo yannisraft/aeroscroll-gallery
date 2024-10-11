@@ -7,12 +7,9 @@
                 </div>
                 <div v-if="!editMode" class="q-row q-pb-sm">
                     <div v-if="loading" class="panelloader">
-                        <q-spinner
-                            color="white"
-                            size="3em"
-                        />
-                        <span style="color: white; margin-top: 10px;">{{ t('loading') + '...' }}</span>
-                    </div> 
+                        <q-spinner color="white" size="3em" />
+                        <span style="color: white; margin-top: 10px;">{{ t("loading") + "..." }}</span>
+                    </div>
                     <div v-if="!licenseActive" class="license_inactive_panel">
                         <span v-if="licenseNotActive">{{ t("please_activate_license") }}</span>
                     </div>
@@ -88,213 +85,230 @@
                     <div class="q-row q-py-md q-px-md">
                         <h6 class="aeroscroll-subheader" style="margin: 0px;">{{ t("editimagegallery") }}</h6>
                     </div>
-                    <q-tabs v-model="tab" no-caps align="left" class="q-pl-md">
-                        <q-tab name="settings" icon="settings" :label="t('settings')" />
-                        <q-tab name="images" icon="images" :label="t('images')" :disable="createMode" />
-                    </q-tabs>
-                    <q-tab-panels v-model="tab" animated>
-                        <q-tab-panel name="settings">
-                            <div class="text-h6">{{ t("settings") }}</div>
-                            <p>{{ t("settings_desc") }}</p>
-                            <div class="q-row q-py-sm">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">ID</div>
-                                    <div class="text-caption">{{ t("id_desc_collections") }}</div>
-                                </div>
-                                <div class="q-col">
-                                    <q-input class="condensed-width" outlined v-model="editingItem.id" dense readonly></q-input>
+                    <div class="q-row q-py-md q-pl-lg">
+                        <!-- <div class="text-h6">{{ t("settings") }}</div>
+                        <p>{{ t("settings_desc") }}</p> -->
+                        <div class="q-row">
+                            <div class="q-col">
+                                <div class="q-row q-py-sm">
+                                    <div class="q-col-3 text-left q-px-sm">
+                                        <div class="text-field-header">ID</div>
+                                        <div class="text-caption">{{ t("id_desc_collections") }}</div>
+                                    </div>
+                                    <div class="q-col">
+                                        <q-input class="condensed-width" outlined v-model="editingItem.id" dense readonly></q-input>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="q-row q-py-sm">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t("imagegal_title") }}</div>
-                                    <div class="text-caption">{{ t("imagegal_title_desc") }}</div>
-                                </div>
-                                <div class="q-col">
-                                    <q-input class="condensed-width" outlined v-model="editingItem.title" dense></q-input>
-                                </div>
-                            </div>
-                            <div class="q-row q-py-sm">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t("description") }}</div>
-                                </div>
-                                <div class="q-col">
-                                    <q-input class="condensed-width" outlined v-model="editingItem.description" type="textarea" dense></q-input>
+                            <div class="q-col">
+                                <div class="q-row q-py-sm">
+                                    <div class="q-col-3 text-left q-px-sm">
+                                        <div class="text-field-header">{{ t("imagegal_title") }}</div>
+                                        <div class="text-caption">{{ t("imagegal_title_desc") }}</div>
+                                    </div>
+                                    <div class="q-col">
+                                        <q-input class="condensed-width" outlined v-model="editingItem.title" dense></q-input>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="q-row q-py-sm q-items-center">
-                                <div class="q-col-2 text-left q-px-sm">
-                                    <div class="text-field-header">{{ t("published") }}</div>                                    
-                                </div>
-                                <div class="q-col">
-                                    <q-toggle v-model="editingItem.published"></q-toggle>
-                                </div>
-                            </div>
+                        </div>
 
-                            <!-- Notification -->
-                            <div v-if="notification_success" class="q-row q-py-sm">
-                                <q-banner dense inline-actions class="text-white bg-green">
-                                    {{ t("changessavedsuccessfully") }}
-                                    <template v-slot:action>
-                                        <q-btn flat color="white" label="Dismiss" />
-                                    </template>
-                                </q-banner>
+                        <!-- <div class="q-row q-py-sm">
+                            <div class="q-col-2 text-left q-px-sm">
+                                <div class="text-field-header">{{ t("description") }}</div>
                             </div>
-
-                            <!-- Notify disabled Images -->
-                            <div v-if="createMode" class="q-row q-py-sm">
-                                <span style="color: #f85c2f;">Please Save first in order to activate Images selection Tab!</span>
+                            <div class="q-col">
+                                <q-input class="condensed-width" outlined v-model="editingItem.description"
+                                    type="textarea" dense></q-input>
                             </div>
-                        </q-tab-panel>
+                        </div> -->
+                        <div class="q-row q-py-sm q-items-center">
+                            <div class="q-col-2 text-left q-px-sm">
+                                <div class="text-field-header">{{ t("published") }}</div>
+                            </div>
+                            <div class="q-col">
+                                <q-toggle v-model="editingItem.published"></q-toggle>
+                            </div>
+                        </div>
 
-                        <q-tab-panel name="images">
+                        <!-- Notification -->
+                        <div v-if="notification_success" class="q-row q-py-sm">
+                            <q-banner dense inline-actions class="text-white bg-green">
+                                {{ t("changessavedsuccessfully") }}
+                                <template v-slot:action>
+                                    <q-btn flat color="white" label="Dismiss" />
+                                </template>
+                            </q-banner>
+                        </div>
+
+                        <!-- Notify disabled Images -->
+                        <div v-if="createMode" class="q-row q-py-sm">
+                            <span style="color: #f85c2f;">Please Save first in order to add Images</span>
+                        </div>
+                    </div>
+
+                    <q-separator class="q-mb-sm" />
+
+                    <!-- Images Grid -->
+                    <div>
+                        <div class="q-row q-px-lg">
                             <div class="text-h6">{{ t("selectedimages") }}</div>
+                        </div>
+                        <div class="q-row q-px-lg">
                             <p>{{ t("selectedimages_desc") }}</p>
-
-                            <!-- Images Grid -->
-                            <div>
-                                <div class="q-row q-py-lg q-pl-lg">
-                                    <div class="q-col text-right">
-                                        <q-btn
-                                            color="primary"
-                                            style="margin-left: 10px; margin-bottom: 10px;"
-                                            :label="t('exportgallery')"
-                                            icon="folder_zip"
-                                            @click="ExportGallery"
-                                            :disable="!ispro"
-                                            type="a"
-                                        >
-                                            <q-tooltip v-if="!ispro" class="protooltip bg-blue-1" :offset="[10, 10]">
-                                                <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span
-                                                    class="protooltip_label"
-                                                    >{{ t("profeature") }}</span
-                                                >
-                                            </q-tooltip>
-                                        </q-btn>
-                                        <q-btn
-                                            color="primary"
-                                            style="margin-left: 10px; margin-bottom: 10px;"
-                                            :label="t('importgallery')"
-                                            icon="folder_zip"
-                                            :disable="!ispro"
-                                            @click="ImportGallery"
-                                        >
-                                            <q-uploader
-                                                ref="fileImporterElement"
-                                                label="Auto Uploader"
-                                                
-                                                :url="GetUploaderURL()"
-                                                :headers="uploaderHeaders"
-                                                accept=".zip"
-                                                
-                                                style="display: none;"
-                                                batch
-                                                @uploaded="onUploadedImportGallery"
-                                                @added="onUploaderFilesAdded"
-                                                @failed="onUploaderFilesFailed"
-                                            />                                            
-                                            <q-tooltip v-if="!ispro" class="protooltip bg-blue-1" :offset="[10, 10]">
-                                                <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span
-                                                    class="protooltip_label"
-                                                    >{{ t("profeature") }}</span
-                                                >
-                                            </q-tooltip>
-                                        </q-btn>
-                                        <q-btn
-                                            color="primary"
-                                            style="margin-left: 10px; margin-bottom: 10px;"
-                                            :label="t('deleteselected')"
-                                            icon="delete"
-                                            @click="OnDeleteMultipleGalleryImagesClicked"
-                                            :disable="imagegallery_rows_selected_arr.length === 0"
-                                        ></q-btn>
-                                        <q-btn
-                                            color="primary"
-                                            style="margin-left: 10px; margin-bottom: 10px;"
-                                            :label="t('addimages')"
-                                            icon="folder_zip"
-                                            @click="OnAddImagesClicked"
-                                        ></q-btn>
-                                    </div>
-                                </div>
-
-                                <div class="aeroscroll-table-imagegalleries">
-                                    <div v-if="imagegallery_rows.length === 0" class="aeroscroll-imagegallery-list-empty">
-                                        <q-card class="aeroscroll-imagegallery-list-empty-card">
-                                            <img style="width: 65px; margin-right: 20px;" :src="empty_image" /><span>{{
-                                                t("noimageingalleryclicktoadd")
-                                            }}</span>
-                                        </q-card>
-                                    </div>
-                                    <div v-if="imagegallery_loading" class="aeroscroll-imagegallery-list-empty">
-                                        <q-inner-loading showing color="primary" />
-                                    </div>
-                                    <!-- LINK Draggable-->
-                                    <q-table
-                                        v-if="imagegallery_rows.length > 0"
-                                        class="gal-sticky-header-table"
-                                        style="height: 500px;"
-                                        flat
-                                        bordered
-                                        :rows="imagegallery_rows"
-                                        :columns="imagegallery_columns"
-                                        row-key="id"
-                                        selection="multiple"
-                                        virtual-scroll
-                                        :rows-per-page-options="[0]"
-                                        v-model:selected="imagegallery_rows_selected_arr"
-                                    >
-                                        <template v-slot:body-cell-edit="props">
-                                            <q-td :props="props">
-                                                <q-btn icon="edit" @click="EditGalleryImageClicked(props.row)" flat dense>
-                                                    <q-tooltip>{{ t("editimage") }}</q-tooltip>
-                                                </q-btn>
-                                            </q-td>
-                                        </template>
-                                        <template v-slot:body-cell-image="props">
-                                            <q-td :props="props">
-                                                <q-img
-                                                    class="card-image"
-                                                    :src="props.row.image"
-                                                    loading="lazy"
-                                                    spinner-color="primary"
-                                                    height="100px"
-                                                    style="max-width: 100px;"
-                                                >
-                                                    <template v-slot:error>
-                                                        <div class="flex flex-center bg-red-4 text-white" style="width: 100%; height: 100%;">
-                                                            <span style="white-space: break-spaces; text-align: center;">{{
-                                                                t("error_loading_image")
-                                                            }}</span>
-                                                        </div>
-                                                    </template>
-                                                </q-img>
-                                            </q-td>
-                                        </template>
-                                        <template v-slot:body-cell-description="props">
-                                            <q-td style="text-wrap: wrap;" :props="props">
-                                                {{ props.row.description }}
-                                            </q-td>
-                                        </template>
-                                        <template v-slot:bottom="scope">
-                                            <div class="qtb_bottom_left">
-                                                <span v-if="imagegallery_rows_selected_arr.length > 0"
-                                                    >{{ t("selected") }}: {{ imagegallery_rows_selected_arr.length }}</span
-                                                >
-                                            </div>
-                                            <div class="qtb_bottom">
-                                                <div>{{ t("totalimages") }} : {{ imagegallery_rows.length }}</div>
-                                            </div>
-                                        </template>
-                                    </q-table>
-                                </div>
+                        </div>
+                        <div class="q-row q-pt-lg q-pl-lg q-px-lg">
+                            <div class="q-col text-right">
+                                <q-btn
+                                    color="primary"
+                                    style="margin-left: 10px; margin-bottom: 10px;"
+                                    :label="t('exportgallery')"
+                                    icon="folder_zip"
+                                    @click="ExportGallery"
+                                    :disable="!ispro"
+                                    type="a"
+                                >
+                                    <q-tooltip v-if="!ispro" class="protooltip bg-blue-1" :offset="[10, 10]">
+                                        <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span class="protooltip_label">{{
+                                            t("profeature")
+                                        }}</span>
+                                    </q-tooltip>
+                                </q-btn>
+                                <q-btn
+                                    color="primary"
+                                    style="margin-left: 10px; margin-bottom: 10px;"
+                                    :label="t('importgallery')"
+                                    icon="folder_zip"
+                                    :disable="!ispro"
+                                    @click="ImportGallery"
+                                >
+                                    <q-uploader
+                                        ref="fileImporterElement"
+                                        label="Auto Uploader"
+                                        :url="GetUploaderURL()"
+                                        :headers="uploaderHeaders"
+                                        accept=".zip"
+                                        style="display: none;"
+                                        batch
+                                        @uploaded="onUploadedImportGallery"
+                                        @added="onUploaderFilesAdded"
+                                        @failed="onUploaderFilesFailed"
+                                    />
+                                    <q-tooltip v-if="!ispro" class="protooltip bg-blue-1" :offset="[10, 10]">
+                                        <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span class="protooltip_label">{{
+                                            t("profeature")
+                                        }}</span>
+                                    </q-tooltip>
+                                </q-btn>
+                                <q-btn
+                                    color="primary"
+                                    style="margin-left: 10px; margin-bottom: 10px;"
+                                    :label="t('deleteselected')"
+                                    icon="delete"
+                                    @click="OnDeleteMultipleGalleryImagesClicked"
+                                    :disable="imagegallery_rows_selected_arr.length === 0"
+                                ></q-btn>
+                                <!-- <q-btn color="primary" style="margin-left: 10px; margin-bottom: 10px;" :disable="createMode"
+                                    :label="t('addimages')" icon="folder_zip" @click="OnAddImagesClicked"></q-btn>
+                                <q-btn color="primary" style="margin-left: 10px; margin-bottom: 10px;" :disable="createMode"
+                                    label="Add Images using WP Media Library" icon="folder_zip" @click="OnAddImagesClicked"></q-btn> -->
                             </div>
-                        </q-tab-panel>
-                    </q-tab-panels>
+                        </div>
+
+                        <div class="q-row q-pb-lg q-pl-lg q-px-lg">
+                            <div class="q-col text-right">
+                                <q-btn
+                                    color="primary"
+                                    style="margin-left: 10px; margin-bottom: 10px;"
+                                    :disable="createMode"
+                                    :label="t('addimages')"
+                                    icon="folder_zip"
+                                    @click="OnAddImagesClicked"
+                                ></q-btn>
+                                <q-btn
+                                    color="primary"
+                                    style="margin-left: 10px; margin-bottom: 10px;"
+                                    :disable="createMode"
+                                    label="Add Images using WP Media Library"
+                                    icon="folder_zip"
+                                    @click="openMediaLibrary"
+                                ></q-btn>
+                            </div>
+                        </div>
+
+                        <div class="aeroscroll-table-imagegalleries">
+                            <div v-if="imagegallery_rows.length === 0" class="aeroscroll-imagegallery-list-empty">
+                                <q-card class="aeroscroll-imagegallery-list-empty-card">
+                                    <img style="width: 65px; margin-right: 20px;" :src="empty_image" /><span>{{
+                                        t("noimageingalleryclicktoadd")
+                                    }}</span>
+                                </q-card>
+                            </div>
+                            <div v-if="imagegallery_loading" class="aeroscroll-imagegallery-list-empty">
+                                <q-inner-loading showing color="primary" />
+                            </div>
+                            <!-- LINK Draggable-->
+                            <q-table
+                                v-if="imagegallery_rows.length > 0"
+                                class="gal-sticky-header-table"
+                                style="height: 500px;"
+                                flat
+                                bordered
+                                :rows="imagegallery_rows"
+                                :columns="imagegallery_columns"
+                                row-key="id"
+                                selection="multiple"
+                                virtual-scroll
+                                :rows-per-page-options="[0]"
+                                v-model:selected="imagegallery_rows_selected_arr"
+                            >
+                                <template v-slot:body-cell-edit="props">
+                                    <q-td :props="props">
+                                        <q-btn icon="edit" @click="EditGalleryImageClicked(props.row)" flat dense>
+                                            <q-tooltip>{{ t("editimage") }}</q-tooltip>
+                                        </q-btn>
+                                    </q-td>
+                                </template>
+                                <template v-slot:body-cell-image="props">
+                                    <q-td :props="props">
+                                        <q-img
+                                            class="card-image"
+                                            :src="props.row.image"
+                                            loading="lazy"
+                                            spinner-color="primary"
+                                            height="100px"
+                                            style="max-width: 100px;"
+                                        >
+                                            <template v-slot:error>
+                                                <div class="flex flex-center bg-red-4 text-white" style="width: 100%; height: 100%;">
+                                                    <span style="white-space: break-spaces; text-align: center;">{{ t("error_loading_image") }}</span>
+                                                </div>
+                                            </template>
+                                        </q-img>
+                                    </q-td>
+                                </template>
+                                <template v-slot:body-cell-description="props">
+                                    <q-td style="text-wrap: wrap;" :props="props">
+                                        {{ props.row.description }}
+                                    </q-td>
+                                </template>
+                                <template v-slot:bottom="scope">
+                                    <div class="qtb_bottom_left">
+                                        <span v-if="imagegallery_rows_selected_arr.length > 0"
+                                            >{{ t("selected") }}: {{ imagegallery_rows_selected_arr.length }}</span
+                                        >
+                                    </div>
+                                    <div class="qtb_bottom">
+                                        <div>{{ t("totalimages") }} : {{ imagegallery_rows.length }}</div>
+                                    </div>
+                                </template>
+                            </q-table>
+                        </div>
+                    </div>
                     <div class="aeroscroll-flex q-pa-md">
                         <div class="aeroscroll-flex-child"></div>
                         <div class="fixflex text-right">
-                            <q-btn color="primary" :label="t('cancel')" @click="CancelEditingClicked" dense></q-btn>
+                            <q-btn color="primary" :label="t('close')" @click="CancelEditingClicked" dense></q-btn>
                         </div>
                         <div class="fixflex text-right" style="margin-left: 10px;">
                             <q-btn color="green" :label="t('savechanges')" @click="SaveEditingClicked" dense></q-btn>
@@ -310,8 +324,7 @@
             <div v-if="editimagedialog" class="q-custom-dialog">
                 <div class="q-custom-dialog-bg"></div>
                 <q-card class="my-card" style="min-width: 500px;">
-                    <q-img class="popupeditimage_img" loading="lazy" spinner-color="primary" :src="editimagedialog_data.image">
-                    </q-img>
+                    <q-img class="popupeditimage_img" loading="lazy" spinner-color="primary" :src="editimagedialog_data.image"> </q-img>
                     <q-card-section>
                         <div class="q-row q-no-wrap items-center">
                             <div class="q-col text-subtitle1 ellipsis">
@@ -333,7 +346,7 @@
                     <q-separator />
 
                     <q-card-actions align="right" class="q-col items-center justify-end">
-                        <q-btn @click="editimagedialog = false" color="primary" :label="t('cancel')"></q-btn>
+                        <q-btn @click="editimagedialog = false" color="primary" :label="t('close')"></q-btn>
                         <q-btn v-close-popup color="primary" :label="t('save')" @click="SaveImageDetails" />
                     </q-card-actions>
                 </q-card>
@@ -396,7 +409,7 @@ export default defineComponent({
         let loading = ref(false);
         let drag = ref(false);
         let filemanager_visible = ref(false);
-        let ispro = ref(false);        
+        let ispro = ref(false);
         ispro.value = IS_PRO;
 
         let editimagedialog = ref(false);
@@ -435,6 +448,11 @@ export default defineComponent({
             status: "idle"
         });
         let uploaderHeaders = ref([]);
+
+        // Reactive state to hold selected images and image IDs
+        const selectedImages = ref([]);
+        const imageIds = ref([]);
+        let frame = null;
 
         const tablecolumns = computed(() => {
             return [
@@ -587,10 +605,10 @@ export default defineComponent({
                     }
                 })
                 .onCancel(() => {
-                    // 
+                    //
                 })
                 .onDismiss(() => {
-                    // 
+                    //
                 });
         };
 
@@ -812,7 +830,7 @@ export default defineComponent({
 
                             // For TEST
                             imagegallery_rows_selected.value = {};
-                            imagegallery_rows_selected_arr.value = [];                            
+                            imagegallery_rows_selected_arr.value = [];
                         }
 
                         loading.value = false;
@@ -853,7 +871,7 @@ export default defineComponent({
             });
             return filteredRows;
         }
-        
+
         function getGhostParent() {
             return document.body;
         }
@@ -893,10 +911,15 @@ export default defineComponent({
         function OnImagesSelected(images) {
             var last_index = imagegallery_rows.value.length;
 
+            console.log("OnImagesSelected: ", images);
+
             var _index = last_index;
             var imagestoadd = [];
             for (const key in images) {
                 var img = images[key];
+
+                if (img.relativeurlfile) img.image = img.relativeurlfile;
+
                 if (img.folder !== 1) {
                     var item = {
                         id: img.id,
@@ -924,6 +947,59 @@ export default defineComponent({
 
                     _index++;
                 }
+            }
+
+            if (imagestoadd.length > 0) {
+                // Insert into DB and Refresh
+                AddGalleryImages(imagestoadd);
+            }
+        }
+
+        function OnImagesMediaLibrarySelected(images) {
+            var last_index = imagegallery_rows.value.length;
+
+            console.log("OnImagesSelected: ", images);
+            var _index = last_index;
+
+            console.log("OnImagesMediaLibrarySelected: ", images);
+
+            let _REST_URL = "http://localhost/";
+            if (window["REST_URL"]) {
+                _REST_URL = window["REST_URL"].url;
+            }
+
+            var imagestoadd = [];
+            for (var k = 0; k < images.length; k++) {
+                var img = images[k];
+                console.log("I M G: ", img);
+
+                var _relativedir = img.url;
+                _relativedir = _relativedir.replace(img.title, "");
+                _relativedir = _relativedir.replace(_REST_URL, "");
+
+                var item = {
+                    id: img.id,
+                    media_gallery_id: img.id,
+                    order: _index + 1,
+                    name: img.title,
+                    image: img.title,
+                    size: img.filesizeInBytes,
+                    date: img.date,
+                    relativedir: _relativedir,
+                    selected: false,
+                    edit: true,
+                    justadded: true,
+                    updated: false,
+                    title: "",
+                    description: ""
+                };
+
+                console.log("I T E M: ", item);
+
+                // Will update on Refresh
+                imagestoadd.push(item);
+
+                _index++;
             }
 
             if (imagestoadd.length > 0) {
@@ -1031,7 +1107,7 @@ export default defineComponent({
                         .then((response) => {
                             return response.json();
                         })
-                        .then((data) => {                            
+                        .then((data) => {
                             $q.loading.hide();
 
                             imagegallery_rows_selected.value = {};
@@ -1148,7 +1224,7 @@ export default defineComponent({
                 ghostClass: "ghost"
             };
         });
-        
+
         function ExportGallery() {
             let _REST_URL = "http://localhost/";
             let _NONCENAME = "exportimagegallery";
@@ -1219,7 +1295,6 @@ export default defineComponent({
         }
 
         function onUploaderFilesAdded(info) {
-
             $q.loading.show({
                 message: t("uploadingimportfile")
             });
@@ -1237,14 +1312,12 @@ export default defineComponent({
                 if (ressp.success === true) {
                     GetGalleryImages();
                 } else {
-                    if (ressp.error_code)
-                    {
-                        if(ressp.error_code === "upload_max_filesize")
-                        {
+                    if (ressp.error_code) {
+                        if (ressp.error_code === "upload_max_filesize") {
                             $q.dialog({
                                 title: t("error"),
                                 message: t("upload_max_filesize_error")
-                            });                         
+                            });
                         }
                     }
                 }
@@ -1261,20 +1334,22 @@ export default defineComponent({
         }
 
         function onCloseManager() {
-            $q.loading.hide();
+            setTimeout(() => {
+                $q.loading.hide();
+                GetGalleryImages();
+            }, 1000);
         }
 
         function GetUploaderHeaders() {
             let _headers = [];
 
             let _APEX = window["APEX"];
-            if(_APEX.importimagegallery)
-            {                
+            if (_APEX.importimagegallery) {
                 if (_APEX) {
                     _headers = [
                         {
                             name: "X-WP-Nonce",
-                            value: _APEX.importimagegallery.nonce//_APEX["importimagegallery"].nonce
+                            value: _APEX.importimagegallery.nonce //_APEX["importimagegallery"].nonce
                         },
                         {
                             name: "relativedir",
@@ -1287,8 +1362,19 @@ export default defineComponent({
                     ];
                 }
                 uploaderHeaders.value = _headers;
-            }            
+            }
         }
+
+        // Function to open WordPress Media Library
+        const openMediaLibrary = () => {
+            if (!wp || !wp.media) {
+                console.error("wp.media is not available");
+                return;
+            }
+
+            // Open the media dialog
+            frame.open();
+        };
 
         onBeforeMount(() => {
             var incomingLocale = window["TRANSLATIONS"].locale;
@@ -1336,6 +1422,46 @@ export default defineComponent({
                     initialPagination.value.rowsPerPage = $q.sessionStorage.getItem("ig_table_rowsperpage");
                 }
             }
+
+            // Ensure wp.media is available
+            setTimeout(() => {
+                console.log(wp);
+                if (wp) {
+                    frame = wp.media({
+                        title: "Select Images",
+                        button: {
+                            text: "Add to Library"
+                        },
+                        multiple: true // Allow multiple selection
+                    });
+
+                    // When an image is selected
+                    frame.on("select", () => {
+                        // Get selected images from media library
+                        const attachments = frame.state().get("selection").toJSON();
+
+                        // Reset selected images and IDs
+                        selectedImages.value = [];
+                        imageIds.value = [];
+
+                        //console.log("A T T A C H M E N T S: ", attachments);
+
+                        // Process the selected images
+                        /* attachments.forEach((attachment) => {
+                        // Add image to selected images array
+                        selectedImages.value.push({
+                            id: attachment.id,
+                            url: attachment.url,
+                        });
+
+                        // Add image ID to imageIds array
+                        imageIds.value.push(attachment.id);
+                    }); */
+
+                        OnImagesMediaLibrarySelected(attachments);
+                    });
+                }
+            }, 1000);
         });
 
         return {
@@ -1373,6 +1499,9 @@ export default defineComponent({
             licenseNotActive,
             uploaderHeaders,
             ispro,
+            selectedImages,
+            imageIds,
+            openMediaLibrary,
             onCloseManager,
             EditGalleryClicked,
             DeleteGalleryClicked,

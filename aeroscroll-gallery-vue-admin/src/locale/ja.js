@@ -237,5 +237,11 @@ export default {
     showarticleonlightbox: "ライトボックスで記事を表示",
     showarticleonlightbox_desc: "読書体験を向上させます！ 魅力的なライトボックスでフル記事をシームレスに探索するには、クリックしてください。",
     changeimage: "画像を変更",
-    upload_max_filesize_error: "エラー：アップロードされたファイルがphp.iniの 'upload_max_filesize' ディレクティブを超えています。PHP設定でファイルサイズ制限を増やしてください。"
+    upload_max_filesize_error: "エラー：アップロードされたファイルがphp.iniの 'upload_max_filesize' ディレクティブを超えています。PHP設定でファイルサイズ制限を増やしてください。",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 };

@@ -236,5 +236,13 @@ export default {
     showarticleonlightbox: "Display Article in Lightbox",
     showarticleonlightbox_desc: "Enhance your reading experience! Click to seamlessly explore the full article in a captivating lightbox.",
     changeimage: "Change Image",
-    upload_max_filesize_error: "Error the uploaded file exceeds the 'upload_max_filesize' directive in php.ini. Please increase the file size limit in your PHP settings."
+    upload_max_filesize_error: "Error the uploaded file exceeds the 'upload_max_filesize' directive in php.ini. Please increase the file size limit in your PHP settings.",
+    settings_tiktok_title: "Connect your TikTok Account",
+    settings_tiktok_desc: "Sign in to your tiktok Account in order to show your Tiktok videos",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 }

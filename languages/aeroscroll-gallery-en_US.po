@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: aeroscroll-gallery\n"
-"POT-Creation-Date: 2024-05-17 15:44+0300\n"
-"PO-Revision-Date: 2024-05-17 15:44+0300\n"
+"POT-Creation-Date: 2024-05-21 12:39+0300\n"
+"PO-Revision-Date: 2024-05-21 12:39+0300\n"
 "Last-Translator: \n"
 "Language-Team: Aeroscroll Team\n"
-"Language: el\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,32 +25,32 @@ msgstr ""
 #: class-aeroscroll-gallery-admin.php:412
 #: class-aeroscroll-gallery-admin.php:413
 msgid "Manage Galleries"
-msgstr "Διαχείριση Συλλογών"
+msgstr "Manage Galleries"
 
 #: class-aeroscroll-gallery-admin-pro.php:82
 #: class-aeroscroll-gallery-admin.php:108
 msgid "Published"
-msgstr "Δημοσιευμένο"
+msgstr "Published"
 
 #: class-aeroscroll-gallery-admin-pro.php:83
 #: class-aeroscroll-gallery-admin.php:109
 msgid "Operation"
-msgstr "Λειτουργία"
+msgstr "Operation"
 
 #: class-aeroscroll-gallery-admin-pro.php:84
 #: class-aeroscroll-gallery-admin.php:110
 msgid "Title"
-msgstr "Τίτλος"
+msgstr "Title"
 
 #: class-aeroscroll-gallery-admin-pro.php:133
 #: class-aeroscroll-gallery-admin.php:159
 msgid "Settings Saved"
-msgstr "Οι ρυθμίσεις αποθηκεύτηκαν"
+msgstr "Settings Saved"
 
 #: class-aeroscroll-gallery-admin-pro.php:134
 #: class-aeroscroll-gallery-admin.php:160
 msgid "Error"
-msgstr "Σφάλμα"
+msgstr "Error"
 
 #: class-aeroscroll-gallery-admin-pro.php:333
 #: class-aeroscroll-gallery-admin-pro.php:334
@@ -59,7 +59,7 @@ msgstr "Σφάλμα"
 #: class-aeroscroll-gallery-admin.php:422
 #: class-aeroscroll-gallery-admin.php:423
 msgid "Image Collections"
-msgstr "Συλλογή Εικόνων"
+msgstr "Image Collections"
 
 #: class-aeroscroll-gallery-admin-pro.php:343
 #: class-aeroscroll-gallery-admin-pro.php:344
@@ -67,7 +67,7 @@ msgstr "Συλλογή Εικόνων"
 #: class-aeroscroll-gallery-admin.php:432
 #: class-aeroscroll-gallery-admin.php:433
 msgid "Settings"
-msgstr "Ρυθμίσεις"
+msgstr "Settings"
 
 #: class-aeroscroll-gallery-admin-pro.php:353
 #: class-aeroscroll-gallery-admin-pro.php:354
@@ -76,22 +76,16 @@ msgstr "Ρυθμίσεις"
 #: class-aeroscroll-gallery-admin.php:442
 #: class-aeroscroll-gallery-admin.php:443
 msgid "Help"
-msgstr "Βοήθεια"
+msgstr "Help"
 
 #: class-aeroscroll-gallery-admin-pro.php:440
 msgid "Orientation"
-msgstr "Προσανατολισμός"
+msgstr "Orientation"
 
 #: class-aeroscroll-gallery-admin.php:382
 #: class-aeroscroll-gallery-admin.php:383
 msgid "Get PRO"
-msgstr "Αποκτήστε την PRO"
-
-#~ msgid "Manage Grids"
-#~ msgstr "Διαχείριση Συλλογών"
-
-#~ msgid "Support"
-#~ msgstr "Υποστήριξη"
+msgstr "Get PRO"
 
 #~ msgid "manage_grids"
-#~ msgstr "Διαχείριση Συλλογών"
+#~ msgstr "Manage Grids"

@@ -428,7 +428,6 @@ export default {
                 });
             } else if (this.type === "imagegallery") {
                 this.GetImageGalleryData(this.perPage, "asc", indexFirst, this.lastindex, async (returned) => {
-
                     let _indexFirst = returned.indexFirst;
                     let _indexLast = returned.indexLast;
                     let _datagalleryimages = returned.data.galleryimages;
@@ -705,7 +704,7 @@ export default {
         },
 
         StripHTML(html) {
-            let doc = new DOMParser().parseFromString(html, 'text/html');
+            let doc = new DOMParser().parseFromString(html, "text/html");
             return doc.body.textContent || "";
         },
 
@@ -886,73 +885,85 @@ export default {
         },
         // Lightbox Functions
         ShowLightBox(_data, theme) {
+            console.log("ShowLightBox");
             var celldata = _data.dt;
             if (_data.id) celldata.id = _data.id;
             this.lightbox_array = [];
 
             if (!this.isDragging) {
+                // If Posts Open Link Else Show Lightbox
+                var showLightbox = true;
+                if (this.type === "posts") {
+                    if (this.articleinlightbox != true && this.articleinlightbox != "true") {
+                        showLightbox = false;
+                        window.location.assign(celldata.permalink);
+                    }
+                }
+
                 if (celldata) {
-                    this.lightbox_currentcell = {
-                        src: celldata.feature_image,
-                        title: celldata.title,
-                        description: celldata.content
-                    };
-
-                    // extract dt data from celldata as array
-
-                    var _temp_lightbox_index = 0;
-                    for (var k = 0; k < this.cachereference.length; k++) {
-                        this.cachereference[k].dt.src = this.cachereference[k].dt.feature_image;
-
-                        var image_data = {
-                            title: this.cachereference[k].dt.title,
-                            description: this.cachereference[k].dt.subtitle,
-                            src: this.cachereference[k].dt.src
+                    if (showLightbox) {
+                        this.lightbox_currentcell = {
+                            src: celldata.feature_image,
+                            title: celldata.title,
+                            description: celldata.content
                         };
 
-                        if (_data.dt.title) image_data.title = _data.dt.title;
+                        // extract dt data from celldata as array
 
-                        var meta_desc = _data.dt.content;
-                        var meta_desc_size = 0;
-                        if (_data.dt.content) meta_desc_size = _data.dt.content.length;
+                        var _temp_lightbox_index = 0;
+                        for (var k = 0; k < this.cachereference.length; k++) {
+                            this.cachereference[k].dt.src = this.cachereference[k].dt.feature_image;
 
-                        if (meta_desc_size > 160) meta_desc = meta_desc.substr(0, 160);
-                        image_data.description = meta_desc;
+                            var image_data = {
+                                title: this.cachereference[k].dt.title,
+                                description: this.cachereference[k].dt.subtitle,
+                                src: this.cachereference[k].dt.src
+                            };
 
-                        if (this.type === "posts") {
+                            if (_data.dt.title) image_data.title = _data.dt.title;
 
-                            image_data.src = this.cachereference[k].dt.thumbnail_image;
+                            var meta_desc = _data.dt.content;
+                            var meta_desc_size = 0;
+                            if (_data.dt.content) meta_desc_size = _data.dt.content.length;
+
+                            if (meta_desc_size > 160) meta_desc = meta_desc.substr(0, 160);
+                            image_data.description = meta_desc;
+
+                            if (this.type === "posts") {
+
+                                image_data.src = this.cachereference[k].dt.thumbnail_image;
 
 
-                            if (this.cachereference[k].id === celldata.post_id) {
-                                var post_content = "";
-                                var post_permalink = "";
-                                var post_timestamp = "";
-                                var post_thumbnal = "";
+                                if (this.cachereference[k].id === celldata.post_id) {
+                                    var post_content = "";
+                                    var post_permalink = "";
+                                    var post_timestamp = "";
+                                    var post_thumbnal = "";
 
-                                try {
-                                    post_content = this.cachereference[k].dt.content;
-                                    post_permalink = this.cachereference[k].dt.permalink;
-                                    post_timestamp = this.cachereference[k].dt.timestamp;
-                                    post_thumbnal = this.cachereference[k].dt.thumbnail_image;
-                                } catch (ex) {}
+                                    try {
+                                        post_content = this.cachereference[k].dt.content;
+                                        post_permalink = this.cachereference[k].dt.permalink;
+                                        post_timestamp = this.cachereference[k].dt.timestamp;
+                                        post_thumbnal = this.cachereference[k].dt.thumbnail_image;
+                                    } catch (ex) {}
 
-                                _temp_lightbox_index = k;
+                                    _temp_lightbox_index = k;
+                                }
+                            } else {
+                                if (this.cachereference[k].id === celldata.id) {
+                                    _temp_lightbox_index = k;
+                                }
                             }
-                        } else {
-                            if (this.cachereference[k].id === celldata.id) {
-                                _temp_lightbox_index = k;
-                            }
+
+                            this.lightbox_array.push(image_data);
                         }
 
-                        this.lightbox_array.push(image_data);
+                        this.lightbox_imgs = this.lightbox_array;
+                        this.lightbox_index = _temp_lightbox_index;
+
+                        this.lightboxVisible = true;
+                        this.mousewheelenabled = false;
                     }
-
-                    this.lightbox_imgs = this.lightbox_array;
-                    this.lightbox_index = _temp_lightbox_index;
-
-                    this.lightboxVisible = true;
-                    this.mousewheelenabled = false;
                 }
             }
         },
@@ -1004,7 +1015,7 @@ export default {
             return baseUrl + "/wp-content/plugins/aeroscroll-gallery/public/images/notfound_image.png";
         },
         FormatPostDateTime(tmstmp) {
-            var __date = new Date(tmstmp * 1000)
+            var __date = new Date(tmstmp * 1000);
             return __date.toLocaleString();
         }
     },

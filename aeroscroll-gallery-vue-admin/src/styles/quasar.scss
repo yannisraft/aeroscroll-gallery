@@ -854,6 +854,13 @@ body.desktop .q-toggle:not(.disabled):hover .q-toggle__thumb:before {
     text-decoration: line-through;
 }
 
+.tiktok-btn {
+    border: 1px solid #888;
+    box-shadow: 1px 1px 1px 1px #4b4b4b;
+    color: #333;
+    border-radius: 10px;
+}
+
 @media (min-width: 800px) {
     .aeroscroll-table-filemanager .filemitem {
         height: auto;

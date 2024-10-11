@@ -6,24 +6,26 @@
                     <span>{{ t("settings") }}</span>
                 </div>
                 <div class="row q-pa-md">
-                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col" style="flex-basis: 30%; flex-grow: 0;">
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;">
                         <div class="text-field-header">{{ t("license_status") }}</div>
                         <div class="text-caption">{{ t("license_status_desc") }}</div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md" style="display: flex; align-items: center;">
                         <q-spinner v-if="loading_license" color="primary" size="2em" />
-                        <div
-                            v-if="!loading_license"
-                            class="text-field-header aeroscroll-licensestatus-label"
-                            :style="{ color: license_active ? (license_servererror ? '#de4a2c' : '#61b33e' ) : '#de4a2c' }"
-                        >
-                            {{ license_active ? (license_servererror ? t("licence_status_text_servererror") : t("licence_status_text_valid")) : ( license_expired ? t("licence_status_text_expired") : t("licence_status_text_invalid")) }}
+                        <div v-if="!loading_license" class="text-field-header aeroscroll-licensestatus-label"
+                            :style="{ color: license_active ? (license_servererror ? '#de4a2c' : '#61b33e') : '#de4a2c' }">
+                            {{ license_active ? (license_servererror ? t("licence_status_text_servererror") :
+                        t("licence_status_text_valid")) : (license_expired ? t("licence_status_text_expired") :
+                            t("licence_status_text_invalid")) }}
                         </div>
-                        <q-btn v-if="license_expired" style="margin-left: 20px;" color="light-green" @click="RenewLicense()" icon="key" :label="t('license_renew_license')" dense />
+                        <q-btn v-if="license_expired" style="margin-left: 20px;" color="light-green"
+                            @click="RenewLicense()" icon="key" :label="t('license_renew_license')" dense />
                     </div>
                 </div>
                 <div class="row q-pa-md">
-                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col" style="flex-basis: 30%; flex-grow: 0;">
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;">
                         <div class="text-field-header">{{ t("select_product") }}</div>
                         <div class="text-caption">{{ t("select_product_desc") }}</div>
                     </div>
@@ -32,53 +34,54 @@
                     </div>
                 </div>
                 <div class="row q-pa-md">
-                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col" style="flex-basis: 30%; flex-grow: 0;">
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;">
                         <div class="text-field-header">{{ t("serial_key") }}</div>
                         <div class="text-caption">{{ t("serial_key_desc") }}</div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md">
-                        <q-input
-                            class="condensed-width"
-                            outlined
-                            v-model="serial_key"
-                            dense
-                            mask="aaaa-xxxx-xxxx-xxxx-xxxx"
-                            hint="Serial: ssss-xxxx-xxxx-xxxx-xxxx"
-                            :loading="activating_license"
-                            @update:model-value="SerialInputChanged"
-                        ></q-input>
+                        <q-input class="condensed-width" outlined v-model="serial_key" dense
+                            mask="aaaa-xxxx-xxxx-xxxx-xxxx" hint="Serial: ssss-xxxx-xxxx-xxxx-xxxx"
+                            :loading="activating_license" @update:model-value="SerialInputChanged"></q-input>
                     </div>
                 </div>
                 <div v-if="notification_active" class="row q-pa-md">
-                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col" style="flex-basis: 30%; flex-grow: 0;"></div>
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;"></div>
                     <div class="col-xs-12 col-sm-12 col-md">
-                        <span :style="{ color: notification_status === 0 ? '#e53935' : '#8bc34a' }" class="notification_label">{{
-                            notification_text
-                        }}</span>
+                        <span :style="{ color: notification_status === 0 ? '#e53935' : '#8bc34a' }"
+                            class="notification_label">{{
+                        notification_text
+                    }}</span>
                     </div>
                 </div>
                 <div class="row q-pa-md">
-                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col" style="flex-basis: 30%; flex-grow: 0;"></div>
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;"></div>
                     <div class="col-xs-12 col-sm-12 col-md">
-                        <q-btn color="light-green" @click="ActivateLicense()" icon="key" :label="t('license_activate_license')" dense />
-                        <q-btn
-                            color="red-7"
-                            @click="DeactivateLicense()"
-                            icon="close"
-                            :label="t('license_deactivate_license')"
-                            dense
-                            style="margin-left: 10px;"
-                        />
-                        <q-btn
-                            color="primary"
-                            @click="CheckLicense()"
-                            icon="sync"
-                            :label="t('license_check_license')"
-                            dense
-                            style="margin-left: 10px;"
-                        />
+                        <q-btn color="light-green" @click="ActivateLicense()" icon="key"
+                            :label="t('license_activate_license')" dense />
+                        <q-btn color="red-7" @click="DeactivateLicense()" icon="close"
+                            :label="t('license_deactivate_license')" dense style="margin-left: 10px;" />
+                        <q-btn color="primary" @click="CheckLicense()" icon="sync" :label="t('license_check_license')"
+                            dense style="margin-left: 10px;" />
                     </div>
                 </div>
+                <!-- <div class="row q-pa-md">
+                    <div class="col-xs-12 col-sm-12 col-md text-left q-px-sm aeroscroll-edit-label-col"
+                        style="flex-basis: 30%; flex-grow: 0;">
+                        <div class="text-field-header">{{ t("settings_tiktok_title") }}</div>
+                        <div class="text-caption">{{ t("settings_tiktok_desc") }}</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md">
+                        <q-btn @click="SigninToTikTok" class="tiktok-btn" color="white" text-color="grey-9"
+                            label="Sign in with Tiktok">
+                            <q-avatar size="32px">
+                                <img :src="GetBaseUrl('tiktok.svg')">
+                            </q-avatar>
+                        </q-btn>
+                    </div>
+                </div> -->
             </q-card>
         </div>
     </div>
@@ -139,7 +142,7 @@ export default defineComponent({
             let _APEX = window["APEX"];
             console.log("APEX: ", _APEX);
             console.log("APEX: ", window["APEX"]);
-            
+
             fetch(finalurl, {
                 method: "POST",
                 headers: {
@@ -157,29 +160,27 @@ export default defineComponent({
                     if (result) {
                         license_active.value = result.active;
 
-                        if(result.code === "key_expired") license_expired.value = true;
-                        
-                        if(result.storedserialkey.length > 0)
-                        {
+                        if (result.code === "key_expired") license_expired.value = true;
+
+                        if (result.storedserialkey.length > 0) {
                             serial_key.value = result.storedserialkey;
                         }
 
-                        if(result.code === "server_error") {
-                            license_servererror.value = true;                            
+                        if (result.code === "server_error") {
+                            license_servererror.value = true;
                         }
 
                         var found = productoptions.find(item => item.value === result.productid);
-                        if(found !== null && typeof found !== 'undefined')
-                        {
+                        if (found !== null && typeof found !== 'undefined') {
                             productselected.value = found;
-                        }                        
+                        }
                     }
                 });
         }
 
         function CheckLicense() {
             loading_license.value = true;
-            notification_active.value = false;            
+            notification_active.value = false;
 
             let _REST_URL = "http://localhost/";
             if (window["REST_URL"]) {
@@ -197,7 +198,7 @@ export default defineComponent({
                 }
             })
                 .then((response) => {
-                    //console.log("GET LICENSE response: ", response.text());
+                    //console.log("CHECK LICENSE response: ", response.text());
                     return response.json();
                 })
                 .then((result) => {
@@ -205,11 +206,11 @@ export default defineComponent({
 
                     if (result) {
                         license_active.value = result.active;
-                        if(result.code === "server_error") {
-                            license_servererror.value = true;                            
+                        if (result.code === "server_error") {
+                            license_servererror.value = true;
                         }
 
-                        if(result.serialkey) {
+                        if (result.serialkey) {
                             serial_key.value = result.serialkey;
                         }
 
@@ -268,7 +269,7 @@ export default defineComponent({
                                 }
                             }
                             notification_active.value = true;
-                            if(result.code !== "no_activations_left") license_active.value = result.active;
+                            if (result.code !== "no_activations_left") license_active.value = result.active;
                         } else {
                         }
                     });
@@ -308,7 +309,7 @@ export default defineComponent({
                     activating_license.value = false;
 
                     if (result) {
-                        if(result.code === "key_deactivated") {
+                        if (result.code === "key_deactivated") {
                             notification_status.value = 1;
                             notification_text.value = t("serialkey_deactivated");
                         }
@@ -320,6 +321,11 @@ export default defineComponent({
                 });
         }
 
+        function GetBaseUrl(_img) {
+            var baseUrl = window["MEDIA_URL"];
+            return baseUrl + "/images/" + _img;
+        }
+
         function SerialInputChanged(value) {
             notification_active.value = false;
         }
@@ -327,6 +333,16 @@ export default defineComponent({
         function RenewLicense() {
             //
             window.open('https://www.aeroscroll.com/#pricing', '_blank');
+        }
+
+        function SigninToTikTok() {
+            const clientId = 'sbawxr776z9pyrtbgh';
+            const redirectUri = encodeURIComponent('https://www.aeroscroll.com/wp-json/aeroscroll-manager/v1/tiktok-callback');
+            const state = encodeURIComponent(Math.random().toString(36).substring(7)); // A random state for CSRF protection
+            const scope = encodeURIComponent('user.info.basic,user.info.profile,user.info.stats,video.list'); // Adjust scopes as needed
+            const authUrl = `https://www.tiktok.com/auth/authorize?client_key=${clientId}&response_type=code&scope=${scope}&redirect_uri=${redirectUri}&state=${state}`;
+
+            window.location.href = authUrl;
         }
 
         onBeforeMount(() => {
@@ -361,7 +377,9 @@ export default defineComponent({
             ActivateLicense,
             DeactivateLicense,
             SerialInputChanged,
-            RenewLicense
+            RenewLicense,
+            GetBaseUrl,
+            SigninToTikTok
         };
     }
 });

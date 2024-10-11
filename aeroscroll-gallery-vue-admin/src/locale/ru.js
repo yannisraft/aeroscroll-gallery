@@ -238,5 +238,11 @@ export default {
     showarticleonlightbox: "Показать статью в лайтбоксе",
     showarticleonlightbox_desc: "Улучшите свой опыт чтения! Нажмите, чтобы плавно исследовать полную статью в увлекательном лайтбоксе.",
     changeimage: "Изменить изображение",
-    upload_max_filesize_error: "Ошибка: загруженный файл превышает директиву 'upload_max_filesize' в php.ini. Пожалуйста, увеличьте ограничение размера файла в настройках PHP."
+    upload_max_filesize_error: "Ошибка: загруженный файл превышает директиву 'upload_max_filesize' в php.ini. Пожалуйста, увеличьте ограничение размера файла в настройках PHP.",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 };

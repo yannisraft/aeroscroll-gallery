@@ -1,22 +1,22 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Aeroscroll Gallery\n"
-"POT-Creation-Date: 2024-05-08 15:36+0300\n"
-"PO-Revision-Date: 2023-07-11 14:20+0300\n"
+"POT-Creation-Date: 2024-05-17 15:39+0300\n"
+"PO-Revision-Date: 2024-05-17 15:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: aeroscroll-gallery.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -29,32 +29,32 @@ msgstr ""
 #: admin/class-aeroscroll-gallery-admin.php:412
 #: admin/class-aeroscroll-gallery-admin.php:413
 msgid "Manage Galleries"
-msgstr ""
+msgstr "Gestionar Galerías"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:82
 #: admin/class-aeroscroll-gallery-admin.php:108
 msgid "Published"
-msgstr ""
+msgstr "Publicado"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:83
 #: admin/class-aeroscroll-gallery-admin.php:109
 msgid "Operation"
-msgstr ""
+msgstr "Operación"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:84
 #: admin/class-aeroscroll-gallery-admin.php:110
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:133
 #: admin/class-aeroscroll-gallery-admin.php:159
 msgid "Settings Saved"
-msgstr ""
+msgstr "Configuración guardada"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:134
 #: admin/class-aeroscroll-gallery-admin.php:160
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:333
 #: admin/class-aeroscroll-gallery-admin-pro.php:334
@@ -63,7 +63,7 @@ msgstr ""
 #: admin/class-aeroscroll-gallery-admin.php:422
 #: admin/class-aeroscroll-gallery-admin.php:423
 msgid "Image Collections"
-msgstr ""
+msgstr "Colecciones de imágenes"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:343
 #: admin/class-aeroscroll-gallery-admin-pro.php:344
@@ -71,7 +71,7 @@ msgstr ""
 #: admin/class-aeroscroll-gallery-admin.php:432
 #: admin/class-aeroscroll-gallery-admin.php:433
 msgid "Settings"
-msgstr ""
+msgstr "Configuración"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:353
 #: admin/class-aeroscroll-gallery-admin-pro.php:354
@@ -80,37 +80,42 @@ msgstr ""
 #: admin/class-aeroscroll-gallery-admin.php:442
 #: admin/class-aeroscroll-gallery-admin.php:443
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: admin/class-aeroscroll-gallery-admin-pro.php:440
 msgid "Orientation"
-msgstr ""
+msgstr "Orientación"
 
 #: admin/class-aeroscroll-gallery-admin.php:382
 #: admin/class-aeroscroll-gallery-admin.php:383
 msgid "Get PRO"
-msgstr ""
+msgstr "Obtener PRO"
 
 #. Plugin Name of the plugin/theme
 msgid "Aeroscroll Gallery"
-msgstr ""
+msgstr "Aeroscroll Gallery"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/yannisraft/aeroscroll-gallery"
-msgstr ""
+msgstr "https://github.com/yannisraft/aeroscroll-gallery"
 
 #. Description of the plugin/theme
 msgid ""
-"Aeroscroll Gallery empowers you to create captivating and interactive "
-"image galleries like never before. With a diverse set of advanced "
-"features, our plugin offers a seamless and immersive image browsing "
-"experience that leaves a lasting impression on your website visitors."
+"Aeroscroll Gallery empowers you to create captivating and interactive image "
+"galleries like never before. With a diverse set of advanced features, our "
+"plugin offers a seamless and immersive image browsing experience that leaves "
+"a lasting impression on your website visitors."
 msgstr ""
+"Aeroscroll Gallery le permite crear galerías de imágenes cautivadoras e "
+"interactivas como nunca antes. Con un conjunto diverso de funciones "
+"avanzadas, nuestro complemento ofrece una experiencia de navegación de "
+"imágenes perfecta e inmersiva que deja una impresión duradera en los "
+"visitantes de su sitio web."
 
 #. Author of the plugin/theme
 msgid "Aeroscroll Team"
-msgstr ""
+msgstr "Equipo de Aeroscroll"
 
 #. Author URI of the plugin/theme
 msgid "https://www.aeroscroll.com"
-msgstr ""
+msgstr "https://www.aeroscroll.com"

@@ -36,10 +36,13 @@ class Aeroscroll_Gallery_I18n {
 	 */
 	public function aeroscroll_load_plugin_textdomain() {
 
-		load_plugin_textdomain(
-			'aeroscroll-gallery',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
+		$path        = dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/';
+		$lang_loaded = load_plugin_textdomain( 'aeroscroll-gallery', false, $path );
+
+		if ( ! $lang_loaded ) {
+			error_log( 'Failed to load plugin text domain: ' . $path );
+		} else {
+			error_log( 'Plugin text domain loaded successfully: ' . $path );
+		}
 	}
 }

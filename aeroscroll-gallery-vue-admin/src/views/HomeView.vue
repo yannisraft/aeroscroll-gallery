@@ -423,7 +423,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div
+                            <!-- <div
                                 :class="['q-row', 'q-py-md', { creditsection: !ispro }]"
                                 :style="{
                                     backgroundColor: '#fff2db'
@@ -456,7 +456,7 @@
                                         <q-btn color="primary" style="margin-top: 10px;" :label="t('signup')" @click="RegisterClicked"></q-btn>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="q-row q-py-md items-center">
                                 <div class="q-col text-left q-px-sm aeroscroll-edit-label-col">
                                     <div class="text-field-header">{{ t("published") }}</div>

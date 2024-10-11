@@ -50,6 +50,20 @@
                                 <div style="display: flex; flex-direction: column; width: 100%;">
                                     <div style="display: flex;">
                                         <div style="flex-grow: 1;"></div>
+                                        <!-- <div
+                                            style="flex-basis: 200px; margin-right: 10px; align-items: center; justify-content: center; display: flex;">
+                                            <q-btn :color="togglemodecolor" label="Select Images"
+                                                @click="openMediaLibrary" size="md">
+                                            </q-btn>
+                                        </div>
+
+                                         <div
+                                            style="flex-basis: 200px; margin-right: 10px; align-items: center; justify-content: center; display: flex;">
+                                            <q-btn :color="togglemodecolor" :label="t(filemanagermode) + ' Mode'"
+                                                @click="ToggleMode" size="md">
+                                                <q-tooltip>{{ t("fileexplorermode") }}</q-tooltip>
+                                            </q-btn>
+                                        </div> -->
                                         <div style="flex-basis: 60px; margin-right: 10px;">
                                             <q-btn color="primary" icon="arrow_upward" @click="UpFolderClicked" :disable="isRoot === true">
                                                 <q-tooltip>{{ t("uponelevel") }}</q-tooltip>
@@ -66,7 +80,12 @@
                                             </q-btn>
                                         </div>
                                         <div style="flex-basis: 60px; margin-right: 10px;">
-                                            <q-btn color="primary" icon="create_new_folder" @click="CreateFolderClicked">
+                                            <q-btn
+                                                color="primary"
+                                                :disable="filemanagermode === 'mode_medialibrary'"
+                                                icon="create_new_folder"
+                                                @click="CreateFolderClicked"
+                                            >
                                                 <q-tooltip>{{ t("createfolder") }}</q-tooltip>
                                             </q-btn>
                                         </div>
@@ -86,10 +105,18 @@
                                             </q-btn>
                                         </div>
                                         <div style="flex-basis: 60px; margin-right: 10px;">
-                                            <q-btn color="primary" icon="auto_fix_high" @click="OptimizeAll" :disable="(GDLOADED === false || ISNOTPRO)">
+                                            <q-btn
+                                                color="primary"
+                                                icon="auto_fix_high"
+                                                @click="OptimizeAll"
+                                                :disable="GDLOADED === false || ISNOTPRO"
+                                            >
                                                 <q-tooltip :offset="[10, -80]">{{ t("optimizeallinfolder") }}</q-tooltip>
                                                 <q-tooltip v-if="ISNOTPRO" class="protooltip bg-blue-1" :offset="[10, 10]">
-                                                    <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon"  /><span class="protooltip_label">{{ t("profeature") }}</span>
+                                                    <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span
+                                                        class="protooltip_label"
+                                                        >{{ t("profeature") }}</span
+                                                    >
                                                 </q-tooltip>
                                             </q-btn>
                                         </div>
@@ -116,7 +143,7 @@
                             </template>
                             <template v-slot:item="props">
                                 <div class="filemitem q-pa-sm q-col-xs-6 q-col-sm-3 q-col-md-2">
-                                    <q-card class="fileitemcard" :id="props.row.id" :class="selectedItems[props.row.id] ? 'q-card-focused' : ''">
+                                    <q-card class="fileitemcard" :id="props.row.id" :class="GetSelectedItemClass(props.row.id) ? 'q-card-focused' : ''">
                                         <div
                                             @click.stop="ClickedFileMItem(props.row)"
                                             @dblclick.stop="DoubleClickedFileMItem(props.row)"
@@ -152,8 +179,13 @@
                                             <span>{{ props.row.name }}</span>
                                         </q-card-section>
                                         <q-card-section class="filemitemsize text-center unselectable">
-                                            <div v-if="props.row.id !== 'uponefolder' && !props.row.optimized">{{ CalculateSize(props.row.size) }}</div>
-                                            <div class="optimized_size" v-if="props.row.id !== 'uponefolder' && props.row.optimized"><span class="non_optimized_size_text">{{ CalculateSize(props.row.size) }}</span><span class="optimized_size_text">{{ CalculateSize(props.row.optimizedsize) }}</span></div>
+                                            <div v-if="props.row.id !== 'uponefolder' && !props.row.optimized">
+                                                {{ CalculateSize(props.row.size) }}
+                                            </div>
+                                            <div class="optimized_size" v-if="props.row.id !== 'uponefolder' && props.row.optimized">
+                                                <span class="non_optimized_size_text">{{ CalculateSize(props.row.size) }}</span
+                                                ><span class="optimized_size_text">{{ CalculateSize(props.row.optimizedsize) }}</span>
+                                            </div>
                                         </q-card-section>
                                         <q-card-section
                                             v-if="GDLOADED"
@@ -171,15 +203,20 @@
                                                 :disable="ISNOTPRO"
                                             >
                                                 <q-icon
-                                                    v-if="( !props.row.optimizing)"
-                                                    :name="( props.row.optimized ? 'done' : ( props.row.optimizing ? '' : 'auto_fix_high'))"
+                                                    v-if="!props.row.optimizing"
+                                                    :name="props.row.optimized ? 'done' : props.row.optimizing ? '' : 'auto_fix_high'"
                                                     color="white"
                                                     size="10pt"
                                                 />
-                                                <q-spinner v-if="(props.row.optimizing)" color="white" size="10pt" />
-                                                <div class="optimizebtn_label">{{ props.row.optimized ? t("optimized") : t("optimize") }}</div>
+                                                <q-spinner v-if="props.row.optimizing" color="white" size="10pt" />
+                                                <div class="optimizebtn_label">
+                                                    {{ props.row.optimized ? t("optimized") : t("optimize") }}
+                                                </div>
                                                 <q-tooltip v-if="ISNOTPRO" class="protooltip bg-blue-1" :offset="[10, 10]">
-                                                    <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon"  /><span class="protooltip_label">{{ t("profeature") }}</span>
+                                                    <q-icon size="sm" name="workspace_premium" class="q-mr-sm protooltip_icon" /><span
+                                                        class="protooltip_label"
+                                                        >{{ t("profeature") }}</span
+                                                    >
                                                 </q-tooltip>
                                             </q-chip>
                                         </q-card-section>
@@ -217,9 +254,21 @@
                     </div>
                     <div class="q-col-12">
                         <q-card-actions align="right">
-                            <q-btn color="primary" :label="t('cancel')" @click="onCancelClick" />
-                            <q-btn v-if="singleselectionmode === false" color="primary" :label="t('add')" @click="onAddImagesClicked" :disable="Object.keys(selectedItems).length === 0" />
-                            <q-btn v-if="singleselectionmode === true" color="primary" :label="t('select')" @click="onSelectImageClicked" :disable="Object.keys(selectedItems).length === 0" />
+                            <q-btn color="primary" :label="t('close')" @click="onCancelClick" />
+                            <q-btn
+                                v-if="singleselectionmode === false"
+                                color="primary"
+                                :label="t('add')"
+                                @click="onAddImagesClicked"
+                                :disable="Object.keys(selectedItems).length === 0"
+                            />
+                            <q-btn
+                                v-if="singleselectionmode === true"
+                                color="primary"
+                                :label="t('select')"
+                                @click="onSelectImageClicked"
+                                :disable="Object.keys(selectedItems).length === 0"
+                            />
                         </q-card-actions>
                     </div>
                 </div>
@@ -341,9 +390,31 @@
                             />
                         </q-card-section>
 
-                        <q-card-actions align="right" class="text-primary">
+                        <q-card-actions class="text-primary">
                             <q-btn flat :label="t('cancel')" @click="CreateRenameDialogCancel" />
                             <q-btn flat :label="dialogCreateRenameBtnLabel" @click="CreateRenameDialogSubmit" />
+                        </q-card-actions>
+                    </q-card>
+                </q-dialog>
+
+                <!-- Dialog for confirm delete image from Image Galleries -->
+                <q-dialog v-model="dialogConfirmDeletion" persistent>
+                    <q-card>
+                        <q-card-section class="row items-center">
+                            <div class="q-row" style="flex-grow: 1;">
+                                <div class="q-col-2">
+                                    <q-avatar icon="delete_sweep" color="primary" text-color="white" />
+                                </div>
+                                <div class="q-col-9">
+                                    <span class="q-ml-sm">{{ dialogConfirmDeletion_message }}</span>
+                                </div>
+                            </div>
+                        </q-card-section>
+
+                        <q-card-actions>
+                            <q-btn :label="t('cancel')" color="primary" v-close-popup />
+                            <q-btn :label="t('delete_fromimagecollections_no')" color="primary" v-close-popup @click="DeleteBtnClicked_Event_Β;" />
+                            <q-btn :label="t('delete_fromimagecollections_yes')" color="primary" v-close-popup @click="DeleteBtnClicked_Event_A" />
                         </q-card-actions>
                     </q-card>
                 </q-dialog>
@@ -387,9 +458,7 @@ export default {
         SortingButton
     },
 
-    emits: [
-        ["update:modelValue", "onImagesSelected","onUpdate:modelValue","onCloseManager"]
-    ],
+    emits: [["update:modelValue", "onImagesSelected", "onUpdate:modelValue", "onCloseManager"]],
 
     setup(props, context) {
         const $q = useQuasar();
@@ -431,6 +500,10 @@ export default {
         let currentListFolder = ref("root");
         let currentRelativeURL = ref("root");
         let isRoot = ref(false);
+        let MEDIA_LIBRARY_MODE = ref(true);
+        let filemanagermode = ref("mode_fileexplorer");
+        let togglemodecolor = ref("orange-9");
+
         const dialogCreateRenameInputRef = ref(null);
         const imageuploaderRef = ref(null);
         const igtableref = ref(null);
@@ -439,6 +512,10 @@ export default {
         let GDLOADED_notification = ref(false);
 
         let dialogOptimizeAll = null;
+        let dialogConfirmDeletion = ref(false);
+        let dialogConfirmDeletion_message = ref("");
+        let dialogConfirmDeletion_btn_a = ref("OK");
+        let dialogConfirmDeletion_btn_b = ref("OK");
 
         let ctrlKeyDown = ref(false);
         let shiftKeyDown = ref(false);
@@ -522,7 +599,7 @@ export default {
                             selectedItems.value = {};
                         }
                     }
-                } else if(props.singleselectionmode !== true) {
+                } else if (props.singleselectionmode !== true) {
                     if (!selectedItems.value[item.id]) {
                         selectedItems.value[item.id] = item;
                     } else {
@@ -531,6 +608,58 @@ export default {
                 }
             }
         }
+
+        /* function ClickedFileMItem(item) {
+            console.log("item CLICKED: ", item);
+
+            if (item.id !== "uponefolder") {
+                console.log("ctrlKeyDown: ", ctrlKeyDown.value);
+                console.log("shiftKeyDown: ", shiftKeyDown.value);
+                console.log("singleselectionmode: ", props.singleselectionmode);
+                if (ctrlKeyDown.value === false) {
+                    if (shiftKeyDown.value === true && props.singleselectionmode !== true) {
+                        console.log("A");
+                        var firstKey = Object.keys(selectedItems.value)[0];
+                        var firstKeyInArray = igtableref.value.computedRows.findIndex((x) => x.id === firstKey);
+                        var lastKeyInarray = igtableref.value.computedRows.findIndex((x) => x.id === item.id);
+
+                        var newSelectedItems = [];
+                        if (firstKeyInArray < lastKeyInarray) {
+                            for (var k = firstKeyInArray + 1; k <= lastKeyInarray; k++) {
+                                newSelectedItems.push(igtableref.value.computedRows[k]);
+                            }
+                        } else {
+                            for (var f = lastKeyInarray; f <= firstKeyInArray - 1; f++) {
+                                newSelectedItems.push(igtableref.value.computedRows[f]);
+                            }
+                        }
+
+                        for (var g = 0; g < newSelectedItems.length; g++) {
+                            var newSelectedItem = newSelectedItems[g];
+                            selectedItems.value[newSelectedItem.name] = newSelectedItem;
+                        }
+                    } else {
+                        console.log("C");
+                        console.log("selectedItems.value: ", selectedItems.value);
+                        if (!selectedItems.value[item.id]) {
+                            selectedItems.value = {};
+                            selectedItems.value[item.id] = item;
+                        } else {
+                            selectedItems.value = {};
+                        }
+                    }
+                } else if (props.singleselectionmode !== true) {
+                    console.log("B");
+                    if (!selectedItems.value[item.id]) {
+                        selectedItems.value[item.id] = item;
+                    } else {
+                        delete selectedItems.value[item.id];
+                    }
+                } else {
+                    selectedItems.value = {};
+                }
+            }
+        } */
 
         function DoubleClickedFileMItem(item) {
             if (item.folder === 1) {
@@ -552,7 +681,7 @@ export default {
                 _REST_URL = window["REST_URL"].url;
             }
 
-            //console.log("currentRelativeURL: ", currentRelativeURL.value);
+            //console.log("_REST_URL: ", _REST_URL);
 
             selectedItems.value = {};
 
@@ -560,7 +689,8 @@ export default {
                 path: "root",
                 current: currentListFolder.value,
                 target: target,
-                relativedir: currentRelativeURL.value
+                relativedir: currentRelativeURL.value,
+                mode: filemanagermode.value
             };
 
             let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/listfolder`;
@@ -592,7 +722,7 @@ export default {
                             filegridloading.value = false;
 
                             let jsdata = JSON.parse(dataStr);
-                            console.log("POST listfolder result: ", jsdata);
+                            //console.log("POST listfolder result: ", jsdata);
 
                             if (jsdata.list) {
                                 filemanager_rows.value = [];
@@ -612,6 +742,7 @@ export default {
                                     var item = jsdata.list[k];
                                     if (item.folder === 1) {
                                         filemanager_rows.value.push({
+                                            //id: item.id,  // REVIEW
                                             id: item.file,
                                             name: item.file,
                                             size: item.size,
@@ -620,14 +751,31 @@ export default {
                                             relativedir: currentRelativeURL.value
                                         });
                                     } else {
+                                        //console.log(item);
+                                        var img_url = "";
+                                        if (item.ismedia) {
+                                            if (item.ismedia === 1) {
+                                                if (item.absoluteurl) {
+                                                    img_url = item.absoluteurl;
+                                                }
+                                            } else {
+                                                item.relativeurl = currentRelativeURL.value;
+                                                img_url = `${_REST_URL}/` + currentRelativeURL.value + "/" + item.file;
+                                            }
+                                        } else {
+                                            item.relativeurl = currentRelativeURL.value;
+                                            img_url = `${_REST_URL}/` + currentRelativeURL.value + "/" + item.file;
+                                        }
+
                                         filemanager_rows.value.push({
+                                            //id: item.id, // REVIEW
                                             id: item.file,
                                             name: item.file,
-                                            image: `${_REST_URL}/` + currentRelativeURL.value + "/" + item.file,
+                                            image: img_url,
                                             size: item.size,
                                             date: item.date,
                                             folder: 0,
-                                            relativedir: currentRelativeURL.value,
+                                            relativedir: item.relativeurl,
                                             optimized: item.optimized,
                                             optimizedsize: item.optimizedsize
                                         });
@@ -705,7 +853,15 @@ export default {
                     // Rename Item Mode
                     let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/renameitem`;
 
-                    const oldname = Object.keys(selectedItems.value)[0];
+                    var selectedItemValues = selectedItems.value[Object.keys(selectedItems.value)[0]];
+                    const oldname = selectedItemValues.name;
+
+                    console.log("RENAME: ", {
+                        id: selectedItemValues.id,
+                        newname: dialogCreateRenameValue.value,
+                        name: oldname,
+                        relativedir: selectedItemValues.relativedir
+                    });
 
                     let _APEX = window["APEX"];
                     if (_APEX) {
@@ -717,14 +873,15 @@ export default {
                                 "X-WP-Nonce": _APEX.renameitem.nonce
                             },
                             body: JSON.stringify({
+                                id: selectedItemValues.id,
                                 newname: dialogCreateRenameValue.value,
                                 name: oldname,
-                                relativedir: currentRelativeURL.value
+                                relativedir: selectedItemValues.relativedir
                             })
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                //console.log("POST rename item result: ", data);
+                                console.log("POST rename item result: ", data);
 
                                 ListFolder("refresh");
                             });
@@ -749,7 +906,12 @@ export default {
                 dialogCreateFolderMode = false;
                 dialogCreateRenameTitle.value = "Item New Name";
                 dialogCreateRenameBtnLabel.value = "Rename";
-                dialogCreateRenameValue.value = Object.keys(selectedItems.value)[0];
+
+                //const fileid = Object.keys(selectedItems.value)[0];
+                var selectedItemValues = selectedItems.value[Object.keys(selectedItems.value)[0]];
+                console.log("selectedItemValues: ", selectedItemValues);
+
+                dialogCreateRenameValue.value = selectedItemValues.name;
 
                 createRenameDialog.value = true;
             }
@@ -764,15 +926,14 @@ export default {
             }
         }
 
+        // LINK Delete Button Clicked
         function DeleteBtnClicked() {
             //console.log('DeleteBtnClicked');
             var __continue = true;
 
-            console.log('Delete: ', selectedItems.value);
+            //console.log("Delete: ", selectedItems.value);
 
             if (Object.keys(selectedItems.value).length > 0) {
-                
-
                 let selectedItemsIDS = [];
                 //for (var k = 0; k < selectedItems.value.length; k++) {
                 for (var key in selectedItems.value) {
@@ -786,8 +947,6 @@ export default {
                         if (Object.keys(selectedItems.value).length === 1) __continue = false;
                     }
                 }
-
-                
 
                 if (__continue) {
                     $q.dialog({
@@ -805,43 +964,10 @@ export default {
                         persistent: true
                     })
                         .onOk(() => {
-                            $q.loading.show();
-
-                            let _REST_URL = "http://localhost/";
-                            if (window["REST_URL"]) {
-                                _REST_URL = window["REST_URL"].url;
-                            }
-
-                            /// TODO
-                            let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/deleteitem`;
-
-                            let _APEX = window["APEX"];
-                            if (_APEX) {
-                                fetch(finalurl, {
-                                    method: "POST",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        // eslint-disable-next-line
-                                        "X-WP-Nonce": _APEX.deleteitem.nonce
-                                    },
-                                    body: JSON.stringify({
-                                        files: selectedItemsIDS,
-                                        relativedir: currentRelativeURL.value
-                                    })
-                                })
-                                    .then((response) => {
-                                        //console.log("On Response : ", response.text());
-                                        var return_response = response.json();
-                                        //return return_response;
-
-                                        
-                                    })
-                                    .then((data) => {
-                                        console.log("POST delete item result: ", data);
-
-                                        ListFolder("refresh");
-                                    });
-                            }
+                            dialogConfirmDeletion.value = true;
+                            dialogConfirmDeletion_message.value = t("delete_fromimagecollections");
+                            dialogConfirmDeletion_btn_a.value = t("delete_fromimagecollections_yes");
+                            dialogConfirmDeletion_btn_b.value = t("delete_fromimagecollections_no");
                         })
                         .onCancel(() => {
                             // console.log('>>>> Cancel')
@@ -850,6 +976,73 @@ export default {
                             // console.log('I am triggered on both OK and Cancel')
                         });
                 }
+            }
+        }
+
+        function DeleteBtnClicked_Event_A() {
+            console.log("DeleteBtnClicked_Event_A");
+            DeleteCommit(true);
+        }
+
+        function DeleteBtnClicked_Event_Β() {
+            console.log("DeleteBtnClicked_Event_B");
+            DeleteCommit(false);
+        }
+
+        function DeleteCommit(_deleterelevant) {
+            $q.loading.show();
+
+            if (_deleterelevant !== true) {
+                _deleterelevant = false;
+            }
+
+            let _REST_URL = "http://localhost/";
+            if (window["REST_URL"]) {
+                _REST_URL = window["REST_URL"].url;
+            }
+
+            let selectedItemsIDS = [];
+            //for (var k = 0; k < selectedItems.value.length; k++) {
+            for (var key in selectedItems.value) {
+                var _item = selectedItems.value[key];
+                console.log("D E L E T E: ", _item);
+                if (_item.id !== "uponefolder") {
+                    selectedItemsIDS.push({
+                        name: _item.name,
+                        folder: _item.folder
+                    });
+                } else {
+                    if (Object.keys(selectedItems.value).length === 1) __continue = false;
+                }
+            }
+
+            let finalurl = `${_REST_URL}/wp-json/aeroscroll/v1/deleteitem`;
+
+            let _APEX = window["APEX"];
+            if (_APEX) {
+                fetch(finalurl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        // eslint-disable-next-line
+                        "X-WP-Nonce": _APEX.deleteitem.nonce
+                    },
+                    body: JSON.stringify({
+                        files: selectedItemsIDS,
+                        relativedir: currentRelativeURL.value,
+                        deleterelevant: _deleterelevant
+                    })
+                })
+                    .then((response) => {
+                        //console.log("On Response : ", response.text());
+                        var return_response = response.json();
+                        return return_response;
+                    })
+                    .then((data) => {
+                        console.log("POST delete item result: ", data);
+
+                        ListFolder("refresh");
+                    });
             }
         }
 
@@ -971,16 +1164,16 @@ export default {
         }
 
         /* function CalculateSize(size) {
-            // size is in bytes
-            var sizekb = parseInt(size / 1000);
-            var size_str = sizekb + " KB";
-
-            if (sizekb > 1000) {
-                size_str = parseInt(sizekb / 1000) + " MB";
-            }
-
-            return size_str;
-        } */
+                // size is in bytes
+                var sizekb = parseInt(size / 1000);
+                var size_str = sizekb + " KB";
+    
+                if (sizekb > 1000) {
+                    size_str = parseInt(sizekb / 1000) + " MB";
+                }
+    
+                return size_str;
+            } */
 
         /// Optimize
         // ----------------
@@ -1095,11 +1288,11 @@ export default {
                                     }
 
                                     /* .then((response) => response.json())
-                                    .then((data) => {
-                                        //console.log("POST optimize ALL images result: ", data);
-                                        //ListFolder("refresh");
-
-                                    }); */
+                                                      .then((data) => {
+                                                          //console.log("POST optimize ALL images result: ", data);
+                                                          //ListFolder("refresh");
+                  
+                                                      }); */
                                 }
 
                                 dialogOptimizeAll.update({
@@ -1248,7 +1441,28 @@ export default {
             console.log(">>> onCancelClick");
             dialogVisible.value = false;
             context.emit("update:modelValue", false);
-            context.emit("onCloseManager");            
+            context.emit("onCloseManager");
+        }
+
+        function ToggleMode() {
+            if (filemanagermode.value === "mode_medialibrary") {
+                filemanagermode.value = "mode_fileexplorer";
+                togglemodecolor.value = "cyan-8";
+            } else {
+                filemanagermode.value = "mode_medialibrary";
+                togglemodecolor.value = "orange-9";
+            }
+
+            ListFolder("root");
+        }
+
+        function GetSelectedItemClass(rowid) {
+            var valid = false;
+            if (selectedItems.value[rowid] !== null && typeof selectedItems.value[rowid] !== 'undefined') {
+                valid = true;
+            }
+
+            return valid;
         }
 
         // ----------------
@@ -1331,11 +1545,13 @@ export default {
 
             // we can passthrough onDialogCancel directly
             //onCancelClick: onDialogCancel,
-            
 
             ClickedFileMItem,
             t,
             isRoot,
+            togglemodecolor,
+            filemanagermode,
+            MEDIA_LIBRARY_MODE,
             GDLOADED,
             GDLOADED_notification,
             filegridloading,
@@ -1362,6 +1578,9 @@ export default {
             uploaderTotalfiles,
             ctrlKeyDown,
             shiftKeyDown,
+            dialogConfirmDeletion,
+            dialogConfirmDeletion_message,
+
             onCancelClick,
             UpFolderClicked,
             DeleteBtnClicked,
@@ -1387,14 +1606,17 @@ export default {
             CalculateSize,
             SearchMethod,
             CancelFileManager,
-            CreateRenameDialogCancel
+            CreateRenameDialogCancel,
+            ToggleMode,
+            DeleteBtnClicked_Event_A,
+            DeleteBtnClicked_Event_Β,
+            GetSelectedItemClass
         };
     }
 };
 </script>
 
 <style lang="scss">
-
 .q-field__native {
     padding: unset;
     line-height: unset;

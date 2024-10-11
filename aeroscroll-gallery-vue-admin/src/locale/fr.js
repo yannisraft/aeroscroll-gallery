@@ -235,5 +235,11 @@ export default {
     showarticleonlightbox: "Afficher l'article dans la Lightbox",
     showarticleonlightbox_desc: "Améliorez votre expérience de lecture ! Cliquez pour explorer de manière transparente l'article complet dans une lightbox captivante.",
     changeimage: "Changer l'image",
-    upload_max_filesize_error: "Erreur : le fichier téléchargé dépasse la directive 'upload_max_filesize' dans php.ini. Veuillez augmenter la limite de taille de fichier dans vos paramètres PHP."
+    upload_max_filesize_error: "Erreur : le fichier téléchargé dépasse la directive 'upload_max_filesize' dans php.ini. Veuillez augmenter la limite de taille de fichier dans vos paramètres PHP.",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 };

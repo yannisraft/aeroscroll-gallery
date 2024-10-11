@@ -19,46 +19,49 @@
  * @package    aeroscroll_gallery
  * @subpackage aeroscroll_gallery/includes
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (! defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
-class Aeroscroll_Gallery_Activator {
+class Aeroscroll_Gallery_Activator
+{
 
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function aeroscroll_activate() {
-		self::aeroscroll_create_table_if_not_exist();
-	}
+    /**
+     * Short Description. (use period)
+     *
+     * Long Description.
+     *
+     * @since    1.0.0
+     */
+    public static function aeroscroll_activate()
+    {
+        self::aeroscroll_create_table_if_not_exist();
+    }
 
-	public static function aeroscroll_create_table_if_not_exist() {
-		try {
-			global $wpdb;
+    public static function aeroscroll_create_table_if_not_exist()
+    {
+        try {
+            global $wpdb;
 
-			// Let's not break the site with exception messages
-			$wpdb->hide_errors();
+            // Let's not break the site with exception messages
+            $wpdb->hide_errors();
 
-			if ( ! function_exists( 'dbDelta' ) ) {
-				require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-			}
+            if (! function_exists('dbDelta')) {
+                require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+            }
 
-			$collate = '';
+            $collate = '';
 
-			if ( $wpdb->has_cap( 'collation' ) ) {
-				$collate = $wpdb->get_charset_collate();
-			}
+            if ($wpdb->has_cap('collation')) {
+                $collate = $wpdb->get_charset_collate();
+            }
 
-			// Create the GRIDS TABLE
-			// ------------------
-			$table_name = $wpdb->prefix . 'aeroscroll_gallery';
-			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery" ) !== $table_name ) {
-				$schema = "
+            // Create the GRIDS TABLE
+            // ------------------
+            $table_name = $wpdb->prefix . 'aeroscroll_gallery';
+            if ($wpdb->get_var("SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery") !== $table_name) {
+                $schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -127,14 +130,14 @@ class Aeroscroll_Gallery_Activator {
                     PRIMARY KEY (id)
                 ) $collate;";
 
-				dbDelta( $schema );
-			}
+                dbDelta($schema);
+            }
 
-			// Create the IMAGE GALLERIES TABLE
-			// ------------------
-			$table_name2 = $wpdb->prefix . 'aeroscroll_gallery_imagegalleries';
-			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegalleries" ) !== $table_name2 ) {
-				$schema_ig = "
+            // Create the IMAGE GALLERIES TABLE
+            // ------------------
+            $table_name2 = $wpdb->prefix . 'aeroscroll_gallery_imagegalleries';
+            if ($wpdb->get_var("SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegalleries") !== $table_name2) {
+                $schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegalleries (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -147,14 +150,14 @@ class Aeroscroll_Gallery_Activator {
                     PRIMARY KEY (id)
                 ) $collate;";
 
-				dbDelta( $schema_ig );
-			}
+                dbDelta($schema_ig);
+            }
 
-			// Create the UPLOADED IMAGES TABLE
-			// ------------------
-			$table_name3 = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
-			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images" ) !== $table_name3 ) {
-				$schema_ig = "
+            // Create the UPLOADED IMAGES TABLE
+            // ------------------
+            $table_name3 = $wpdb->prefix . 'aeroscroll_gallery_imagegallery_images';
+            if ($wpdb->get_var("SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images") !== $table_name3) {
+                $schema_ig = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_imagegallery_images (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                     imagegallery_id BIGINT UNSIGNED NOT NULL,  
@@ -165,18 +168,19 @@ class Aeroscroll_Gallery_Activator {
                     image_name VARCHAR(256) NOT NULL,
                     image_type VARCHAR(120),
                     image_resolution BIGINT UNSIGNED,
+                    media_gallery_id BIGINT UNSIGNED,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (id)
                 ) $collate;";
 
-				dbDelta( $schema_ig );
-			}
+                dbDelta($schema_ig);
+            }
 
-			// Create the SETTINGS TABLE
-			// ------------------
-			$table_name = $wpdb->prefix . 'aeroscroll_gallery_settings';
-			if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_settings" ) !== $table_name ) {
-				$schema = "
+            // Create the SETTINGS TABLE
+            // ------------------
+            $table_name = $wpdb->prefix . 'aeroscroll_gallery_settings';
+            if ($wpdb->get_var("SHOW TABLES LIKE {$wpdb->prefix}aeroscroll_gallery_settings") !== $table_name) {
+                $schema = "
                     CREATE TABLE {$wpdb->prefix}aeroscroll_gallery_settings (
                     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,                    
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -188,12 +192,12 @@ class Aeroscroll_Gallery_Activator {
                     PRIMARY KEY (id)
                 ) $collate;";
 
-				dbDelta( $schema );
+                dbDelta($schema);
 
-				$table_cols = $wpdb->get_results( "INSERT IGNORE INTO {$wpdb->prefix}aeroscroll_gallery_settings (email,serial_key_product_id) VALUES (``,``);" );
-			}
-		} catch ( Exception $e ) {
-			throw new Exception( 'Aeroscroll Gallery Error : {esc_html_e( $e->getMessage() )}' );
-		}
-	}
+                $table_cols = $wpdb->get_results("INSERT IGNORE INTO {$wpdb->prefix}aeroscroll_gallery_settings (email,serial_key_product_id) VALUES (``,``);");
+            }
+        } catch (Exception $e) {
+            throw new Exception('Aeroscroll Gallery Error : {esc_html_e( $e->getMessage() )}');
+        }
+    }
 }

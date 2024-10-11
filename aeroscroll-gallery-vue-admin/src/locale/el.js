@@ -237,5 +237,11 @@ export default {
     showarticleonlightbox: "Προβολή Άρθρου σε Παράθυρο Lightbox",
     showarticleonlightbox_desc: "Βελτιώστε την εμπειρία ανάγνωσής σας! Κάντε κλικ για να εξερευνήσετε απροβλημάτιστα το πλήρες άρθρο σε ένα επιβλητικό lightbox.",
     changeimage: "Αλλαγή Εικόνας",
-    upload_max_filesize_error: "Σφάλμα: το μεταφορτωμένο αρχείο υπερβαίνει την οδηγία 'upload_max_filesize' στο php.ini. Παρακαλώ αυξήστε το όριο μεγέθους αρχείου στις ρυθμίσεις PHP σας."
+    upload_max_filesize_error: "Σφάλμα: το μεταφορτωμένο αρχείο υπερβαίνει την οδηγία 'upload_max_filesize' στο php.ini. Παρακαλώ αυξήστε το όριο μεγέθους αρχείου στις ρυθμίσεις PHP σας.",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Θα θέλατε επίσης να τις διαγράψετε από όλες τις σχετικές συλλογές εικόνων;",
+    delete_fromimagecollections_yes: "Ναί",
+    delete_fromimagecollections_no: "Όχι",
 };

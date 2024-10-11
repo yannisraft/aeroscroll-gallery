@@ -237,5 +237,11 @@ export default {
     showarticleonlightbox: "라이트박스에 기사 표시",
     showarticleonlightbox_desc: "읽기 경험을 향상시키세요! 매혹적인 라이트박스에서 전체 기사를 쉽게 탐색하려면 클릭하세요.",
     changeimage: "이미지 변경",
-    upload_max_filesize_error: "오류: 업로드된 파일이 php.ini의 'upload_max_filesize' 지시문을 초과합니다. PHP 설정에서 파일 크기 제한을 늘려주세요."
+    upload_max_filesize_error: "오류: 업로드된 파일이 php.ini의 'upload_max_filesize' 지시문을 초과합니다. PHP 설정에서 파일 크기 제한을 늘려주세요.",
+    fileexplorermode: "File Explorer Mode",
+    mode_medialibrary: "Media Library",
+    mode_fileexplorer: "File Explorer",
+    delete_fromimagecollections: "Would you also like to delete them from the all the relevant image collections?",
+    delete_fromimagecollections_yes: "Yes",
+    delete_fromimagecollections_no: "No",
 };

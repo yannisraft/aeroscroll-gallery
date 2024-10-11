@@ -1,82 +1,124 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Aeroscroll Gallery\n"
-"POT-Creation-Date: 2023-10-04 20:34+0300\n"
-"PO-Revision-Date: 2023-10-04 20:36+0300\n"
+"POT-Creation-Date: 2024-05-17 15:19+0300\n"
+"PO-Revision-Date: 2024-05-17 15:43+0300\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: aeroscroll-gallery.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: \n"
-"Language: de_DE\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/class-aeroscroll-gallery-admin.php:160
-#: admin/class-aeroscroll-gallery-admin.php:416
-#: admin/class-aeroscroll-gallery-admin.php:417
+#: admin/class-aeroscroll-gallery-admin-pro.php:81
+#: admin/class-aeroscroll-gallery-admin-pro.php:323
+#: admin/class-aeroscroll-gallery-admin-pro.php:324
+#: admin/class-aeroscroll-gallery-admin.php:107
+#: admin/class-aeroscroll-gallery-admin.php:351
+#: admin/class-aeroscroll-gallery-admin.php:352
+#: admin/class-aeroscroll-gallery-admin.php:412
+#: admin/class-aeroscroll-gallery-admin.php:413
 msgid "Manage Galleries"
-msgstr "Galerien Verwalten\t"
+msgstr "Galerien Verwalten"
 
-#: admin/class-aeroscroll-gallery-admin.php:161
+#: admin/class-aeroscroll-gallery-admin-pro.php:82
+#: admin/class-aeroscroll-gallery-admin.php:108
 msgid "Published"
 msgstr "Veröffentlicht"
 
-#: admin/class-aeroscroll-gallery-admin.php:162
+#: admin/class-aeroscroll-gallery-admin-pro.php:83
+#: admin/class-aeroscroll-gallery-admin.php:109
 msgid "Operation"
 msgstr "Betrieb"
 
-#: admin/class-aeroscroll-gallery-admin.php:163
+#: admin/class-aeroscroll-gallery-admin-pro.php:84
+#: admin/class-aeroscroll-gallery-admin.php:110
 msgid "Title"
 msgstr "Titel"
 
-#: admin/class-aeroscroll-gallery-admin.php:243
+#: admin/class-aeroscroll-gallery-admin-pro.php:133
+#: admin/class-aeroscroll-gallery-admin.php:159
 msgid "Settings Saved"
-msgstr "Einstellungen gespeichert\t"
+msgstr "Einstellungen gespeichert"
 
-#: admin/class-aeroscroll-gallery-admin.php:244
+#: admin/class-aeroscroll-gallery-admin-pro.php:134
+#: admin/class-aeroscroll-gallery-admin.php:160
 msgid "Error"
 msgstr "Fehler"
 
-#: admin/class-aeroscroll-gallery-admin.php:426
-#: admin/class-aeroscroll-gallery-admin.php:427
+#: admin/class-aeroscroll-gallery-admin-pro.php:333
+#: admin/class-aeroscroll-gallery-admin-pro.php:334
+#: admin/class-aeroscroll-gallery-admin.php:361
+#: admin/class-aeroscroll-gallery-admin.php:362
+#: admin/class-aeroscroll-gallery-admin.php:422
+#: admin/class-aeroscroll-gallery-admin.php:423
 msgid "Image Collections"
 msgstr "Bildersammlungen"
 
-#: admin/class-aeroscroll-gallery-admin.php:437
-#: admin/class-aeroscroll-gallery-admin.php:438
-#: admin/class-aeroscroll-gallery-admin.php:521
+#: admin/class-aeroscroll-gallery-admin-pro.php:343
+#: admin/class-aeroscroll-gallery-admin-pro.php:344
+#: admin/class-aeroscroll-gallery-admin-pro.php:433
+#: admin/class-aeroscroll-gallery-admin.php:432
+#: admin/class-aeroscroll-gallery-admin.php:433
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: admin/class-aeroscroll-gallery-admin.php:447
-#: admin/class-aeroscroll-gallery-admin.php:448
+#: admin/class-aeroscroll-gallery-admin-pro.php:353
+#: admin/class-aeroscroll-gallery-admin-pro.php:354
+#: admin/class-aeroscroll-gallery-admin.php:371
+#: admin/class-aeroscroll-gallery-admin.php:372
+#: admin/class-aeroscroll-gallery-admin.php:442
+#: admin/class-aeroscroll-gallery-admin.php:443
 msgid "Help"
 msgstr "Hilfe"
 
-#: admin/class-aeroscroll-gallery-admin.php:528
+#: admin/class-aeroscroll-gallery-admin-pro.php:440
 msgid "Orientation"
 msgstr "Ausrichtung"
 
+#: admin/class-aeroscroll-gallery-admin.php:382
+#: admin/class-aeroscroll-gallery-admin.php:383
+msgid "Get PRO"
+msgstr "PRO-Version erhalten"
+
 #. Plugin Name of the plugin/theme
 msgid "Aeroscroll Gallery"
-msgstr ""
+msgstr "Aeroscroll Gallery"
 
 #. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "https://www.aeroscroll.com"
-msgstr ""
+msgid "https://github.com/yannisraft/aeroscroll-gallery"
+msgstr "https://github.com/yannisraft/aeroscroll-gallery"
 
 #. Description of the plugin/theme
-msgid "The aeroscroll gallery is an infinite grid system"
+msgid ""
+"Aeroscroll Gallery empowers you to create captivating and interactive image "
+"galleries like never before. With a diverse set of advanced features, our "
+"plugin offers a seamless and immersive image browsing experience that leaves "
+"a lasting impression on your website visitors."
 msgstr ""
+"Aeroscroll Gallery ermöglicht es Ihnen, fesselnde und interaktive "
+"Bildgalerien wie nie zuvor zu erstellen. Mit einer Vielzahl "
+"fortschrittlicher Funktionen bietet unser Plugin ein nahtloses und "
+"immersives Bilderlebnis, das einen bleibenden Eindruck bei den Besuchern "
+"Ihrer Website hinterlässt."
 
 #. Author of the plugin/theme
 msgid "Aeroscroll Team"
-msgstr ""
+msgstr "Das Aeroscroll-Team"
+
+#. Author URI of the plugin/theme
+msgid "https://www.aeroscroll.com"
+msgstr "https://www.aeroscroll.com"
+
+#~ msgid "The aeroscroll gallery is an infinite grid system"
+#~ msgstr "Die Aeroscroll-Galerie ist ein unendliches Rastersystem."
